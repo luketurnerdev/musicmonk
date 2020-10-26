@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Modal} from '@material-ui/core/'
 import fakeData from "./../../fakeData";
+import EditModal from "./../../Components/EditModal";
 
 // Hit the API / DB, get a list of users routines
 // map them out with the title amd a button to play or edit
@@ -22,9 +23,13 @@ const RoutineList = () => {
   }
   
   const handleModalClose = () => {
-    console.log('closing?')
+    console.log('closing')
     setEditModalVisible(false);
     setCurrentlySelectedRoutine(null);
+  }
+
+  const saveRoutine = () => {
+    console.log('this function will save routine to the upper state')
   }
 
   const List = () => {
@@ -45,19 +50,15 @@ const RoutineList = () => {
     <>
 
      <List />
-     <Modal
-      open={editModalVisible}
-      onClose={handleModalClose}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    > 
-    <div>
-      {currentlySelectedRoutine && <h1>{currentlySelectedRoutine.title}</h1>}
-    <Button variant="contained" onClick={() => handleModalClose()}>Close</Button>
-    </div>
-
-    
-  </Modal>
+     {editModalVisible && 
+      <EditModal
+        open={editModalVisible}
+        routine={currentlySelectedRoutine}
+        handleModalClose={handleModalClose}
+        saveRoutine={saveRoutine}
+      />
+      
+      }
 
     </>
   )
