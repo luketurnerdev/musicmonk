@@ -1,8 +1,21 @@
-import {Button, Modal} from '@material-ui/core/'
-import React from 'react';
+import {Button, Modal, TextField} from '@material-ui/core/'
+import styles from "./styles";
+import React, {useState} from 'react';
 
 const EditModal = props => {
   const {open, routine, handleModalClose, saveRoutine} = props;
+  const [routineFormData, setRoutineFormData] = useState(routine); 
+  const RoutineEditForm = () => {
+    console.log(routine);
+    return (
+    <div style={styles.editForm}>
+      <TextField id="title" label="Routine title" variant="outlined" defaultValue={routine.title} />
+      {routine.steps.map((step, index) => {
+        return <TextField id={index} label={`Step ${(index+1)}`} variant="outlined" defaultValue={step} />
+      })}
+    </div>
+    )
+  }
   return (<Modal
       open={open}
       onClose={handleModalClose}
@@ -10,7 +23,7 @@ const EditModal = props => {
       aria-describedby="simple-modal-description"
     > 
     <div>
-      {routine && <h1>{routine.title}</h1>}
+      {routine && <RoutineEditForm />}
       <Button variant="contained" onClick={() => handleModalClose()}>Close</Button>
     </div>
 
