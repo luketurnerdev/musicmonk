@@ -1,5 +1,5 @@
 import React from "react"
-import Routine from "./../Components/Routine";
+import RoutineList from "./RoutineList";
 export default function Home() {
-  return <Routine />
+  return <RoutineList />
 }

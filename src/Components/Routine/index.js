@@ -1,33 +1,12 @@
 import React from 'react';
 
 
-const RoutineStep = props => {
-  const {text} = props;
-  return <h1>{text}</h1>
-};
-
-
-const Routine = () => {
-  const steps = [
-  {
-    id: 1,
-    text: 'abc'
-  },
-  {
-    id: 2,
-    text: 'abc'
-  },
-  {
-    id: 3,
-    text: 'abc'
-  },
-];
+const Routine = props => {
+  const {title} = props;
   return (
     <>
 
-      {steps.map(step => {
-        return <RoutineStep text={step.text} />
-      })}
+      <h1>{title}</h1>
 
     </>
   )
