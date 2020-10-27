@@ -8,6 +8,11 @@ const fakeData = [
     id: 1,
     title: 'Rock routine',
     steps: ['step1', 'step2'],
+  },
+  {
+    id: 2,
+    title: 'Metal routine',
+    steps: ['Tune up', 'Start rockin'],
   }
 ]
 

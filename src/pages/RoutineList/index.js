@@ -36,12 +36,12 @@ const RoutineList = () => {
     return (
       userRoutines.map(routine => {
         return (
-         <>
+         <div key={routine.id}>
            <h1>{routine.title}</h1>
            <h1>{routine.id}</h1>
            <Button variant="contained">Play</Button>
            <Button variant="contained" onClick={() => enterEditMode(routine.id)}>Edit</Button>
-         </>
+         </div>
         )
       })
     )
