@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Modal} from '@material-ui/core/'
 import fakeData from "./../../fakeData";
 import EditModal from "./../../Components/EditModal";
+import NewRoutineForm from "./../../Components/NewRoutineForm";
 
 // Hit the API / DB, get a list of users routines
 // map them out with the title amd a button to play or edit
@@ -13,23 +14,17 @@ import EditModal from "./../../Components/EditModal";
 
 const RoutineList = () => {
   const [userRoutines, setUserRoutines] = useState(fakeData);
-  const [editModalVisible, setEditModalVisible] = useState(false);
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
+  const [formOpen, setFormOpen] = useState(false);
   // Default value is the existing list
-  const enterEditMode = id => {
-    // Open modal, set current routine
-    setEditModalVisible(true);
-    setCurrentlySelectedRoutine(userRoutines[id]);
-  }
-  
-  const handleModalClose = () => {
-    console.log('closing')
-    setEditModalVisible(false);
-    setCurrentlySelectedRoutine(null);
-  }
-
   const saveRoutine = () => {
     console.log('this function will save routine to the upper state')
+    setFormOpen(false);
+  }
+  
+  const discardRoutine = () => {
+    setFormOpen(false);
+
   }
 
   const List = () => {
@@ -38,9 +33,8 @@ const RoutineList = () => {
         return (
          <div key={routine.id}>
            <h1>{routine.title}</h1>
-           <h1>{routine.id}</h1>
+           <h6>{routine.steps[0]}</h6>
            <Button variant="contained">Play</Button>
-           <Button variant="contained" onClick={() => enterEditMode(routine.id)}>Edit</Button>
          </div>
         )
       })
@@ -49,17 +43,16 @@ const RoutineList = () => {
   return (
     <>
 
-     <List />
-     {editModalVisible && 
-      <EditModal
-        open={editModalVisible}
-        routine={currentlySelectedRoutine}
-        handleModalClose={handleModalClose}
+     {!formOpen && <List />}
+     <Button variant="contained" onClick={() => setFormOpen(true)}>Add new routine</Button>
+      <Modal
+        open={formOpen}
+      >
+       <NewRoutineForm
         saveRoutine={saveRoutine}
-      />
-      
-      }
-
+        discardRoutine={discardRoutine}
+       />
+    </Modal>
     </>
   )
 }
