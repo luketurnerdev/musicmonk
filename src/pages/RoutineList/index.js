@@ -30,10 +30,12 @@ const RoutineList = () => {
   const List = () => {
     return (
       userRoutines.map(routine => {
+        console.log('steps')
+        console.log(routine)
         return (
          <div key={routine.id}>
            <h1>{routine.title}</h1>
-           {/* <h6>{routine.steps[0]}</h6> */}
+        {/* {routine.userSteps && <h5>{routine.userSteps[0].text}</h5>} */}
            <Button variant="contained">Play</Button>
          </div>
         )
