@@ -15,16 +15,16 @@ import NewRoutineForm from "./../../Components/NewRoutineForm";
 const RoutineList = () => {
   const [userRoutines, setUserRoutines] = useState(fakeData);
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
-  const [formOpen, setFormOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(true);
   // Default value is the existing list
-  const saveRoutine = () => {
-    console.log('this function will save routine to the upper state')
+  const saveRoutine = newRoutineData => {
+    console.log(newRoutineData);
+    setUserRoutines(routines => [...routines, newRoutineData])
     setFormOpen(false);
   }
   
   const discardRoutine = () => {
     setFormOpen(false);
-
   }
 
   const List = () => {
@@ -33,7 +33,7 @@ const RoutineList = () => {
         return (
          <div key={routine.id}>
            <h1>{routine.title}</h1>
-           <h6>{routine.steps[0]}</h6>
+           {/* <h6>{routine.steps[0]}</h6> */}
            <Button variant="contained">Play</Button>
          </div>
         )
@@ -43,8 +43,12 @@ const RoutineList = () => {
   return (
     <>
 
-     {!formOpen && <List />}
+     {!formOpen && 
+    <>
+      <List />
      <Button variant="contained" onClick={() => setFormOpen(true)}>Add new routine</Button>
+    </>
+     }
       <Modal
         open={formOpen}
       >
