@@ -6,7 +6,18 @@ const NewRoutineForm = props => {
   //A new routine must have at least 1 step, a title and an id
   const {discardRoutine, saveRoutine} = props;
   const [formData, setFormData] = useState({});
-  const [userSteps, setUserSteps] = useState(['heres step 1','and also step 2']);
+  const [userSteps, setUserSteps] = useState(
+    [
+      {
+        id:0,
+        text: 'step 1'
+      },
+      {
+        id:1,
+        text: 'step 2'
+      },
+    ]
+  );
 
   const handleFormUpdate = (field, value) => {
     console.log(field, value);
@@ -14,13 +25,17 @@ const NewRoutineForm = props => {
   }
 
   const addStep = () => {
-    setUserSteps(steps => [...steps, ['new step']])
+    setUserSteps(steps => [...steps, [{id: userSteps.length-1, text: ''}]])
+  }
+  const editStep = (index, value) => {
+
   }
 
   const mapSteps = () => {
     return (
       userSteps && userSteps.map((step, index) => {
-        return <TextField defaultValue={step} />
+        console.log(step, index)
+        return <TextField defaultValue={step.text} />
       })
     )
   }
