@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Modal} from '@material-ui/core/'
 import fakeData from "./../../fakeData";
 import NewRoutineForm from "./../../Components/NewRoutineForm";
+import PlayRoutine from "./../../Components/PlayRoutine";
 
 // Hit the API / DB, get a list of users routines
 // map them out with the title amd a button to play or edit
@@ -14,17 +15,23 @@ import NewRoutineForm from "./../../Components/NewRoutineForm";
 const RoutineList = () => {
   const [userRoutines, setUserRoutines] = useState(fakeData);
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
-  const [formOpen, setFormOpen] = useState(true);
+  const [newFormOpen, setNewFormOpen] = useState(false);
+  const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
   // Default value is the existing list
   const saveRoutine = newRoutineData => {
-    console.log('receiveing new routine')
-    console.log(newRoutineData)
     setUserRoutines(routines => [...routines, newRoutineData])
-    setFormOpen(false);
+    setNewFormOpen(false);
   }
   
   const discardRoutine = () => {
-    setFormOpen(false);
+    setNewFormOpen(false);
+  }
+  const openPlayMode = routine => {
+    setPlayRoutineOpen(true);
+    setCurrentlySelectedRoutine(routine)
+  }
+  const closePlayMode = () => {
+    setPlayRoutineOpen(false);
   }
 
   const List = () => {
@@ -34,29 +41,48 @@ const RoutineList = () => {
          <div key={routine.id}>
            <h1>{routine.title}</h1>
             {routine.steps && routine.steps.map(step => {return <h5>{step.text}</h5>})}
-           <Button variant="contained" onClick={() => setCurrentlySelectedRoutine(routine)}>View</Button>
+           <Button variant="contained" onClick={() => openPlayMode(routine)}>View</Button>
          </div>
         )
       })
     )
   }
+
+  const NewForm = () => {
+    return (
+      <Modal
+      open={newFormOpen}
+      >
+        <NewRoutineForm
+          saveRoutine={saveRoutine}
+          discardRoutine={discardRoutine}
+        />
+      </Modal>
+    )
+  }
+  const Play = () => {
+    return (
+      <Modal
+      open={playRoutineOpen}
+      >
+        <PlayRoutine
+          routine={currentlySelectedRoutine}
+          closePlayMode={closePlayMode}
+        />
+      </Modal>
+    )
+  }
   return (
     <>
-     {!formOpen && 
+     {!newFormOpen && 
     <>
       <h5>{currentlySelectedRoutine && currentlySelectedRoutine.title}</h5>
       <List />
-     <Button variant="contained" onClick={() => setFormOpen(true)}>Add new routine</Button>
+     <Button variant="contained" onClick={() => setNewFormOpen(true)}>Add new routine</Button>
     </>
      }
-      <Modal
-        open={formOpen}
-      >
-       <NewRoutineForm
-        saveRoutine={saveRoutine}
-        discardRoutine={discardRoutine}
-       />
-    </Modal>
+      <NewForm />
+      <Play />
     </>
   )
 }
