@@ -3,32 +3,30 @@ import {Button, FormControl, TextField} from '@material-ui/core';
 
 const NewRoutineForm = props => {
 
-  //A new routine must have at least 1 step, a title and an id
+  //A new routine must have at least 1 step, a title and an id - add validation later
   const {discardRoutine, saveRoutine} = props;
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({id: 0, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState([]);
 
   const handleFormUpdate = (field, value) => {
-    console.log(field, value);
     setFormData({...formData, [field]:value})
   }
 
   const handleSubmit = () => {
-
-    //Combine steps and title 
-
     let copy = formData;
-    copy[userSteps] = userSteps;
-
-    console.log('copy')
-    console.log(copy)
+    copy.steps = userSteps;
     // Submit to upper
-    saveRoutine(copy)
+    console.log('submitting')
+    console.log(copy);
+    saveRoutine(copy);
 
   }
 
   const addStep = () => {
     setUserSteps(steps => [...steps, [{id: userSteps.length, text: ''}]])
+  }
+  const removeStep = id => {
+    setUserSteps(userSteps.filter(step => step[0].id !== id));
   }
   const editStep = (index, value) => {
     let copy = userSteps;
@@ -39,14 +37,17 @@ const NewRoutineForm = props => {
   const mapSteps = () => {
     return (
       userSteps && userSteps.map((step, index) => {
-        console.log(step, index)
-        return <TextField defaultValue={step.text} onChange={e => editStep(index, e.target.value)} />
+        return (
+          <>
+            <TextField defaultValue={step.text} onChange={e => editStep(index, e.target.value)} />
+            <Button onClick={() => removeStep(index)}>Remove Step</Button>
+          </>
+        )
       })
     )
   }
   return (
     <div>
-    {console.log(formData)}
       <FormControl>
         <TextField
           label="Routine name"

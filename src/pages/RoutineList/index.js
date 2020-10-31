@@ -18,7 +18,8 @@ const RoutineList = () => {
   const [formOpen, setFormOpen] = useState(true);
   // Default value is the existing list
   const saveRoutine = newRoutineData => {
-    console.log(newRoutineData);
+    console.log('receiveing new routine')
+    console.log(newRoutineData)
     setUserRoutines(routines => [...routines, newRoutineData])
     setFormOpen(false);
   }
@@ -30,8 +31,6 @@ const RoutineList = () => {
   const List = () => {
     return (
       userRoutines.map(routine => {
-        console.log('steps')
-        console.log(routine)
         return (
          <div key={routine.id}>
            <h1>{routine.title}</h1>
