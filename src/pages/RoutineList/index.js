@@ -34,7 +34,7 @@ const RoutineList = () => {
         return (
          <div key={routine.id}>
            <h1>{routine.title}</h1>
-        {/* {routine.userSteps && <h5>{routine.userSteps[0].text}</h5>} */}
+            {routine.steps && routine.steps.map(step => {return <h5>{step.text}</h5>})}
            <Button variant="contained">Play</Button>
          </div>
         )
