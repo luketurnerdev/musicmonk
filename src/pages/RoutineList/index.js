@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Modal} from '@material-ui/core/'
 import fakeData from "./../../fakeData";
-import EditModal from "./../../Components/EditModal";
 import NewRoutineForm from "./../../Components/NewRoutineForm";
 
 // Hit the API / DB, get a list of users routines
@@ -35,7 +34,7 @@ const RoutineList = () => {
          <div key={routine.id}>
            <h1>{routine.title}</h1>
             {routine.steps && routine.steps.map(step => {return <h5>{step.text}</h5>})}
-           <Button variant="contained">Play</Button>
+           <Button variant="contained" onClick={() => setCurrentlySelectedRoutine(routine)}>View</Button>
          </div>
         )
       })
@@ -43,9 +42,9 @@ const RoutineList = () => {
   }
   return (
     <>
-
      {!formOpen && 
     <>
+      <h5>{currentlySelectedRoutine && currentlySelectedRoutine.title}</h5>
       <List />
      <Button variant="contained" onClick={() => setFormOpen(true)}>Add new routine</Button>
     </>
