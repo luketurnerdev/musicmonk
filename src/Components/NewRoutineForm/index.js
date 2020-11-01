@@ -15,18 +15,18 @@ const NewRoutineForm = props => {
   const handleSubmit = () => {
     let copy = formData;
     copy.steps = userSteps;
+    console.log('usersteps ')
+    console.log(userSteps)
     // Submit to upper
-    console.log('submitting')
-    console.log(copy);
     saveRoutine(copy);
 
   }
 
   const addStep = () => {
-    setUserSteps(steps => [...steps, [{id: userSteps.length, text: ''}]])
+    setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
-    setUserSteps(userSteps.filter(step => step[0].id !== id));
+    setUserSteps(userSteps.filter(step => step.id !== id));
   }
   const editStep = (index, value) => {
     let copy = userSteps;
