@@ -14,6 +14,9 @@ const styles = {
     flexDirection: 'column',
     alignItems:'center'
   },
+  step: {
+    // display: 'none',
+  }
 };
 
 export default styles;
