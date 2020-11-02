@@ -26,10 +26,10 @@ const Step = props => {
 }
 const PlayRoutine = props => {
   const {closePlayMode, routine, classes} = props; 
-  const [routineComplete, setRoutineComplete] = useState(false);
 
   const completeRoutine = id => {
-    setRoutineComplete(true);
+    console.log('completed', id)
+    closePlayMode();
   }
   const MapSteps = () => {
     return (
