@@ -40,8 +40,7 @@ const RoutineList = () => {
         return (
          <div key={routine.id}>
            <h1>{routine.title}</h1>
-            {routine.steps && routine.steps.map(step => {return <h5>{step.text}</h5>})}
-           <Button variant="contained" onClick={() => openPlayMode(routine)}>View</Button>
+           <Button variant="contained" onClick={() => openPlayMode(routine)}>Start Routine</Button>
          </div>
         )
       })
@@ -63,7 +62,7 @@ const RoutineList = () => {
   const Play = () => {
     return (
       <Modal
-      open={playRoutineOpen}
+        open={playRoutineOpen}
       >
         <PlayRoutine
           routine={currentlySelectedRoutine}

@@ -15,8 +15,6 @@ const NewRoutineForm = props => {
   const handleSubmit = () => {
     let copy = formData;
     copy.steps = userSteps;
-    console.log('usersteps ')
-    console.log(userSteps)
     // Submit to upper
     saveRoutine(copy);
 

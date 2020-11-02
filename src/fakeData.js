@@ -3,7 +3,7 @@ const fakeData = [
     id: 0,
     title: 'Jazz routine',
     steps:
-    [{id: 0,text: 'step1Text'}, {id: 1,text: 'step2Text'}, {id: 2,text: 'step3Text'}]
+    [{id: 0,text: 'Tune your guitar'}, {id: 1,text: 'Do stretches'}, {id: 2,text: 'Chromatics'}]
   },
 ]
 

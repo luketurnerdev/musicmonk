@@ -14,8 +14,10 @@ const styles = {
     flexDirection: 'column',
     alignItems:'center'
   },
-  step: {
-    // display: 'none',
+  stepContainer: {
+    display: 'flex',
+    border: '2px solid black',
+    borderRadius: '15px'
   }
 };
 

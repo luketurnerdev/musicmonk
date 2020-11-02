@@ -1,34 +1,36 @@
 import React, {useState} from 'react';
-import {Button, Box} from '@material-ui/core';
+import {Button, Typography} from '@material-ui/core';
 import styles from "./styles";
 import { withStyles } from '@material-ui/styles';
 import RadioButtonUncheckedSharpIcon from '@material-ui/icons/RadioButtonUncheckedSharp';
 import CheckCircleOutlineSharpIcon from '@material-ui/icons/CheckCircleOutlineSharp';
 
-
 const Step = props => {
-  const {step, setCompletedSteps, classes} = props;
-  const [complete, setComplete] = useState(false);
+  const {step, classes} = props;
+  const [stepComplete, setStepComplete] = useState(false);
 
-  const handleClick = id => {
-    setComplete(!complete);
+  const completeStep = () => {
+    setStepComplete(!stepComplete);
   }
   return (
-    <div className={classes.step}>
-      <h1>{step.text}</h1>
+    <div className={classes.stepContainer}>
+      <Typography variant="subtitle2">{step.text}</Typography >
       
-      {complete ? 
-      <Button onClick ={() => handleClick()}> <CheckCircleOutlineSharpIcon /> </Button>
+      {stepComplete ? 
+      <Button onClick ={() => completeStep()}> <CheckCircleOutlineSharpIcon /> </Button>
       :
-      <Button onClick ={() => handleClick()}> <RadioButtonUncheckedSharpIcon /></Button>
+      <Button onClick ={() => completeStep()}> <RadioButtonUncheckedSharpIcon /></Button>
       }
     </div>
   )
 }
 const PlayRoutine = props => {
-  const {closePlayMode, routine, classes} = props;
-  const [completedSteps, setCompletedSteps] = useState([]);
+  const {closePlayMode, routine, classes} = props; 
+  const [routineComplete, setRoutineComplete] = useState(false);
 
+  const completeRoutine = id => {
+    setRoutineComplete(true);
+  }
   const MapSteps = () => {
     return (
       <>
@@ -36,7 +38,6 @@ const PlayRoutine = props => {
           return (
               <Step
                 step={step}
-                setCompletedSteps={setCompletedSteps}
                 classes={classes}
               />  
           ) 
@@ -49,7 +50,8 @@ const PlayRoutine = props => {
     <div className={classes.playModeContainer}>
       <h1>{routine.title}</h1>
       <MapSteps />
-      <Button variant="contained" onClick={() => closePlayMode()}>Close</Button>
+      <Button variant="contained" className={classes.root} onClick={() => completeRoutine(routine.id)}>Mark as complete</Button>
+      <Button variant="contained" className={classes.root} onClick={() => closePlayMode()}>Close</Button>
     </div>
   )
 }
