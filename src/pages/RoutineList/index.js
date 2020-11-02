@@ -30,6 +30,15 @@ const RoutineList = props => {
     setUserRoutines(routines => [...routines, newRoutineData])
     setNewFormOpen(false);
   }
+  const updateRoutine = (id, newRoutineData) => {
+    // Find the original routine in the list and modify it
+    console.log('uipdating')
+    console.log(id)
+    console.log(newRoutineData)
+    userRoutines.forEach(routine => console.log(routine.id === id))
+    // setUserRoutines(routines => [...routines, newRoutineData])
+    setNewFormOpen(false);
+  }
   
   const discardRoutine = () => {
     setNewFormOpen(false);
@@ -89,6 +98,7 @@ const RoutineList = props => {
       open={newFormOpen}
       >
         <NewRoutineForm
+          currentIdCount={userRoutines.length-1}
           saveRoutine={saveRoutine}
           discardRoutine={discardRoutine}
         />
@@ -101,7 +111,7 @@ const RoutineList = props => {
         open={editFormOpen}
       >
         <EditRoutineForm
-          saveRoutine={saveRoutine}
+          updateRoutine={updateRoutine}
           closeEditMode={closeEditMode}
           defaultRoutine={currentlySelectedRoutine}
         />
@@ -124,7 +134,6 @@ const RoutineList = props => {
     <>
      {!newFormOpen && 
     <>
-      <h5>{currentlySelectedRoutine && currentlySelectedRoutine.title}</h5>
       <List />
      <Button variant="contained" onClick={() => setNewFormOpen(true)}>Add new routine</Button>
     </>

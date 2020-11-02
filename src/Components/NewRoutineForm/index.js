@@ -4,11 +4,12 @@ import {Button, FormControl, TextField} from '@material-ui/core';
 const NewRoutineForm = props => {
 
   //A new routine must have at least 1 step, a title and an id - add validation later
-  const {discardRoutine, saveRoutine} = props;
-  const [formData, setFormData] = useState({id: 0, steps: [], title: ''});
+  const {discardRoutine, saveRoutine, currentIdCount} = props;
+  const [formData, setFormData] = useState({id: currentIdCount+1, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState([]);
 
   const handleFormUpdate = (field, value) => {
+    console.log('current id count', currentIdCount);
     setFormData({...formData, [field]:value})
   }
 

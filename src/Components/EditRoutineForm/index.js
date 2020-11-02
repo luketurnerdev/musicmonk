@@ -4,19 +4,19 @@ import {Button, FormControl, TextField} from '@material-ui/core';
 const EditRoutineForm = props => {
 
   //A new routine must have at least 1 step, a title and an id - add validation later
-  const {discardRoutine, saveRoutine, closeEditMode} = props;
-  const [formData, setFormData] = useState({id: 0, steps: [], title: ''});
-  const [userSteps, setUserSteps] = useState([]);
+  const {defaultRoutine, updateRoutine, closeEditMode} = props;
+  const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
+  const [userSteps, setUserSteps] = useState(defaultRoutine.steps || []);
 
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
   }
 
   const handleSubmit = () => {
-    let copy = formData;
-    copy.steps = userSteps;
+    let newData = formData;
+    newData.steps = userSteps;
     // Submit to upper
-    saveRoutine(copy);
+    updateRoutine(defaultRoutine.id, newData);
     closeEditMode();
   }
 
@@ -49,6 +49,7 @@ const EditRoutineForm = props => {
       <FormControl>
         <TextField
           label="Routine name"
+          defaultValue={defaultRoutine.title || ''}
           onChange={e => handleFormUpdate('title', e.target.value)}
         />
       </FormControl>
