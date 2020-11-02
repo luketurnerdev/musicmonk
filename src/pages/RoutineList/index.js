@@ -31,12 +31,16 @@ const RoutineList = props => {
     setNewFormOpen(false);
   }
   const updateRoutine = (id, newRoutineData) => {
-    // Find the original routine in the list and modify it
+    // Find the original routine in the list via id, extract routine object
+    // modify object to have new data
+    // insert it back into the list and update state
     console.log('uipdating')
-    console.log(id)
-    console.log(newRoutineData)
-    userRoutines.forEach(routine => console.log(routine.id === id))
-    // setUserRoutines(routines => [...routines, newRoutineData])
+    let routines = userRoutines;
+    let routineToUpdate = routines.filter(routine => routine.id === id)
+    routines[routineToUpdate[0].id] = newRoutineData;
+    
+    // routineToUpdate = newRoutineData;
+    setUserRoutines(routines)
     setNewFormOpen(false);
   }
   

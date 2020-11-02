@@ -9,7 +9,6 @@ const NewRoutineForm = props => {
   const [userSteps, setUserSteps] = useState([]);
 
   const handleFormUpdate = (field, value) => {
-    console.log('current id count', currentIdCount);
     setFormData({...formData, [field]:value})
   }
 
