@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {Button, FormControl, TextField} from '@material-ui/core';
+import styles from "./styles";
+import { withStyles } from '@material-ui/styles';
+import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 
 const NewRoutineForm = props => {
 
   //A new routine must have at least 1 step, a title and an id - add validation later
-  const {discardRoutine, saveRoutine, currentIdCount} = props;
+  const {discardRoutine, saveRoutine, currentIdCount, classes} = props;
   const [formData, setFormData] = useState({id: currentIdCount+1, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState([]);
 
@@ -36,18 +39,22 @@ const NewRoutineForm = props => {
     return (
       userSteps && userSteps.map((step, index) => {
         return (
-          <>
+          <div className={classes.step}>
             <TextField defaultValue={step.text} onChange={e => editStep(index, e.target.value)} />
-            <Button onClick={() => removeStep(index)}>Remove Step</Button>
-          </>
+            <Button className={classes.deleteStepButton} onClick={() => removeStep(index)}>
+              <DeleteForeverSharpIcon />
+            </Button>
+          </div>
         )
       })
     )
   }
   return (
-    <div>
+    <div className={classes.formContainer}>
+      <div className={classes.newRoutineForm}>
       <FormControl>
         <TextField
+          className={classes.routineName}
           label="Routine name"
           onChange={e => handleFormUpdate('title', e.target.value)}
         />
@@ -57,7 +64,8 @@ const NewRoutineForm = props => {
       <Button onClick={() => handleSubmit()}>Save</Button>
       <Button onClick={() => discardRoutine()}>Discard</Button>
     </div>
+    </div>
   )
 }
 
-export default NewRoutineForm;
+export default withStyles(styles)(NewRoutineForm);

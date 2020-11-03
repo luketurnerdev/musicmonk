@@ -15,6 +15,9 @@ const styles = {
     height: '50%',
     margin: 'auto 0'
   },
+  newRoutineFormRoot: {
+    backgroundColor: 'white'
+  }
 };
 
 export default styles;

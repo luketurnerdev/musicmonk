@@ -31,17 +31,11 @@ const RoutineList = props => {
     setNewFormOpen(false);
   }
   const updateRoutine = (id, newRoutineData) => {
-    // Find the original routine in the list via id, extract routine object
-    // modify object to have new data
-    // insert it back into the list and update state
-    console.log('uipdating')
+    // copy the array, modify relevant object, update state
     let routines = userRoutines;
-    let routineToUpdate = routines.filter(routine => routine.id === id)
-    routines[routineToUpdate[0].id] = newRoutineData;
-    
-    // routineToUpdate = newRoutineData;
+    routines[routines.filter(routine => routine.id === id)[0].id] = newRoutineData;
     setUserRoutines(routines)
-    setNewFormOpen(false);
+    setNewFormOpen(false); 
   }
   
   const discardRoutine = () => {
@@ -99,7 +93,7 @@ const RoutineList = props => {
   const NewForm = () => {
     return (
       <Modal
-      open={newFormOpen}
+        open={newFormOpen}
       >
         <NewRoutineForm
           currentIdCount={userRoutines.length-1}
@@ -142,7 +136,7 @@ const RoutineList = props => {
      <Button variant="contained" onClick={() => setNewFormOpen(true)}>Add new routine</Button>
     </>
      }
-      <NewForm />
+      <NewForm className={classes.newRoutineFormRoot} />
       <EditForm />
       <Play />
     </>
