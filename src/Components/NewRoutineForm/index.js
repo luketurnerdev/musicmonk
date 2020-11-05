@@ -10,6 +10,7 @@ const NewRoutineForm = props => {
   const {discardRoutine, saveRoutine, currentIdCount, classes} = props;
   const [formData, setFormData] = useState({id: currentIdCount+1, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState([]);
+  const [titleError, setTitleError] = useState('');
 
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
@@ -18,9 +19,7 @@ const NewRoutineForm = props => {
   const handleSubmit = () => {
     let copy = formData;
     copy.steps = userSteps;
-    // Submit to upper
-    saveRoutine(copy);
-
+    formData.title ? saveRoutine(copy) : setTitleError('Name is required.');
   }
 
   const addStep = () => {
@@ -55,8 +54,12 @@ const NewRoutineForm = props => {
   }
   return (
     <div className={classes.newRoutineForm}>
+      <h1>123 {titleError}</h1>
       <FormControl>
         <TextField
+          autoFocus={true}
+          error={titleError}
+          helperText={titleError || ""}
           className={classes.routineName}
           label="Routine name"
           onChange={e => handleFormUpdate('title', e.target.value)}
