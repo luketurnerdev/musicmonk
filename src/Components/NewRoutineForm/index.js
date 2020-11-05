@@ -40,7 +40,11 @@ const NewRoutineForm = props => {
       userSteps && userSteps.map((step, index) => {
         return (
           <div className={classes.step}>
-            <TextField defaultValue={step.text} onChange={e => editStep(index, e.target.value)} />
+            <TextField
+              variant="outlined"
+              defaultValue={step.text}
+              onChange={e => editStep(index, e.target.value)}
+              />
             <Button className={classes.deleteStepButton} onClick={() => removeStep(index)}>
               <DeleteForeverSharpIcon />
             </Button>
@@ -50,20 +54,21 @@ const NewRoutineForm = props => {
     )
   }
   return (
-    <div className={classes.formContainer}>
-      <div className={classes.newRoutineForm}>
+    <div className={classes.newRoutineForm}>
       <FormControl>
         <TextField
           className={classes.routineName}
           label="Routine name"
           onChange={e => handleFormUpdate('title', e.target.value)}
+          InputProps={{
+            style: styles.input
+        }}
         />
       </FormControl>
       {mapSteps()}
       <Button onClick={() => addStep()}>Add Step</Button>
       <Button onClick={() => handleSubmit()}>Save</Button>
       <Button onClick={() => discardRoutine()}>Discard</Button>
-    </div>
     </div>
   )
 }

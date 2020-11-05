@@ -4,10 +4,9 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     position: 'absolute',
-    width: '50%',
-    transform: 'translateX(-50%)',
-    left: '50%',
-    top: '25%'
+    width: '100%',
+    height: '100%',
+    overflowY: 'auto'
   },
   routineName: {
     margin: '0 auto'
@@ -20,6 +19,9 @@ const styles = {
   },
   deleteStepButton: {
     position:'absolute'
+  },
+  inputLabel: {
+    // color:'red',
   }
 }
 
