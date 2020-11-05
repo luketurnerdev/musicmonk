@@ -10,6 +10,7 @@ const EditRoutineForm = props => {
   const {defaultRoutine, updateRoutine, closeEditMode, classes} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine.steps || []);
+  const [titleError, setTitleError] = useState('');
 
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
@@ -19,8 +20,7 @@ const EditRoutineForm = props => {
     let newData = formData;
     newData.steps = userSteps;
     // Submit to upper
-    updateRoutine(defaultRoutine.id, newData);
-    closeEditMode();
+    formData.title ? updateRoutine(defaultRoutine.id, newData) : setTitleError('Name is required.');
   }
 
   const addStep = () => {
@@ -53,6 +53,9 @@ const EditRoutineForm = props => {
     <div className={classes.newRoutineForm}>
       <FormControl>
         <TextField
+          autoFocus={true}
+          error={titleError}
+          helperText={titleError || ""}
           className={classes.routineName}
           label="Routine name"
           defaultValue={defaultRoutine.title || ''}

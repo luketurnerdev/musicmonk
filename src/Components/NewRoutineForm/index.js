@@ -54,7 +54,6 @@ const NewRoutineForm = props => {
   }
   return (
     <div className={classes.newRoutineForm}>
-      <h1>123 {titleError}</h1>
       <FormControl>
         <TextField
           autoFocus={true}

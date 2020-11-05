@@ -36,6 +36,7 @@ const RoutineList = props => {
     routines[routines.filter(routine => routine.id === id)[0].id] = newRoutineData;
     setUserRoutines(routines)
     setNewFormOpen(false); 
+    setEditFormOpen(false);
   }
   
   const discardRoutine = () => {
@@ -48,13 +49,13 @@ const RoutineList = props => {
   const closePlayMode = () => {
     setPlayRoutineOpen(false);
   }
-  const closeEditMode = () => {
-    setEditFormOpen(false);
-  }
-
+  
   const openEditMode = routine => {
     setCurrentlySelectedRoutine(routine)
     setEditFormOpen(true);
+  }
+  const closeEditMode = () => {
+    setEditFormOpen(false);
   }
 
   const RoutineDisplay = props => {
@@ -109,8 +110,8 @@ const RoutineList = props => {
         open={editFormOpen}
       >
         <EditRoutineForm
-          updateRoutine={updateRoutine}
           closeEditMode={closeEditMode}
+          updateRoutine={updateRoutine}
           defaultRoutine={currentlySelectedRoutine}
         />
       </Modal>
