@@ -35,8 +35,9 @@ const PlayRoutine = props => {
     return (
       <>
         {routine.steps.map(step => {
-          return (
+          return step && (
               <Step
+                key={step.id}
                 step={step}
                 classes={classes}
               />  

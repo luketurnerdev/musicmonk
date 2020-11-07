@@ -26,7 +26,19 @@ const NewRoutineForm = props => {
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
-    setUserSteps(userSteps.filter(step => step.id !== id));
+    // The index and id align at first, but then get put out of order when
+    // a non-last step is deleted.
+    
+    // if the array id matches the step id, set it to null or undefined.
+    let removedList = userSteps.map(step => {
+      if (step && step.id !== id) {
+        return step;
+      }
+      else {
+        return null;
+      }
+    })
+    setUserSteps(removedList);
   }
   const editStep = (index, value) => {
     let copy = userSteps;
@@ -37,8 +49,8 @@ const NewRoutineForm = props => {
   const mapSteps = () => {
     return (
       userSteps && userSteps.map((step, index) => {
-        return (
-          <div className={classes.step}>
+        return step ? (
+          <div className={classes.step} key={index}>
             <TextField
               variant="outlined"
               defaultValue={step.text}
@@ -49,6 +61,7 @@ const NewRoutineForm = props => {
             </Button>
           </div>
         )
+        : null
       })
     )
   }

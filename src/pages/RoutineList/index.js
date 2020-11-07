@@ -85,7 +85,7 @@ const RoutineList = props => {
     return (
       userRoutines.map(routine => {
         return (
-         <RoutineDisplay routine={routine} classes={classes} />
+         <RoutineDisplay routine={routine} classes={classes} key={routine.id} />
         )
       })
     )

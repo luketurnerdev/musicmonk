@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, FormControl, TextField} from '@material-ui/core';
 import styles from './styles';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
@@ -12,6 +12,9 @@ const EditRoutineForm = props => {
   const [userSteps, setUserSteps] = useState(defaultRoutine.steps || []);
   const [titleError, setTitleError] = useState('');
 
+  useEffect(() => {
+    console.log('crank')
+  }, userSteps)
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
   }
@@ -27,7 +30,19 @@ const EditRoutineForm = props => {
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
-    setUserSteps(userSteps.filter(step => step.id !== id));
+    // The index and id align at first, but then get put out of order when
+    // a non-last step is deleted.
+    
+    // if the array id matches the step id, set it to null or undefined.
+    let removedList = userSteps.map(step => {
+      if (step && step.id !== id) {
+        return step;
+      }
+      else {
+        return null;
+      }
+    })
+    setUserSteps(removedList);
   }
   const editStep = (index, value) => {
     let copy = userSteps;
@@ -38,14 +53,17 @@ const EditRoutineForm = props => {
   const mapSteps = () => {
     return (
       userSteps && userSteps.map((step, index) => {
-        return (
+        return step ? (
           <div className={classes.step}>
-            <TextField defaultValue={step.text} onChange={e => editStep(index, e.target.value)} />
+            <TextField
+              defaultValue={step.text}
+              onChange={e => editStep(index, e.target.value)} />
             <Button className={classes.deleteStepButton} onClick={() => removeStep(index)}>
               <DeleteForeverSharpIcon />
             </Button>
           </div>
         )
+        : null
       })
     )
   }
