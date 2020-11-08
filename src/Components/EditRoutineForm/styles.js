@@ -15,8 +15,14 @@ const styles = {
     margin: '0 auto'
   },
   deleteStepButton: {
-    position:'absolute'
+    width: '20%',
+    margin: '0 auto'
   },
+  button: {
+    // position:'absolute',
+    width: '20%',
+    margin: '0 auto'
+  }
 }
 
 export default styles;

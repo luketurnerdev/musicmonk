@@ -13,7 +13,6 @@ const EditRoutineForm = props => {
   const [titleError, setTitleError] = useState('');
 
   useEffect(() => {
-    console.log('crank')
   }, userSteps)
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
@@ -50,18 +49,40 @@ const EditRoutineForm = props => {
     setUserSteps(copy);
   }
 
+  const StepDisplay = props => {
+    const {step, index} = props;
+    const [stepError, setStepError] = useState('');
+    const handleBlur = text => {
+      // if there is no text, set the error message
+      console.log(text.length);
+      if (text.length === 0) {
+        setStepError('Step cannot be empty.');
+      } else {
+        setStepError('');
+      }
+      return null;
+    }
+    return (
+      <div className={classes.step}>
+      {console.log(stepError)}
+        <TextField
+          error={stepError}
+          helperText={stepError || ""}
+          defaultValue={step.text}
+          onChange={e => editStep(index, e.target.value)}
+          onBlur={() => handleBlur(step.text)}
+           />
+        <Button className={classes.button} onClick={() => removeStep(index)}>
+          <DeleteForeverSharpIcon />
+        </Button>
+      </div>
+    )
+  }
   const mapSteps = () => {
     return (
       userSteps && userSteps.map((step, index) => {
         return step ? (
-          <div className={classes.step}>
-            <TextField
-              defaultValue={step.text}
-              onChange={e => editStep(index, e.target.value)} />
-            <Button className={classes.deleteStepButton} onClick={() => removeStep(index)}>
-              <DeleteForeverSharpIcon />
-            </Button>
-          </div>
+          <StepDisplay step={step} index={index} />
         )
         : null
       })
@@ -81,9 +102,24 @@ const EditRoutineForm = props => {
         />
       </FormControl>
       {mapSteps()}
-      <Button onClick={() => addStep()}>Add Step</Button>
-      <Button onClick={() => handleSubmit()}>Save</Button>
-      <Button onClick={() => closeEditMode()}>Discard</Button>
+      <Button
+        variant="contained"
+        className={classes.button}
+        onClick={() => addStep()}>
+          Add Step
+      </Button>
+      <Button
+          variant="contained"
+          className={classes.button}
+          onClick={() => handleSubmit()}>
+          Save
+      </Button>
+      <Button
+        variant="contained"
+        className={classes.button}
+        onClick={() => closeEditMode()}>
+          Discard
+      </Button>
     </div>
   )
 }
