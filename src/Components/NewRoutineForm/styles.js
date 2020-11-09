@@ -9,19 +9,19 @@ const styles = {
     overflowY: 'auto'
   },
   routineName: {
-    margin: '0 auto'
-  },
-  formContainer: {
-    backgroundColor: 'white',
+    margin: '0 auto',
+    width: '30vw',
   },
   step: {
     margin: '0 auto'
   },
   deleteStepButton: {
-    position:'absolute'
+    width: '20%',
+    margin: '0 auto'
   },
-  inputLabel: {
-    // color:'red',
+  button: {
+    width: '20%',
+    margin: '0 auto'
   }
 }
 

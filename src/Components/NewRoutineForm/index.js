@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 import {Button, FormControl, TextField} from '@material-ui/core';
 import styles from "./styles";
 import { withStyles } from '@material-ui/styles';
-import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
+import StepDisplay from "./../StepDisplay";
 
 const NewRoutineForm = props => {
 
-  //A new routine must have at least 1 step, a title and an id - add validation later
   const {discardRoutine, saveRoutine, currentIdCount, classes} = props;
   const [formData, setFormData] = useState({id: currentIdCount+1, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState([]);
@@ -50,16 +49,13 @@ const NewRoutineForm = props => {
     return (
       userSteps && userSteps.map((step, index) => {
         return step ? (
-          <div className={classes.step} key={index}>
-            <TextField
-              variant="outlined"
-              defaultValue={step.text}
-              onChange={e => editStep(index, e.target.value)}
-              />
-            <Button className={classes.deleteStepButton} onClick={() => removeStep(index)}>
-              <DeleteForeverSharpIcon />
-            </Button>
-          </div>
+          <StepDisplay
+            step={step}
+            index={index}
+            classes={classes}
+            removeStep={removeStep}
+            editStep={editStep}
+          />
         )
         : null
       })
@@ -80,10 +76,27 @@ const NewRoutineForm = props => {
         }}
         />
       </FormControl>
+
       {mapSteps()}
-      <Button onClick={() => addStep()}>Add Step</Button>
-      <Button onClick={() => handleSubmit()}>Save</Button>
-      <Button onClick={() => discardRoutine()}>Discard</Button>
+
+      <Button
+        variant="contained"
+        className={classes.button}
+        onClick={() => addStep()}>
+          Add Step
+      </Button>
+      <Button
+          variant="contained"
+          className={classes.button}
+          onClick={() => handleSubmit()}>
+          Save
+      </Button>
+      <Button
+        variant="contained"
+        className={classes.button}
+        onClick={() => discardRoutine()}>
+          Discard
+      </Button>
     </div>
   )
 }

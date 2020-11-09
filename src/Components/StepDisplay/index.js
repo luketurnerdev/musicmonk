@@ -7,28 +7,35 @@ import styles from "./styles";
 const StepDisplay = props => {
   const {step, index, classes, removeStep, editStep} = props;
   const [stepError, setStepError] = useState('');
-  const handleBlur = text => {
-    // if there is no text, set the error message
-    console.log(text.length);
-    if (text.length === 0) {
+
+  const checkTextLength = length => {
+    if (length === 0) {
       setStepError('Step cannot be empty.');
     } else {
       setStepError('');
     }
     return null;
   }
+  const handleChange = e => {
+    // perform check here for exceeding 0 chars
+    checkTextLength(e.target.value.length);
+    editStep(index, e.target.value);
+  }
+  const handleBlur = text => {
+    // if there is no text, set the error message
+    checkTextLength(text.length);
+  }
   return (
-    <div className={classes.step}>
-    {console.log(stepError)}
+    <div style={styles.step}>
       <TextField
         error={stepError}
         helperText={stepError || ""}
         defaultValue={step.text}
-        onChange={e => editStep(index, e.target.value)}
+        onChange={e => handleChange(e)}
         onBlur={() => handleBlur(step.text)}
          />
-      <Button className={classes.button} onClick={() => removeStep(index)}>
-        <DeleteForeverSharpIcon />
+      <Button style={styles.button} onClick={() => removeStep(index)}>
+        <DeleteForeverSharpIcon style={styles.deleteStepButton} />
       </Button>
     </div>
   )
