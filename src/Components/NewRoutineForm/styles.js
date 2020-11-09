@@ -6,22 +6,22 @@ const styles = {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    alignItems: 'center'
   },
   routineName: {
-    margin: '0 auto',
     width: '30vw',
   },
   step: {
-    margin: '0 auto'
+    // margin: '0 auto'
   },
   deleteStepButton: {
     width: '20%',
-    margin: '0 auto'
+    // margin: '0 auto'
   },
   button: {
     width: '20%',
-    margin: '0 auto'
+    // margin: '0 auto'
   }
 }
 
