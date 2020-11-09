@@ -132,10 +132,10 @@ const RoutineList = props => {
   return (
     <>
      {!newFormOpen && 
-    <>
+    <div className={classes.routineListContainer}>
       <List />
      <Button variant="contained" onClick={() => setNewFormOpen(true)}>Add new routine</Button>
-    </>
+    </div>
      }
       <NewForm className={classes.newRoutineFormRoot} />
       <EditForm />

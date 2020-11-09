@@ -17,6 +17,10 @@ const styles = {
   },
   newRoutineFormRoot: {
     backgroundColor: 'white'
+  },
+  routineListContainer: {
+    display: 'flex',
+    flexDirection: 'column'
   }
 };
 
