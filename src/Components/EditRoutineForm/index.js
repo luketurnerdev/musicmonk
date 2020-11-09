@@ -3,6 +3,7 @@ import {Button, FormControl, TextField} from '@material-ui/core';
 import styles from './styles';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import { withStyles } from '@material-ui/styles';
+import StepDisplay from "./../StepDisplay";
 
 const EditRoutineForm = props => {
 
@@ -49,40 +50,46 @@ const EditRoutineForm = props => {
     setUserSteps(copy);
   }
 
-  const StepDisplay = props => {
-    const {step, index} = props;
-    const [stepError, setStepError] = useState('');
-    const handleBlur = text => {
-      // if there is no text, set the error message
-      console.log(text.length);
-      if (text.length === 0) {
-        setStepError('Step cannot be empty.');
-      } else {
-        setStepError('');
-      }
-      return null;
-    }
-    return (
-      <div className={classes.step}>
-      {console.log(stepError)}
-        <TextField
-          error={stepError}
-          helperText={stepError || ""}
-          defaultValue={step.text}
-          onChange={e => editStep(index, e.target.value)}
-          onBlur={() => handleBlur(step.text)}
-           />
-        <Button className={classes.button} onClick={() => removeStep(index)}>
-          <DeleteForeverSharpIcon />
-        </Button>
-      </div>
-    )
-  }
+  // const StepDisplay = props => {
+  //   const {step, index} = props;
+  //   const [stepError, setStepError] = useState('');
+  //   const handleBlur = text => {
+  //     // if there is no text, set the error message
+  //     console.log(text.length);
+  //     if (text.length === 0) {
+  //       setStepError('Step cannot be empty.');
+  //     } else {
+  //       setStepError('');
+  //     }
+  //     return null;
+  //   }
+  //   return (
+  //     <div className={classes.step}>
+  //     {console.log(stepError)}
+  //       <TextField
+  //         error={stepError}
+  //         helperText={stepError || ""}
+  //         defaultValue={step.text}
+  //         onChange={e => editStep(index, e.target.value)}
+  //         onBlur={() => handleBlur(step.text)}
+  //          />
+  //       <Button className={classes.button} onClick={() => removeStep(index)}>
+  //         <DeleteForeverSharpIcon />
+  //       </Button>
+  //     </div>
+  //   )
+  // }
   const mapSteps = () => {
     return (
       userSteps && userSteps.map((step, index) => {
         return step ? (
-          <StepDisplay step={step} index={index} />
+          <StepDisplay
+            step={step}
+            index={index}
+            classes={classes}
+            removeStep={removeStep}
+            editStep={editStep}
+          />
         )
         : null
       })
