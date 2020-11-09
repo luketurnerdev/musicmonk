@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Modal} from '@material-ui/core/'
+import {Button, Modal, Grid} from '@material-ui/core/'
 import fakeData from "./../../fakeData";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
@@ -62,21 +62,29 @@ const RoutineList = props => {
     const {routine, classes} = props;
     return (
     <div key={routine.id} className={classes.routineDisplay}>
-      <h1>{routine.title}</h1>
-      <Button
-        variant="contained"
-        onClick={() => openPlayMode(routine)}
-        className={classes.startButton}
-        >
-          <PlayCircleOutlineSharpIcon />
-      </Button>
-      <Button
-        variant="contained"
-        onClick={() => openEditMode(routine)}
-        className={classes.editButton}
-      >
-          <EditOutlinedIcon />
-      </Button>
+      <Grid container >
+        <Grid item xs={8} className={classes.gridItem}>
+          <h1>{routine.title}</h1>
+        </Grid>
+        <Grid item xs={2} className={classes.gridItem}>
+          <Button
+          variant="contained"
+          onClick={() => openPlayMode(routine)}
+          className={classes.startButton}
+          >
+            <PlayCircleOutlineSharpIcon />
+        </Button>
+      </Grid>
+        <Grid item xs={2} className={classes.gridItem}>
+            <Button
+            variant="contained"
+            onClick={() => openEditMode(routine)}
+            className={classes.editButton}
+          >
+              <EditOutlinedIcon />
+          </Button>
+        </Grid>
+      </Grid>
     </div>
     )
   }
