@@ -6,7 +6,7 @@ import StepDisplay from "./../StepDisplay";
 
 const RoutineForm = props => {
 
-  const {defaultRoutine, updateRoutine, closeEditMode, classes, saveNewRoutine} = props;
+  const {defaultRoutine, updateRoutine, discardRoutine, classes, saveNewRoutine} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine && defaultRoutine.steps || []);
   const [titleError, setTitleError] = useState('');
@@ -99,7 +99,7 @@ const RoutineForm = props => {
       <Button
         variant="contained"
         className={classes.button}
-        onClick={() => closeEditMode()}>
+        onClick={() => discardRoutine()}>
           Discard
       </Button>
     </div>

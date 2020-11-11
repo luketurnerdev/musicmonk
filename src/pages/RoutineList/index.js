@@ -31,6 +31,7 @@ const RoutineList = props => {
   const saveNewRoutine = newRoutineData => {
     setUserRoutines(routines => [...routines, newRoutineData])
     setRoutineFormOpen(false);
+    setCurrentlySelectedRoutine(null);
   }
   const updateRoutine = (id, newRoutineData) => {
     // copy the array, modify relevant object, update state
@@ -38,10 +39,12 @@ const RoutineList = props => {
     routines[routines.filter(routine => routine.id === id)[0].id] = newRoutineData;
     setUserRoutines(routines)
     setRoutineFormOpen(false);
+    setCurrentlySelectedRoutine(null);
   }
   
   const discardRoutine = () => {
-    setNewFormOpen(false);
+    setRoutineFormOpen(false);
+    setCurrentlySelectedRoutine(null);
   }
   const openPlayMode = routine => {
     setPlayRoutineOpen(true);
@@ -51,12 +54,7 @@ const RoutineList = props => {
     setPlayRoutineOpen(false);
   }
   
-  const openEditMode = routine => {
-    setCurrentlySelectedRoutine(routine)
-    setEditFormOpen(true);
-  }
   const openRoutineForm = routine => {
-    console.log('routine', routine)
     setCurrentlySelectedRoutine(routine)
     setRoutineFormOpen(true);
   }
@@ -140,6 +138,7 @@ const RoutineList = props => {
           closeEditMode={closeEditMode}
           updateRoutine={updateRoutine}
           saveNewRoutine={saveNewRoutine}
+          discardRoutine={discardRoutine}
           defaultRoutine={currentlySelectedRoutine}
         />
       </Modal>
@@ -165,8 +164,6 @@ const RoutineList = props => {
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
      }
-      {/* <NewForm className={classes.newRoutineFormRoot} />
-      <EditForm /> */}
       <Form />
       <Play />
     </>
