@@ -8,6 +8,7 @@ import EditRoutineForm from "./../../Components/EditRoutineForm";
 import PlayRoutine from "./../../Components/PlayRoutine";
 import PlayCircleOutlineSharpIcon from '@material-ui/icons/PlayCircleOutlineSharp';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import RoutineForm from "./../../Components/RoutineForm";
 
 // Hit the API / DB, get a list of users routines
 // map them out with the title amd a button to play or edit
@@ -22,11 +23,12 @@ const RoutineList = props => {
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
   const [newFormOpen, setNewFormOpen] = useState(false);
   const [editFormOpen, setEditFormOpen] = useState(false);
+  const [routineFormOpen, setRoutineFormOpen] = useState(false);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
 
   const {classes} = props;
   // Default value is the existing list
-  const saveRoutine = newRoutineData => {
+  const saveNewRoutine = newRoutineData => {
     setUserRoutines(routines => [...routines, newRoutineData])
     setNewFormOpen(false);
   }
@@ -54,6 +56,11 @@ const RoutineList = props => {
     setCurrentlySelectedRoutine(routine)
     setEditFormOpen(true);
   }
+  const openRoutineForm = routine => {
+    console.log('routine', routine)
+    setCurrentlySelectedRoutine(routine)
+    setRoutineFormOpen(true);
+  }
   const closeEditMode = () => {
     setEditFormOpen(false);
   }
@@ -78,7 +85,7 @@ const RoutineList = props => {
         <Grid item xs={2} className={classes.gridItem}>
             <Button
             variant="contained"
-            onClick={() => openEditMode(routine)}
+            onClick={() => openRoutineForm(routine)}
             className={classes.editButton}
           >
               <EditOutlinedIcon />
@@ -106,7 +113,7 @@ const RoutineList = props => {
       >
         <NewRoutineForm
           currentIdCount={userRoutines.length-1}
-          saveRoutine={saveRoutine}
+          saveNewRoutine={saveNewRoutine}
           discardRoutine={discardRoutine}
         />
       </Modal>
@@ -120,6 +127,20 @@ const RoutineList = props => {
         <EditRoutineForm
           closeEditMode={closeEditMode}
           updateRoutine={updateRoutine}
+          defaultRoutine={currentlySelectedRoutine}
+        />
+      </Modal>
+    )
+  }
+  const Form = () => {
+    return (
+      <Modal
+        open={routineFormOpen}
+      >
+        <RoutineForm
+          closeEditMode={closeEditMode}
+          updateRoutine={updateRoutine}
+          saveNewRoutine={saveNewRoutine}
           defaultRoutine={currentlySelectedRoutine}
         />
       </Modal>
@@ -145,8 +166,9 @@ const RoutineList = props => {
      <Button variant="contained" onClick={() => setNewFormOpen(true)}>Add new routine</Button>
     </div>
      }
-      <NewForm className={classes.newRoutineFormRoot} />
-      <EditForm />
+      {/* <NewForm className={classes.newRoutineFormRoot} />
+      <EditForm /> */}
+      <Form />
       <Play />
     </>
   )

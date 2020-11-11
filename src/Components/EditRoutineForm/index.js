@@ -6,6 +6,8 @@ import StepDisplay from "./../StepDisplay";
 
 const EditRoutineForm = props => {
 
+  // Extra props required for edit
+
   const {defaultRoutine, updateRoutine, closeEditMode, classes} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine.steps || []);
