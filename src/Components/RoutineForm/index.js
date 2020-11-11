@@ -10,7 +10,7 @@ const RoutineForm = props => {
   const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine.steps || []);
   const [titleError, setTitleError] = useState('');
-  const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
+  const [isNewRoutine, setIsNewRoutine] = useState(true);
 
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
@@ -22,6 +22,8 @@ const RoutineForm = props => {
     console.log('is new? ', isNewRoutine);
     if (isNewRoutine) {
       // save new function, if no validation errors
+
+      formData.title ? saveNewRoutine(newData) : setTitleError('Name is required.');
     }
     else {
       formData.title ? updateRoutine(defaultRoutine.id, newData) : setTitleError('Name is required.');

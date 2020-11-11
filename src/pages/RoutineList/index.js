@@ -30,7 +30,7 @@ const RoutineList = props => {
   // Default value is the existing list
   const saveNewRoutine = newRoutineData => {
     setUserRoutines(routines => [...routines, newRoutineData])
-    setNewFormOpen(false);
+    setRoutineFormOpen(false);
   }
   const updateRoutine = (id, newRoutineData) => {
     // copy the array, modify relevant object, update state
