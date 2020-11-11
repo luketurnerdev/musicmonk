@@ -8,9 +8,9 @@ const RoutineForm = props => {
 
   const {defaultRoutine, updateRoutine, closeEditMode, classes, saveNewRoutine} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
-  const [userSteps, setUserSteps] = useState(defaultRoutine.steps || []);
+  const [userSteps, setUserSteps] = useState(defaultRoutine && defaultRoutine.steps || []);
   const [titleError, setTitleError] = useState('');
-  const [isNewRoutine, setIsNewRoutine] = useState(true);
+  const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
 
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
@@ -19,13 +19,12 @@ const RoutineForm = props => {
   const handleSubmit = () => {
     let newData = formData;
     newData.steps = userSteps;
-    console.log('is new? ', isNewRoutine);
     if (isNewRoutine) {
       // save new function, if no validation errors
-
       formData.title ? saveNewRoutine(newData) : setTitleError('Name is required.');
     }
     else {
+      // Update existing
       formData.title ? updateRoutine(defaultRoutine.id, newData) : setTitleError('Name is required.');
     }
   }
@@ -79,7 +78,7 @@ const RoutineForm = props => {
           helperText={titleError || ""}
           className={classes.routineName}
           label="Routine name"
-          defaultValue={defaultRoutine.title || ''}
+          defaultValue={(defaultRoutine && defaultRoutine.title) || ''}
           onChange={e => handleFormUpdate('title', e.target.value)}
         />
       </FormControl>

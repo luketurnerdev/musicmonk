@@ -162,7 +162,7 @@ const RoutineList = props => {
      {!newFormOpen && 
     <div className={classes.routineListContainer}>
       <List />
-     <Button variant="contained" onClick={() => setNewFormOpen(true)}>Add new routine</Button>
+     <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
      }
       {/* <NewForm className={classes.newRoutineFormRoot} />
