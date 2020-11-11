@@ -37,8 +37,7 @@ const RoutineList = props => {
     let routines = userRoutines;
     routines[routines.filter(routine => routine.id === id)[0].id] = newRoutineData;
     setUserRoutines(routines)
-    setNewFormOpen(false); 
-    setEditFormOpen(false);
+    setRoutineFormOpen(false);
   }
   
   const discardRoutine = () => {

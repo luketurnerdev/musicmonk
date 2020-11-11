@@ -6,79 +6,84 @@ import StepDisplay from "./../StepDisplay";
 
 const RoutineForm = props => {
 
-  const {defaultRoutine, updateRoutine, closeEditMode, classes} = props;
-  console.log(props)
-  // const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
-  // const [userSteps, setUserSteps] = useState(defaultRoutine.steps || []);
-  // const [titleError, setTitleError] = useState('');
+  const {defaultRoutine, updateRoutine, closeEditMode, classes, saveNewRoutine} = props;
+  const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
+  const [userSteps, setUserSteps] = useState(defaultRoutine.steps || []);
+  const [titleError, setTitleError] = useState('');
+  const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
 
-  // const handleFormUpdate = (field, value) => {
-  //   setFormData({...formData, [field]:value})
-  // }
+  const handleFormUpdate = (field, value) => {
+    setFormData({...formData, [field]:value})
+  }
 
-  // const handleSubmit = () => {
-  //   let newData = formData;
-  //   newData.steps = userSteps;
-  //   // Submit to upper
-  //   formData.title ? updateRoutine(defaultRoutine.id, newData) : setTitleError('Name is required.');
-  // }
+  const handleSubmit = () => {
+    let newData = formData;
+    newData.steps = userSteps;
+    console.log('is new? ', isNewRoutine);
+    if (isNewRoutine) {
+      // save new function, if no validation errors
+    }
+    else {
+      formData.title ? updateRoutine(defaultRoutine.id, newData) : setTitleError('Name is required.');
+    }
+  }
 
-  // const addStep = () => {
-  //   setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
-  // }
-  // const removeStep = id => {
-  //   // The index and id align at first, but then get put out of order when
-  //   // a non-last step is deleted.
+  const addStep = () => {
+    setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
+  }
+  const removeStep = id => {
+    // The index and id align at first, but then get put out of order when
+    // a non-last step is deleted.
     
-  //   // if the array id matches the step id, set it to null or undefined.
-  //   let removedList = userSteps.map(step => {
-  //     if (step && step.id !== id) {
-  //       return step;
-  //     }
-  //     else {
-  //       return null;
-  //     }
-  //   })
-  //   setUserSteps(removedList);
-  // }
-  // const editStep = (index, value) => {
-  //   let copy = userSteps;
-  //   copy[index].text = value;
-  //   setUserSteps(copy);
-  // }
+    // if the array id matches the step id, set it to null or undefined.
+    let removedList = userSteps.map(step => {
+      if (step && step.id !== id) {
+        return step;
+      }
+      else {
+        return null;
+      }
+    })
+    setUserSteps(removedList);
+  }
+  const editStep = (index, value) => {
+    let copy = userSteps;
+    copy[index].text = value;
+    setUserSteps(copy);
+  }
 
-  // const mapSteps = () => {
-  //   return (
-  //     userSteps && userSteps.map((step, index) => {
-  //       return step ? (
-  //         <StepDisplay
-  //           step={step}
-  //           index={index}
-  //           classes={classes}
-  //           removeStep={removeStep}
-  //           editStep={editStep}
-  //         />
-  //       )
-  //       : null
-  //     })
-  //   )
-  // }
+  const mapSteps = () => {
+    return (
+      userSteps && userSteps.map((step, index) => {
+        return step ? (
+          <StepDisplay
+            step={step}
+            index={index}
+            classes={classes}
+            removeStep={removeStep}
+            editStep={editStep}
+          />
+        )
+        : null
+      })
+    )
+  }
   return (
   <div className={classes.formContainer}>
     <div className={classes.routineForm}>
       <FormControl>
         <TextField
-          // error={titleError}
-          // helperText={titleError || ""}
+          error={titleError}
+          helperText={titleError || ""}
           className={classes.routineName}
           label="Routine name"
           defaultValue={defaultRoutine.title || ''}
-          // onChange={e => handleFormUpdate('title', e.target.value)}
+          onChange={e => handleFormUpdate('title', e.target.value)}
         />
       </FormControl>
       
-      {/* {mapSteps()} */}
-      {/* <Button
+      {mapSteps()}
+      <Button
         variant="contained"
         className={classes.button}
         onClick={() => addStep()}>
@@ -95,7 +100,7 @@ const RoutineForm = props => {
         className={classes.button}
         onClick={() => closeEditMode()}>
           Discard
-      </Button> */}
+      </Button>
     </div>
 
   </div>
