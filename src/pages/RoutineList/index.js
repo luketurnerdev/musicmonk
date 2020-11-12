@@ -12,14 +12,14 @@ import RoutineForm from "./../../Components/RoutineForm";
 // map them out with the title amd a button to play or edit
 
 //When this page first loads, fetch users routines from db (fake for now)
-//When the list is updated, fetch it again (useEffect)
+//When the list is updated, setUserRoutines.
+//Also need to update the fakeData file.
 
 //When edit is clicked, open up a modal with userRoutines[id] passed in (the whole object including steps)
 
 const RoutineList = props => {
   const [userRoutines, setUserRoutines] = useState(fakeData);
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
-  const [newFormOpen, setNewFormOpen] = useState(false);
   const [routineFormOpen, setRoutineFormOpen] = useState(false);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
 
@@ -29,6 +29,7 @@ const RoutineList = props => {
     setUserRoutines(routines => [...routines, newRoutineData])
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
+    console.log(newRoutineData);
   }
   const updateRoutine = (id, newRoutineData) => {
     // copy the array, modify relevant object, update state
@@ -105,7 +106,7 @@ const RoutineList = props => {
           updateRoutine={updateRoutine}
           saveNewRoutine={saveNewRoutine}
           discardRoutine={discardRoutine}
-          defaultRoutine={currentlySelectedRoutine}
+          defaultRoutine={currentlySelectedRoutine || null}
         />
       </Modal>
     )
@@ -124,12 +125,10 @@ const RoutineList = props => {
   }
   return (
     <>
-     {!newFormOpen && 
     <div className={classes.routineListContainer}>
       <List />
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
-     }
       <Form />
       <Play />
     </>

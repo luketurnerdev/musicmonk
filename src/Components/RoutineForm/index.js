@@ -12,7 +12,6 @@ const RoutineForm = props => {
   const [titleError, setTitleError] = useState('');
   const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
   const [errorCount, setErrorCount] = useState(0);
-
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
   }
