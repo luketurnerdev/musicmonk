@@ -4,9 +4,8 @@ import fakeData from "./../../fakeData";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
-import PlayCircleOutlineSharpIcon from '@material-ui/icons/PlayCircleOutlineSharp';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import RoutineForm from "./../../Components/RoutineForm";
+import RoutineDisplay from "./../../Components/RoutineDisplay";
 
 // Hit the API / DB, get a list of users routines
 // map them out with the title amd a button to play or edit
@@ -56,42 +55,33 @@ const RoutineList = props => {
     setRoutineFormOpen(true);
   }
 
-  const RoutineDisplay = props => {
-    const {routine, classes} = props;
-    return (
-    <div key={routine.id} className={classes.routineDisplay}>
-      <Grid container >
-        <Grid item xs={8} className={classes.gridItem}>
-          <h1>{routine.title}</h1>
-        </Grid>
-        <Grid item xs={2} className={classes.gridItem}>
-          <Button
-          variant="contained"
-          onClick={() => openPlayMode(routine)}
-          className={classes.startButton}
-          >
-            <PlayCircleOutlineSharpIcon />
-        </Button>
-      </Grid>
-        <Grid item xs={2} className={classes.gridItem}>
-            <Button
-            variant="contained"
-            onClick={() => openRoutineForm(routine)}
-            className={classes.editButton}
-          >
-              <EditOutlinedIcon />
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
-    )
+  const deleteRoutine = id => {
+    console.log('deleting', id);
+    let removedList = userRoutines.map(routine => {
+      if (routine && routine.id !== id) {
+        return routine;
+      }
+      else {
+        return null;
+      }
+    })
+    console.log(removedList)
+    // When we remove from the list, the null.xyz values cannot be read
+    setUserRoutines(removedList);
   }
 
   const List = () => {
     return (
       userRoutines.map(routine => {
-        return (
-         <RoutineDisplay routine={routine} classes={classes} key={routine.id} />
+        return routine && (
+        <RoutineDisplay
+          routine={routine}
+          classes={classes}
+          key={routine.id}
+          deleteRoutine={deleteRoutine}
+          openRoutineForm={openRoutineForm}
+          openPlayMode={openPlayMode}
+          />
         )
       })
     )
