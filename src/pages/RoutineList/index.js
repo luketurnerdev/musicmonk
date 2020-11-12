@@ -3,8 +3,6 @@ import {Button, Modal, Grid} from '@material-ui/core/'
 import fakeData from "./../../fakeData";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
-import NewRoutineForm from "./../../Components/NewRoutineForm";
-import EditRoutineForm from "./../../Components/EditRoutineForm";
 import PlayRoutine from "./../../Components/PlayRoutine";
 import PlayCircleOutlineSharpIcon from '@material-ui/icons/PlayCircleOutlineSharp';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
@@ -22,7 +20,6 @@ const RoutineList = props => {
   const [userRoutines, setUserRoutines] = useState(fakeData);
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
   const [newFormOpen, setNewFormOpen] = useState(false);
-  const [editFormOpen, setEditFormOpen] = useState(false);
   const [routineFormOpen, setRoutineFormOpen] = useState(false);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
 
@@ -53,13 +50,9 @@ const RoutineList = props => {
   const closePlayMode = () => {
     setPlayRoutineOpen(false);
   }
-  
   const openRoutineForm = routine => {
     setCurrentlySelectedRoutine(routine)
     setRoutineFormOpen(true);
-  }
-  const closeEditMode = () => {
-    setEditFormOpen(false);
   }
 
   const RoutineDisplay = props => {
@@ -103,39 +96,12 @@ const RoutineList = props => {
     )
   }
 
-  const NewForm = () => {
-    return (
-      <Modal
-        open={newFormOpen}
-      >
-        <NewRoutineForm
-          currentIdCount={userRoutines.length-1}
-          saveNewRoutine={saveNewRoutine}
-          discardRoutine={discardRoutine}
-        />
-      </Modal>
-    )
-  }
-  const EditForm = () => {
-    return (
-      <Modal
-        open={editFormOpen}
-      >
-        <EditRoutineForm
-          closeEditMode={closeEditMode}
-          updateRoutine={updateRoutine}
-          defaultRoutine={currentlySelectedRoutine}
-        />
-      </Modal>
-    )
-  }
   const Form = () => {
     return (
       <Modal
         open={routineFormOpen}
       >
         <RoutineForm
-          closeEditMode={closeEditMode}
           updateRoutine={updateRoutine}
           saveNewRoutine={saveNewRoutine}
           discardRoutine={discardRoutine}

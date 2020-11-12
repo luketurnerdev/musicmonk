@@ -11,6 +11,7 @@ const RoutineForm = props => {
   const [userSteps, setUserSteps] = useState(defaultRoutine && defaultRoutine.steps || []);
   const [titleError, setTitleError] = useState('');
   const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
+  const [errorCount, setErrorCount] = useState(0);
 
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
@@ -69,6 +70,13 @@ const RoutineForm = props => {
       })
     )
   }
+
+  const checkForTitleErrors = title => {
+    console.log(title.length)
+    if (title.length === 0) {
+      setTitleError('Name is required.');
+    }
+  }
   return (
   <div className={classes.formContainer}>
     <div className={classes.routineForm}>
@@ -80,6 +88,7 @@ const RoutineForm = props => {
           label="Routine name"
           defaultValue={(defaultRoutine && defaultRoutine.title) || ''}
           onChange={e => handleFormUpdate('title', e.target.value)}
+          onBlur={e => checkForTitleErrors(e.target.value)}
         />
       </FormControl>
       
@@ -93,7 +102,7 @@ const RoutineForm = props => {
       <Button
           variant="contained"
           className={classes.button}
-          onClick={() => handleSubmit()}>
+          onClick={() => (!errorCount && handleSubmit())}>
           Save
       </Button>
       <Button
