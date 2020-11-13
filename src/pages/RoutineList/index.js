@@ -30,7 +30,6 @@ const RoutineList = props => {
     setUserRoutines(routines => [...routines, newRoutineData])
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
-    console.log(newRoutineData);
   }
   const updateRoutine = (id, newRoutineData) => {
     // copy the array, modify relevant object, update state
@@ -53,6 +52,10 @@ const RoutineList = props => {
     setDeleteConfirmationOpen(true);
     setCurrentlySelectedRoutine(routine)
   }
+  const closeDeleteMode = () => {
+    setDeleteConfirmationOpen(false);
+    setCurrentlySelectedRoutine(null)
+  }
   const closePlayMode = () => {
     setPlayRoutineOpen(false);
   }
@@ -71,9 +74,9 @@ const RoutineList = props => {
         return null;
       }
     })
-    console.log(removedList)
     // When we remove from the list, the null.xyz values cannot be read
     setUserRoutines(removedList);
+    setDeleteConfirmationOpen(false);
   }
 
 
@@ -101,7 +104,10 @@ const RoutineList = props => {
       <Modal
         open={deleteConfirmationOpen}
       >
-        <DeleteRoutine routine={currentlySelectedRoutine} deleteRoutine={deleteRoutine} />
+        <DeleteRoutine 
+         routine={currentlySelectedRoutine}
+         deleteRoutine={deleteRoutine} 
+        />
       </Modal>
     )
   }

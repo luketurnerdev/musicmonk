@@ -6,7 +6,7 @@ import RadioButtonUncheckedSharpIcon from '@material-ui/icons/RadioButtonUncheck
 import CheckCircleOutlineSharpIcon from '@material-ui/icons/CheckCircleOutlineSharp';
 
 const DeleteRoutine = props => {
-  const {deleteRoutine, routine, classes} = props; 
+  const {deleteRoutine, routine, classes, closeDeleteMode} = props; 
 
   // const delete = id => {
   //   // Feed in deletion method from props
@@ -15,10 +15,9 @@ const DeleteRoutine = props => {
   
   return (
     <div className={classes.playModeContainer}>
-      <h1>{routine.title}</h1>
-      {/* <MapSteps /> */}
-      {/* <Button variant="contained" className={classes.root} onClick={() => completeRoutine(routine.id)}>Mark as complete</Button> */}
-      {/* <Button variant="contained" className={classes.root} onClick={() => closePlayMode()}>Close</Button> */}
+      <h1>Really delete {routine.title} ?</h1>
+      <Button variant="contained" className={classes.root} onClick={() => deleteRoutine(routine.id)}>Confirm</Button>
+      <Button variant="contained" className={classes.root} onClick={() => closeDeleteMode()}>Cancel</Button>
     </div>
   )
 }
