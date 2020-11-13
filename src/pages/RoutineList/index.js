@@ -4,6 +4,7 @@ import fakeData from "./../../fakeData";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
+import DeleteRoutine from "./../../Components/DeleteRoutine";
 import RoutineForm from "./../../Components/RoutineForm";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
 
@@ -100,14 +101,8 @@ const RoutineList = props => {
       <Modal
         open={deleteConfirmationOpen}
       >
-        <DeleteConfirmation routine={currentlySelectedRoutine} />
+        <DeleteRoutine routine={currentlySelectedRoutine} deleteRoutine={deleteRoutine} />
       </Modal>
-    )
-  }
-  const DeleteConfirmation = props => {
-    const {routine} = props;
-    return (
-       null
     )
   }
   const Form = () => {
@@ -144,6 +139,7 @@ const RoutineList = props => {
     </div>
       <Form />
       <Play />
+      <Delete />
       {/* <DeleteConfirmation /> */}
     </>
   )
