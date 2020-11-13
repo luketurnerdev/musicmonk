@@ -11,7 +11,18 @@ const RoutineForm = props => {
   const [titleError, setTitleError] = useState('');
   const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
   const [errorCount, setErrorCount] = useState(0);
+  
+  const checkTextLength = length => {
+    if (length === 0) {
+      setTitleError('Title cannot be empty.');
+    } else {
+      setTitleError('');
+    }
+    return null;
+  }
   const handleFormUpdate = (field, value) => {
+    // perform check here for exceeding 0 chars
+    checkTextLength(value.length);
     setFormData({...formData, [field]:value})
   }
   
@@ -20,7 +31,7 @@ const RoutineForm = props => {
     newData.steps = userSteps;
     if (isNewRoutine) {
       // save new function, if no validation errors
-      formData.title ? saveNewRoutine(newData) : setTitleError('Name is required.');
+      formData.title ? saveNewRoutine(newData) : setTitleError('Title cannot be empty.');
     }
     else {
       // Update existing
