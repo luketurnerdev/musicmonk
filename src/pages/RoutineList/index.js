@@ -123,6 +123,7 @@ const RoutineList = props => {
           saveNewRoutine={saveNewRoutine}
           discardRoutine={discardRoutine}
           defaultRoutine={currentlySelectedRoutine || null}
+          routineCount={userRoutines.length}
         />
       </Modal>
     )

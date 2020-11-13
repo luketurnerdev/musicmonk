@@ -5,9 +5,8 @@ import { withStyles } from '@material-ui/styles';
 import StepDisplay from "./../StepDisplay";
 
 const RoutineForm = props => {
-
-  const {defaultRoutine, updateRoutine, discardRoutine, classes, saveNewRoutine} = props;
-  const [formData, setFormData] = useState(defaultRoutine || {id: 0, steps: [], title: ''});
+  const {defaultRoutine, updateRoutine, discardRoutine, classes, saveNewRoutine, routineCount} = props;
+  const [formData, setFormData] = useState(defaultRoutine || {id: routineCount, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine && defaultRoutine.steps || []);
   const [titleError, setTitleError] = useState('');
   const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
@@ -15,7 +14,7 @@ const RoutineForm = props => {
   const handleFormUpdate = (field, value) => {
     setFormData({...formData, [field]:value})
   }
-
+  
   const handleSubmit = () => {
     let newData = formData;
     newData.steps = userSteps;
@@ -101,7 +100,7 @@ const RoutineForm = props => {
       <Button
           variant="contained"
           className={classes.button}
-          onClick={() => (!errorCount && handleSubmit())}>
+          onClick={() => handleSubmit()}>
           Save
       </Button>
       <Button
