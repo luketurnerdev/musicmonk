@@ -13,9 +13,9 @@ const fakeData = [
     {id: 0,text: 'Tune your guitar'},
     {id: 1,text: 'Do stretches'},
     {id: 3,text: 'Left hand warmups'},
-    {id: 4,text: 'Chromatics 10 mins - link ?'},
+    {id: 4,text: 'Chromatics 10 min ?'},
     {id: 5,text: 'Technical Difficulties & Constant motion - 15 mins'},
-    {id: 5,text: 'FUSION JAMS 10 MINS'},
+    {id: 6,text: 'Fusion jam tracks 15 mins'},
     {id: 6,text: 'Play through trust'},
     {id: 7,text: 'Stretch'},
   ]

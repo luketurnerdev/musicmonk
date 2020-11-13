@@ -21,6 +21,7 @@ const RoutineList = props => {
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
   const [routineFormOpen, setRoutineFormOpen] = useState(false);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
   const {classes} = props;
   // Default value is the existing list
@@ -47,6 +48,10 @@ const RoutineList = props => {
     setPlayRoutineOpen(true);
     setCurrentlySelectedRoutine(routine)
   }
+  const openDeleteMode = routine => {
+    setDeleteConfirmationOpen(true);
+    setCurrentlySelectedRoutine(routine)
+  }
   const closePlayMode = () => {
     setPlayRoutineOpen(false);
   }
@@ -55,8 +60,8 @@ const RoutineList = props => {
     setRoutineFormOpen(true);
   }
 
+
   const deleteRoutine = id => {
-    console.log('deleting', id);
     let removedList = userRoutines.map(routine => {
       if (routine && routine.id !== id) {
         return routine;
@@ -70,6 +75,7 @@ const RoutineList = props => {
     setUserRoutines(removedList);
   }
 
+
   const List = () => {
     return (
       userRoutines.map(routine => {
@@ -78,7 +84,7 @@ const RoutineList = props => {
           routine={routine}
           classes={classes}
           key={routine.id}
-          deleteRoutine={deleteRoutine}
+          openDeleteMode={openDeleteMode}
           openRoutineForm={openRoutineForm}
           openPlayMode={openPlayMode}
           />
@@ -87,6 +93,23 @@ const RoutineList = props => {
     )
   }
 
+
+
+  const Delete = () => {
+    return (
+      <Modal
+        open={deleteConfirmationOpen}
+      >
+        <DeleteConfirmation routine={currentlySelectedRoutine} />
+      </Modal>
+    )
+  }
+  const DeleteConfirmation = props => {
+    const {routine} = props;
+    return (
+       null
+    )
+  }
   const Form = () => {
     return (
       <Modal
@@ -121,6 +144,7 @@ const RoutineList = props => {
     </div>
       <Form />
       <Play />
+      {/* <DeleteConfirmation /> */}
     </>
   )
 }
