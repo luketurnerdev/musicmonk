@@ -34,7 +34,7 @@ const RoutineList = props => {
   const updateRoutine = (id, newRoutineData) => {
     // copy the array, modify relevant object, update state
     let routines = userRoutines;
-    routines[routines.filter(routine => routine.id === id)[0].id] = newRoutineData;
+    routines[routines.filter(routine => routine && (routine.id === id))[0].id] = newRoutineData;
     setUserRoutines(routines)
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
@@ -77,6 +77,7 @@ const RoutineList = props => {
     // When we remove from the list, the null.xyz values cannot be read
     setUserRoutines(removedList);
     setDeleteConfirmationOpen(false);
+    setCurrentlySelectedRoutine(null);
   }
 
 
@@ -139,6 +140,8 @@ const RoutineList = props => {
   }
   return (
     <>
+    {console.log('current:')}
+    {console.log(currentlySelectedRoutine)}
     <div className={classes.routineListContainer}>
       <List />
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
