@@ -108,6 +108,7 @@ const RoutineList = props => {
         <DeleteRoutine 
          routine={currentlySelectedRoutine}
          deleteRoutine={deleteRoutine} 
+         closeDeleteMode={closeDeleteMode}
         />
       </Modal>
     )
