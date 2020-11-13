@@ -19,6 +19,13 @@ const styles = {
     width: '30vw',
 
   },
+  stepList: {
+    border: '2px solid',
+    width: '50%',
+    display: 'flex',
+    alignItems:'center',
+    flexDirection: 'column'
+  },
   step: {
     // margin: '0 auto'
   },

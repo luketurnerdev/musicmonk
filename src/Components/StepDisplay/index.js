@@ -28,6 +28,7 @@ const StepDisplay = props => {
   return (
     <div style={styles.step}>
       <TextField
+        fullWidth={true}
         error={stepError}
         helperText={stepError || ""}
         defaultValue={step.text}

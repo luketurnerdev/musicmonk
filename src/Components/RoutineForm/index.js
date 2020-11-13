@@ -54,7 +54,8 @@ const RoutineForm = props => {
 
   const mapSteps = () => {
     return (
-      userSteps && userSteps.map((step, index) => {
+    <div className={classes.stepList}>
+      {userSteps && userSteps.map((step, index) => {
         return step ? (
           <StepDisplay
             step={step}
@@ -65,8 +66,10 @@ const RoutineForm = props => {
           />
         )
         : null
-      })
+      })}
+  </div>
     )
+
   }
 
   const checkForTitleErrors = title => {
