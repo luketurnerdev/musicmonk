@@ -15,6 +15,7 @@ const fakeData = [
     {id: 3,text: 'Left hand warmups'},
     {id: 4,text: 'Chromatics 10 mins - link ?'},
     {id: 5,text: 'Technical Difficulties & Constant motion - 15 mins'},
+    {id: 5,text: 'FUSION JAMS 10 MINS'},
     {id: 6,text: 'Play through trust'},
     {id: 7,text: 'Stretch'},
   ]
