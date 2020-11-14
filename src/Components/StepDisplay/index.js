@@ -5,14 +5,19 @@ import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
 
 const StepDisplay = props => {
-  const {step, index, classes, removeStep, editStep} = props;
-  const [stepError, setStepError] = useState('');
+  const {step, index, classes, removeStep, editStep, setStepErrors} = props;
+  const [stepErrorText, setStepErrorText] = useState('');
+  console.log(props);
+
 
   const checkTextLength = length => {
     if (length === 0) {
-      setStepError('Step cannot be empty.');
+      setStepErrorText('Step cannot be empty.');
+      // Tell upper state about error
+      setStepErrors(true);
     } else {
-      setStepError('');
+      setStepErrorText('');
+      setStepErrors(false);
     }
     return null;
   }
@@ -29,8 +34,8 @@ const StepDisplay = props => {
     <div style={styles.step}>
       <TextField
         fullWidth={true}
-        error={stepError}
-        helperText={stepError || ""}
+        error={stepErrorText}
+        helperText={stepErrorText || ""}
         defaultValue={step.text}
         onChange={e => handleChange(e)}
         onBlur={() => handleBlur(step.text)}
