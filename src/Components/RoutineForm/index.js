@@ -14,7 +14,7 @@ const RoutineForm = props => {
   
   const checkTextLength = length => {
     if (length === 0) {
-      setTitleError('Title cannot be empty.');
+      setTitleError('Name is required.');
     } else {
       setTitleError('');
     }
@@ -29,14 +29,33 @@ const RoutineForm = props => {
   const handleSubmit = () => {
     let newData = formData;
     newData.steps = userSteps;
-    if (isNewRoutine) {
-      // save new function, if no validation errors
-      formData.title && !stepErrors ? saveNewRoutine(newData) : setTitleError('Title cannot be empty.');
+
+    // Only submit if:
+      // title is not empty
+      // stepErrors is false
+      // then choose to update or save new
+
+    if (formData.title) {
+      //continue
+      if (!stepErrors) {
+        // check if new or existing
+        return isNewRoutine ? saveNewRoutine(newData) : updateRoutine(defaultRoutine.id, newData)
+      }
+      else {
+        return null;
+      }
     }
     else {
-      // Update existing
-      formData.title && !stepErrors ? updateRoutine(defaultRoutine.id, newData) : setTitleError('Name is required.');
+      setTitleError('Name is required.');
     }
+    // if (isNewRoutine) {
+    //   // save new function, if no validation errors
+    //   formData.title && !stepErrors ? saveNewRoutine(newData) : setTitleError('Name is required.');
+    // }
+    // else {
+    //   // Update existing
+    //   formData.title && !stepErrors ? updateRoutine(defaultRoutine.id, newData) : setTitleError('Name is required.');
+    // }
   }
 
   const addStep = () => {
