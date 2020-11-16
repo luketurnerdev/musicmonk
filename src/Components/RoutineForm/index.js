@@ -10,7 +10,6 @@ const RoutineForm = props => {
   const [userSteps, setUserSteps] = useState(defaultRoutine && defaultRoutine.steps || []);
   const [titleError, setTitleError] = useState('');
   const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
-  const [stepErrors, setStepErrors] = useState(false);
   
   const checkTextLength = length => {
     if (length === 0) {
@@ -28,34 +27,19 @@ const RoutineForm = props => {
   
   const handleSubmit = () => {
     let newData = formData;
-    newData.steps = userSteps;
+    newData.steps = userSteps.filter(s=>s.text.length > 0);
+    console.log(userSteps.forEach(s => {console.log(s.text.length)}))
 
     // Only submit if:
       // title is not empty
       // stepErrors is false
       // then choose to update or save new
 
-    if (formData.title) {
-      //continue
-      if (!stepErrors) {
-        // check if new or existing
+      if (formData.title) {
+        //continue
         return isNewRoutine ? saveNewRoutine(newData) : updateRoutine(defaultRoutine.id, newData)
       }
-      else {
-        return null;
-      }
-    }
-    else {
-      setTitleError('Name is required.');
-    }
-    // if (isNewRoutine) {
-    //   // save new function, if no validation errors
-    //   formData.title && !stepErrors ? saveNewRoutine(newData) : setTitleError('Name is required.');
-    // }
-    // else {
-    //   // Update existing
-    //   formData.title && !stepErrors ? updateRoutine(defaultRoutine.id, newData) : setTitleError('Name is required.');
-    // }
+
   }
 
   const addStep = () => {
@@ -93,7 +77,6 @@ const RoutineForm = props => {
             classes={classes}
             removeStep={removeStep}
             editStep={editStep}
-            setStepErrors={setStepErrors}
           />
         )
         : null
