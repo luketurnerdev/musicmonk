@@ -6,6 +6,7 @@ import NavBar from "./../../Components/NavBar"
 import Loading from "./../../Components/Loading"
 import Dashboard from "./../Dashboard";
 import Profile from "./../Profile";
+import ProtectedRoute from "./../../auth/ProtectedRoute";
 
 const App = props => {
   const { user, isLoading } = useAuth0();
@@ -20,7 +21,7 @@ const App = props => {
       <NavBar />
       <div className="container flex-grow-1">
         <Switch>
-          <Route path="/profile" component={Profile} />
+          <ProtectedRoute path="/profile" component={Profile} />
           <Route 
             path="/dashboard"
             render={(props) => (
