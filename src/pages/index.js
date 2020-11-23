@@ -1,13 +1,16 @@
 import React from "react"
+import ReactDOM from "react-dom"
 import App from "./App";
-import ReactDOM from "react-dom";
-import { Auth0Provider } from "@auth0/auth0-react";
+import {BrowserRouter as Router} from "react-router-dom";
+import Auth0ProviderWithHistory from "./../auth/auth0-provider-with-history";
 
 
 export default function Home() {
   return (
-      <Auth0Provider>
-        <App />
-      </Auth0Provider>
-  )
-}
+    <Router>
+    <Auth0ProviderWithHistory>
+      <App />
+    </Auth0ProviderWithHistory>
+  </Router>
+  );
+};
