@@ -1,0 +1,55 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "authmusicMonkAmplifyCognitoUserPoolId": {
+            "Type": "String",
+            "Default": "authmusicMonkAmplifyCognitoUserPoolId"
+        },
+        
+        "authmusicMonkAmplifyCognitoAppClientID": {
+            "Type": "String",
+            "Default": "authmusicMonkAmplifyCognitoAppClientID"
+        },
+        "authmusicMonkAmplifyCognitoAppClientIDWeb": {
+            "Type": "String",
+            "Default": "authmusicMonkAmplifyCognitoAppClientIDWeb"
+        },
+        "AuthRoleArn": {
+            "Type": "String"
+        },
+        "UnauthRoleArn": {
+            "Type": "String"
+        },
+        "env": {
+            "Type": "String"
+        }
+    },
+    "Conditions": {
+        "ShouldNotCreateEnvResources": {
+            "Fn::Equals": [
+                {
+                    "Ref": "env"
+                },
+                "NONE"
+            ]
+        }
+    },
+    "Resources": {
+    
+        "musicmonkUuserPoolGroupGroup": {
+          "Type" : "AWS::Cognito::UserPoolGroup",
+          "Properties" : {
+              "GroupName" : "musicmonkUuserPoolGroup",
+              "Precedence" : 1,
+              
+              "UserPoolId" : {
+                "Ref": "authmusicMonkAmplifyCognitoUserPoolId"
+              } 
+            }
+        },
+        
+    
+    
+    },
+    
+}

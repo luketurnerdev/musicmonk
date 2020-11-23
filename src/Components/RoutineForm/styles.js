@@ -3,7 +3,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    height: '100%'
+    height: '100%',
   },
   routineForm: {
     backgroundColor: 'white',
@@ -24,7 +24,12 @@ const styles = {
     width: '50%',
     display: 'flex',
     alignItems:'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    overflow: 'scroll',
+    margin: '10px 0'
+  },
+  stepsContainer: {
+
   },
   step: {
     // margin: '0 auto'
@@ -35,7 +40,16 @@ const styles = {
   },
   button: {
     width: '20%',
+    margin: '15px 5px'
+  },
+  addButton: {
+    // width: '20%',
     // margin: '0 auto'
+  },
+  exitButtons: {
+    display: 'flex',
+    width: '50%',
+    justifyContent: 'center',
   }
 }
 

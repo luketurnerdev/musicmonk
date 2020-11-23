@@ -3,6 +3,7 @@ import {Button, FormControl, TextField} from '@material-ui/core';
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import StepDisplay from "./../StepDisplay";
+import ControlPointSharpIcon from '@material-ui/icons/ControlPointSharp';
 
 const RoutineForm = props => {
   const {defaultRoutine, updateRoutine, discardRoutine, classes, saveNewRoutine, routineCount} = props;
@@ -68,20 +69,30 @@ const RoutineForm = props => {
 
   const mapSteps = () => {
     return (
-    <div className={classes.stepList}>
-      {userSteps && userSteps.map((step, index) => {
-        return step ? (
-          <StepDisplay
-            step={step}
-            index={index}
-            classes={classes}
-            removeStep={removeStep}
-            editStep={editStep}
-          />
-        )
-        : null
-      })}
-  </div>
+      <>
+        <div className={classes.stepList}>
+          {userSteps && userSteps.map((step, index) => {
+            return step ? (
+              <StepDisplay
+                step={step}
+                index={index}
+                classes={classes}
+                removeStep={removeStep}
+                editStep={editStep}
+              />
+            )
+            : null
+          })}
+      </div>
+        <Button
+            variant="contained"
+            className={classes.addButton}
+            onClick={() => addStep()}>
+              <ControlPointSharpIcon />
+          </Button>
+
+    </>
+
     )
 
   }
@@ -108,12 +119,7 @@ const RoutineForm = props => {
       </FormControl>
       
       {mapSteps()}
-      <Button
-        variant="contained"
-        className={classes.button}
-        onClick={() => addStep()}>
-          Add Step
-      </Button>
+    <div className={classes.exitButtons}>
       <Button
           variant="contained"
           className={classes.button}
@@ -126,6 +132,8 @@ const RoutineForm = props => {
         onClick={() => discardRoutine()}>
           Discard
       </Button>
+  </div>
+
     </div>
 
   </div>
