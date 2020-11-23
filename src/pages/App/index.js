@@ -7,9 +7,8 @@ import Loading from "./../../Components/Loading"
 import Dashboard from "./../Dashboard";
 import Profile from "./../Profile";
 
-
 const App = props => {
-  const { isLoading } = useAuth0();
+  const { user, isLoading } = useAuth0();
 
   if (isLoading) {
     return <Loading />;
@@ -22,7 +21,12 @@ const App = props => {
       <div className="container flex-grow-1">
         <Switch>
           <Route path="/profile" component={Profile} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route 
+            path="/dashboard"
+            render={(props) => (
+              <Dashboard {...props} user={user} />
+            )}
+          />
         </Switch>
       </div>
     </div>
