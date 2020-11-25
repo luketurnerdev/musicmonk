@@ -38,6 +38,22 @@ const fakeData = [
   ]
   },
   {
+    id: 7,
+    title: 'Archer Wong Lesson 7',
+    steps:
+    [
+    {id: 0,text: 'Tune your guitar'},
+    {id: 1,text: 'Do stretches'},
+    {id: 3,text: 'Chromatic warmups with drum track - 70 BPM'},
+    {id: 4,text: 'E blues scale'},
+    {id: 4,text: 'E blues scale jam with backing'},
+    {id: 4,text: 'Paranoid play through - listen to song'},
+    {id: 5,text: 'Rhythm - push to ex 6 / 7'},
+    {id: 7,text: 'Writing - make a chorus with powerchords'},
+    {id: 8,text: 'Stretch down'},
+  ]
+  },
+  {
     id: 3,
     title: 'Archer Wong Lesson 6',
     steps:
