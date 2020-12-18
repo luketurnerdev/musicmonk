@@ -17,13 +17,12 @@ const App = props => {
 
   return (
     <div id="app" className="d-flex flex-column h-100">
-      <h1>MusicMonk (header)</h1>
-      <NavBar />
+      <h1>MusicMonk</h1>
+      {/* <NavBar /> */}
       <div className="container flex-grow-1">
         <Switch>
-          <ProtectedRoute path="/profile" component={Profile} />
           <Route 
-            path="/dashboard"
+            path="/"
             render={(props) => (
               <Dashboard {...props} user={user} />
             )}

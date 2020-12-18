@@ -5,8 +5,8 @@ const Dashboard = props => {
   const {user} = props;
   return (
     <>
-      <ChordGenerator />
-      <h1>Welcome, {user.nickname} !</h1>
+      {/* <ChordGenerator /> */}
+      {/* <h1>Welcome, {user.nickname} !</h1> */}
       <RoutineList />
     </>
   );

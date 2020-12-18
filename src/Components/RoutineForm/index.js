@@ -28,8 +28,8 @@ const RoutineForm = props => {
   
   const handleSubmit = () => {
     let newData = formData;
-    newData.steps = userSteps.filter(s=>s.text.length > 0);
-    console.log(userSteps.forEach(s => {console.log(s.text.length)}))
+    console.log(userSteps);
+    // only include non-empty steps
 
     // Only submit if:
       // title is not empty
@@ -47,11 +47,12 @@ const RoutineForm = props => {
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
-    // The index and id align at first, but then get put out of order when
-    // a non-last step is deleted.
     
     // if the array id matches the step id, set it to null or undefined.
-    let removedList = userSteps.map(step => {
+    // let stepToRemove = userSteps.filter(s => s.id === id);
+    // console.log("id selected : ", id);
+    // console.log(userSteps.splice(userSteps[id],1));
+    let updatedList = userSteps.map(step => {
       if (step && step.id !== id) {
         return step;
       }
@@ -59,7 +60,8 @@ const RoutineForm = props => {
         return null;
       }
     })
-    setUserSteps(removedList);
+
+    setUserSteps(updatedList);
   }
   const editStep = (index, value) => {
     let copy = userSteps;
@@ -72,7 +74,7 @@ const RoutineForm = props => {
       <>
         <div className={classes.stepList}>
           {userSteps && userSteps.map((step, index) => {
-            return step ? (
+            return step && step.text ? (
               <StepDisplay
                 step={step}
                 index={index}
