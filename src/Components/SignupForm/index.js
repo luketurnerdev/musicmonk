@@ -15,6 +15,21 @@ const handleClick = () => {
     // always executed
   });
 }
+
+const handleSubmit = (values) => {
+  console.log(values);
+  const {email, password} = values;
+  axios.post('http://localhost:3000/users', {
+    email: email,
+    password: password
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 const SignupForm = () => (
   <div>
     <h1>Anywhere in your app!</h1>
@@ -36,10 +51,18 @@ const SignupForm = () => (
           alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
         }, 400);
-
-        
-
         console.log(JSON.stringify(values, null, 2));
+
+        axios.post('http://localhost:3000/users', {
+          email: (values.email),
+          password: (values.password)
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       }}
     >
       {({
@@ -75,9 +98,6 @@ const SignupForm = () => (
         </form>
       )}
     </Formik>
-  <button onClick = {handleClick}>
-    Clickme
-  </button>
   </div>
 
 );
