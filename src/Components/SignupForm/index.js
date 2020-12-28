@@ -1,5 +1,6 @@
 import React from 'react';
 import {Formik} from 'formik';
+import {Button} from '@material-ui/core';
 import axios from 'axios';
 const handleClick = () => {
   axios.get('http://localhost:3000/users')
@@ -13,6 +14,7 @@ const handleClick = () => {
   })
   .then(function () {
     // always executed
+    console.log('clicked');
   });
 }
 
@@ -31,6 +33,7 @@ const handleSubmit = (values) => {
   });
 }
 const SignupForm = () => (
+  <>
   <div>
     <h1>Anywhere in your app!</h1>
     <Formik
@@ -47,10 +50,6 @@ const SignupForm = () => (
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
         console.log(JSON.stringify(values, null, 2));
 
         axios.post('http://localhost:3000/users', {
@@ -58,10 +57,11 @@ const SignupForm = () => (
           password: (values.password)
         })
         .then(function (response) {
+          alert(JSON.stringify(values, null, 2));
           console.log(response);
         })
         .catch(function (error) {
-          console.log(error);
+          alert(error)
         });
       }}
     >
@@ -99,6 +99,9 @@ const SignupForm = () => (
       )}
     </Formik>
   </div>
+
+  <Button variant="contained" onClick={handleClick}>Clickola</Button>
+  </>
 
 );
 
