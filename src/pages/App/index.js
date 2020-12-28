@@ -4,7 +4,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import NavBar from "./../../Components/NavBar"
 import Loading from "./../../Components/Loading"
+import RoutineForm from "./../../Components/RoutineForm"
 import Dashboard from "./../Dashboard";
+import AuthenticationButton from "../../Components/AuthenticationButton";
 import Profile from "./../Profile";
 import ProtectedRoute from "./../../auth/ProtectedRoute";
 
@@ -17,16 +19,12 @@ const App = props => {
 
   return (
     <div id="app" className="d-flex flex-column h-100">
+      <NavBar />
       <h1>MusicMonk</h1>
-      {/* <NavBar /> */}
       <div className="container flex-grow-1">
         <Switch>
-          <Route 
-            path="/"
-            render={(props) => (
-              <Dashboard {...props} user={user} />
-            )}
-          />
+          <ProtectedRoute path="/profile" component={Profile} />
+          <Route exact path="/dashboard"render={(props) => (<Dashboard {...props} user={user} />)} />
         </Switch>
       </div>
     </div>

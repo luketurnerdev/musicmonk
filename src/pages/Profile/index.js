@@ -8,8 +8,9 @@ const Profile = () => {
 
   return (
     <div>
-      <div className="row align-items-center profile-header">
-        <div className="col-md-2 mb-3">
+      <p>profile page</p>
+        <div className="row align-items-center profile-header">
+         <div className="col-md-2 mb-3"> 
           <img
             src={picture}
             alt="Profile"
