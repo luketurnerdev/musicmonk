@@ -20,12 +20,12 @@ const MainNav = () => (
       Profile
     </NavLink>
     <NavLink
-      to="/routines"
+      to="/dashboard"
       exact
       className="nav-link"
       activeClassName="router-link-exact-active"
     >
-      Routines
+      Dashboard
     </NavLink>
   </div>
 );

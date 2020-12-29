@@ -26,9 +26,8 @@ const App = props => {
       <div className="container flex-grow-1">
         <Switch>
           <Route exact path="/" component={Home}/>
+          <ProtectedRoute exact path="/dashboard"component={(props) => (<Dashboard {...props} user={user} />)} />
           <ProtectedRoute exact path="/profile" component={Profile} />
-          <ProtectedRoute exact path="/routines" component={RoutineList} />
-          <ProtectedRoute exact path="/dashboard"render={(props) => (<Dashboard {...props} user={user} />)} />
         </Switch>
       </div>
     </div>
