@@ -4,7 +4,7 @@ import React from "react";
 const MainNav = () => (
   <div className="navbar-nav mr-auto">
     <NavLink
-      to="/dashboard"
+      to="/"
       exact
       className="nav-link"
       activeClassName="router-link-exact-active"
@@ -20,12 +20,12 @@ const MainNav = () => (
       Profile
     </NavLink>
     <NavLink
-      to="/external-api"
+      to="/routines"
       exact
       className="nav-link"
       activeClassName="router-link-exact-active"
     >
-      External API
+      Routines
     </NavLink>
   </div>
 );

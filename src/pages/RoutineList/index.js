@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, Modal, Grid} from '@material-ui/core/'
 import fakeData from "./../../fakeData";
 import styles from './styles';
@@ -23,6 +23,17 @@ const RoutineList = props => {
   const [routineFormOpen, setRoutineFormOpen] = useState(false);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
+  // Fetch the user's routines from DB on page load
+  // hardcode user id for now
+  const getAllRoutinesForUser = async (userId) => {
+    //axios await stuff
+    console.log(userId);
+  }
+
+  useEffect(() => {
+    getAllRoutinesForUser("auth0|5fbb7ea02a09af0068ee684d");
+  }, [])
 
   const {classes} = props;
   // Default value is the existing list
@@ -142,8 +153,6 @@ const RoutineList = props => {
   }
   return (
     <>
-    {console.log('current:')}
-    {console.log(currentlySelectedRoutine)}
     <div className={classes.routineListContainer}>
       <List />
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>

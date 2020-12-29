@@ -5,7 +5,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./../../Components/NavBar"
 import Loading from "./../../Components/Loading"
 import RoutineForm from "./../../Components/RoutineForm"
+import RoutineList from "./../RoutineList";
 import Dashboard from "./../Dashboard";
+import Home from "./../../Components/Home";
 import AuthenticationButton from "../../Components/AuthenticationButton";
 import Profile from "./../Profile";
 import ProtectedRoute from "./../../auth/ProtectedRoute";
@@ -23,8 +25,10 @@ const App = props => {
       <h1>MusicMonk</h1>
       <div className="container flex-grow-1">
         <Switch>
-          <ProtectedRoute path="/profile" component={Profile} />
-          <Route exact path="/dashboard"render={(props) => (<Dashboard {...props} user={user} />)} />
+          <Route exact path="/" component={Home}/>
+          <ProtectedRoute exact path="/profile" component={Profile} />
+          <ProtectedRoute exact path="/routines" component={RoutineList} />
+          <ProtectedRoute exact path="/dashboard"render={(props) => (<Dashboard {...props} user={user} />)} />
         </Switch>
       </div>
     </div>
