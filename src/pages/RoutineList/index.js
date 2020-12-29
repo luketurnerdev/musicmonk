@@ -7,6 +7,7 @@ import PlayRoutine from "./../../Components/PlayRoutine";
 import DeleteRoutine from "./../../Components/DeleteRoutine";
 import RoutineForm from "./../../Components/RoutineForm";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
+import axios from 'axios';
 
 // Hit the API / DB, get a list of users routines
 // map them out with the title amd a button to play or edit
@@ -29,6 +30,14 @@ const RoutineList = props => {
   const getAllRoutinesForUser = async (userId) => {
     //axios await stuff
     console.log(userId);
+    // Make a request for a user with a given ID
+      axios.get(`http://localhost:3000/users/auth0|5fbb7ea02a09af0068ee684d/routines`)
+      .then(resp => {
+        console.log(resp.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   useEffect(() => {
