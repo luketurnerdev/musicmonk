@@ -10,15 +10,15 @@ const fakeData = [
     title: 'Lukes Daily Routine',
     steps:
     [
-    {id: 0,text: 'Tune your guitar'},
-    {id: 1,text: 'Do stretches'},
-    {id: 3,text: 'Left hand warmups'},
-    {id: 4,text: 'Chromatics 10 min ?'},
-    {id: 5,text: 'Technical Difficulties & Constant motion - 15 mins'},
-    {id: 6,text: 'Vantablack - 25 mins'},
-    {id: 7,text: 'Play through trust'},
-    {id: 8,text: 'Bass programming'},
-    {id: 9,text: 'Stretch'},
+      {id: 0,text: 'Tune your guitar'},
+      {id: 1,text: 'Do stretches'},
+      {id: 3,text: 'Left hand warmups'},
+      {id: 4,text: 'Chromatics 10 min ?'},
+      {id: 5,text: 'Technical Difficulties & Constant motion - 15 mins'},
+      {id: 6,text: 'Vantablack - 25 mins'},
+      {id: 7,text: 'Play through trust'},
+      {id: 8,text: 'Bass programming'},
+      {id: 9,text: 'Stretch'},
   ]
   },
   {

@@ -41,6 +41,24 @@ const RoutineList = props => {
         console.log(err);
       })
   }
+  const postNewRoutineToDb = async (userId, data) => {
+    //axios await stuff
+    console.log(userId);
+    console.log(data);
+
+    await axios.post(`http://localhost:3000/users/${userId}/routines`, {
+      userId: userId,
+      title: data.title,
+      steps: data.steps
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    return data;
+  }
 
   useEffect(() => {
     const routines = getAllRoutinesForUser(user.sub);
@@ -48,11 +66,15 @@ const RoutineList = props => {
 
   const {classes} = props;
   // Default value is the existing list
-  const saveNewRoutine = newRoutineData => {
-    setUserRoutines(routines => [...routines, newRoutineData])
+
+  const saveNewRoutine = newRoutineData => {    
+    // Save to DB
+    postNewRoutineToDb(user.sub, newRoutineData);
+    
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
   }
+
   const updateRoutine = (id, newRoutineData) => {
     // copy the array, modify relevant object, update state
     let routines = userRoutines;
@@ -105,21 +127,18 @@ const RoutineList = props => {
 
   const List = () => {
     return (
-      userRoutines.map(r => {
-        return <h1>{r.title}</h1>
+      userRoutines.map(routine => {
+        return routine && (
+        <RoutineDisplay
+          routine={routine}
+          classes={classes}
+          key={routine.id}
+          openDeleteMode={openDeleteMode}
+          openRoutineForm={openRoutineForm}
+          openPlayMode={openPlayMode}
+          />
+        )
       })
-      // userRoutines.map(routine => {
-      //   return routine && (
-      //   <RoutineDisplay
-      //     routine={routine}
-      //     classes={classes}
-      //     key={routine.id}
-      //     openDeleteMode={openDeleteMode}
-      //     openRoutineForm={openRoutineForm}
-      //     openPlayMode={openPlayMode}
-      //     />
-      //   )
-      // })
     )
   }
 
@@ -169,7 +188,6 @@ const RoutineList = props => {
     <>
     <div className={classes.routineListContainer}>
       <List />
-      {console.log(userRoutines)}
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
       <Form />

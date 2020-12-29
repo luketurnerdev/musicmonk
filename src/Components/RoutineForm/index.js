@@ -29,6 +29,7 @@ const RoutineForm = props => {
   const handleSubmit = () => {
     let newData = formData;
     console.log(userSteps);
+    newData.steps = userSteps;
     // only include non-empty steps
 
     // Only submit if:
@@ -44,6 +45,8 @@ const RoutineForm = props => {
   }
 
   const addStep = () => {
+    console.log('clickityclack')
+    console.log(userSteps)
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
@@ -74,7 +77,7 @@ const RoutineForm = props => {
       <>
         <div className={classes.stepList}>
           {userSteps && userSteps.map((step, index) => {
-            return step && step.text ? (
+            return step ? (
               <StepDisplay
                 step={step}
                 index={index}
@@ -86,12 +89,13 @@ const RoutineForm = props => {
             : null
           })}
       </div>
-        <Button
-            variant="contained"
-            className={classes.addButton}
-            onClick={() => addStep()}>
-              <ControlPointSharpIcon />
-          </Button>
+
+      <Button
+          variant="contained"
+          className={classes.addButton}
+          onClick={() => addStep()}>
+            <ControlPointSharpIcon />
+        </Button>
 
     </>
 
