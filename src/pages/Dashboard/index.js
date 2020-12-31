@@ -7,10 +7,8 @@ const Dashboard = props => {
   return (
     <>
     <h1>hi</h1>
-      {/* <ChordGenerator /> */}
       <h1>Welcome, {user.nickname} !</h1>
       <RoutineList user={user} />
-      {/* <SignupForm /> */}
     </>
   );
 };

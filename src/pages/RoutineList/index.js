@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Button, Modal, Grid} from '@material-ui/core/'
 import fakeData from "./../../fakeData";
+import {Play} from "./Modes";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
@@ -14,8 +15,6 @@ import axios from 'axios';
 
 //When this page first loads, fetch users routines from db (fake for now)
 //When the list is updated, setUserRoutines.
-//Also need to update the fakeData file.
-
 //When edit is clicked, open up a modal with userRoutines[id] passed in (the whole object including steps)
 
 const RoutineList = props => {
@@ -27,11 +26,8 @@ const RoutineList = props => {
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
   // Fetch the user's routines from DB on page load
-  // hardcode user id for now
+
   const getAllRoutinesForUser = async (userId) => {
-    //axios await stuff
-    console.log(userId);
-    // Make a request for a user with a given ID
       await axios.get(`http://localhost:3000/users/${userId}/routines`)
       .then(resp => {
         console.log(resp.data);
@@ -61,7 +57,7 @@ const RoutineList = props => {
   }
 
   useEffect(() => {
-    const routines = getAllRoutinesForUser(user.sub);
+    getAllRoutinesForUser(user.sub);
   }, [])
 
   const {classes} = props;
