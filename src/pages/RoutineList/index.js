@@ -123,21 +123,6 @@ const RoutineList = props => {
     )
   }
 
-
-
-  const Delete = () => {
-    return (
-      <Modal
-        open={deleteConfirmationOpen}
-      >
-        <DeleteRoutine 
-         routine={currentlySelectedRoutine}
-         deleteRoutine={deleteRoutine} 
-         closeDeleteMode={closeDeleteMode}
-        />
-      </Modal>
-    )
-  }
   const Form = () => {
     return (
       <Modal
@@ -161,12 +146,19 @@ const RoutineList = props => {
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
       <Form />
+
       <PlayRoutine
         open={playRoutineOpen}
         routine={currentlySelectedRoutine}
         closePlayMode={closePlayMode}
       />
-      <Delete />
+
+      <DeleteRoutine 
+         routine={currentlySelectedRoutine}
+         deleteRoutine={deleteRoutine} 
+         closeDeleteMode={closeDeleteMode}
+         open={deleteConfirmationOpen}
+      />
     </>
   )
 }
