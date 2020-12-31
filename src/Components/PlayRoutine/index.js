@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Typography} from '@material-ui/core';
+import {Button, Typography, Modal} from '@material-ui/core';
 import styles from "./styles";
 import { withStyles } from '@material-ui/styles';
 import RadioButtonUncheckedSharpIcon from '@material-ui/icons/RadioButtonUncheckedSharp';
@@ -25,7 +25,7 @@ const Step = props => {
   )
 }
 const PlayRoutine = props => {
-  const {closePlayMode, routine, classes} = props; 
+  const {closePlayMode, routine, classes, open} = props; 
 
   const completeRoutine = id => {
     console.log('completed', id)
@@ -48,12 +48,16 @@ const PlayRoutine = props => {
   }
   
   return (
+    <Modal
+        open={open}
+      >
     <div className={classes.playModeContainer}>
-      <h1>{routine.title}</h1>
+      {routine && <h1>{routine.title}</h1>}
       <MapSteps />
       <Button variant="contained" className={classes.root} onClick={() => completeRoutine(routine.id)}>Mark as complete</Button>
       <Button variant="contained" className={classes.root} onClick={() => closePlayMode()}>Close</Button>
     </div>
+  </Modal>
   )
 }
 

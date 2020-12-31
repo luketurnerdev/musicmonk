@@ -71,21 +71,21 @@ const RoutineList = props => {
   }
   const openPlayMode = routine => {
     setPlayRoutineOpen(true);
-    setCurrentlySelectedRoutine(routine)
-  }
-  const openDeleteMode = routine => {
-    setDeleteConfirmationOpen(true);
-    setCurrentlySelectedRoutine(routine)
-  }
-  const closeDeleteMode = () => {
-    setDeleteConfirmationOpen(false);
-    setCurrentlySelectedRoutine(null)
+    setCurrentlySelectedRoutine(routine);
   }
   const closePlayMode = () => {
     setPlayRoutineOpen(false);
   }
+  const openDeleteMode = routine => {
+    setDeleteConfirmationOpen(true);
+    setCurrentlySelectedRoutine(routine);
+  }
+  const closeDeleteMode = () => {
+    setDeleteConfirmationOpen(false);
+    setCurrentlySelectedRoutine(null);
+  }
   const openRoutineForm = routine => {
-    setCurrentlySelectedRoutine(routine)
+    setCurrentlySelectedRoutine(routine);
     setRoutineFormOpen(true);
   }
 
@@ -153,18 +153,7 @@ const RoutineList = props => {
       </Modal>
     )
   }
-  const Play = () => {
-    return (
-      <Modal
-        open={playRoutineOpen}
-      >
-        <PlayRoutine
-          routine={currentlySelectedRoutine}
-          closePlayMode={closePlayMode}
-        />
-      </Modal>
-    )
-  }
+
   return (
     <>
     <div className={classes.routineListContainer}>
@@ -172,9 +161,12 @@ const RoutineList = props => {
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
       <Form />
-      <Play />
+      <PlayRoutine
+        open={playRoutineOpen}
+        routine={currentlySelectedRoutine}
+        closePlayMode={closePlayMode}
+      />
       <Delete />
-      {/* <DeleteConfirmation /> */}
     </>
   )
 }
