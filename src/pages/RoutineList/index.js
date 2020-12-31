@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Button, Modal, Grid} from '@material-ui/core/'
-import {postNewRoutineToDb, getAllRoutinesForUser} from "./../../api";
+import {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
@@ -47,13 +47,19 @@ const RoutineList = props => {
     })
   }, [routineFormOpen])
 
+  // Grab when delete form closed
+  useEffect(() => {
+    getRoutines().then(resp => {
+      setUserRoutines(resp);
+    })
+  }, [deleteConfirmationOpen])
+
   const {classes} = props;
   // Default value is the existing list
 
   const saveNewRoutine = newRoutineData => {    
     // Save to DB
     postNewRoutineToDb(user.sub, newRoutineData);
-
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
   }
@@ -69,7 +75,11 @@ const RoutineList = props => {
   
 
   const setPlayModeStatus = (open, routine) => {
-    open ? setPlayRoutineOpen(true) : setPlayRoutineOpen(false);
+    setPlayRoutineOpen(open);
+    setCurrentlySelectedRoutine(routine);
+  }
+  const setDeleteModeStatus = (open, routine) => {
+    setDeleteConfirmationOpen(open);
     setCurrentlySelectedRoutine(routine);
   }
   const discardRoutine = () => {
@@ -77,54 +87,48 @@ const RoutineList = props => {
     setCurrentlySelectedRoutine(null);
   }
 
-  const setDeleteModeStatus = (open, routine) => {
-    open ? setDeleteConfirmationOpen(true) : setDeleteConfirmationOpen(false);
-    setCurrentlySelectedRoutine(routine);
-  }
-  
   const openRoutineForm = routine => {
     setCurrentlySelectedRoutine(routine);
     setRoutineFormOpen(true);
   }
 
-
-  const deleteRoutine = id => {
-    let removedList = userRoutines.map(routine => {
-      if (routine && routine.id !== id) {
-        return routine;
-      }
-      else {
-        return null;
-      }
-    })
-    // When we remove from the list, the null.xyz values cannot be read
-    setUserRoutines(removedList);
-    setDeleteConfirmationOpen(false);
-    setCurrentlySelectedRoutine(null);
+  const deleteRoutine = (routineId) => {
+    deleteOneRoutineFromDb(user.sub, routineId);
+    setDeleteModeStatus(false, null);
   }
 
-
-  const List = () => {
-    return (
-      userRoutines.map(routine => {
-        return routine && (
-        <RoutineDisplay
-          routine={routine}
-          classes={classes}
-          key={routine.id}
-          setDeleteModeStatus={setDeleteModeStatus}
-          openRoutineForm={openRoutineForm}
-          setPlayModeStatus={setPlayModeStatus}
-          />
-        )
-      })
-    )
+  
+  const MapRoutines = () => {
+    return userRoutines.map(routine => {
+      return <RoutineDisplay
+        routine={routine}
+        classes={classes}
+        key={routine.id}
+        setDeleteModeStatus={setDeleteModeStatus}
+        openRoutineForm={openRoutineForm}
+        setPlayModeStatus={setPlayModeStatus}
+        />
+    })
+  }
+  const List = () => { 
+    return !userRoutines ? null 
+    : userRoutines.map(routine => {
+      return <RoutineDisplay
+        routine={routine}
+        classes={classes}
+        key={routine.id}
+        setDeleteModeStatus={setDeleteModeStatus}
+        openRoutineForm={openRoutineForm}
+        setPlayModeStatus={setPlayModeStatus}
+        />
+    })
   }
 
   return (
     <>
     <div className={classes.routineListContainer}>
-      <List />
+    <h1> Routine List </h1>
+    <List />
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
 

@@ -31,5 +31,20 @@ const getAllRoutinesForUser = async (userId) => {
   return resolved;
 }
 
+const deleteOneRoutineFromDb = async (userId, routineId) => {
+  let resolved;
+  await axios.delete(`http://localhost:3000/users/${userId}/routines/${routineId}`)
+  .then(resp => {
+    console.log(resp.data);
+    resolved = resp.data;
+  })
+  .catch(err => {
+    console.log(err);
+    resolved = err;
+  })
 
-export {postNewRoutineToDb, getAllRoutinesForUser};
+  return resolved;
+}
+
+
+export {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb};

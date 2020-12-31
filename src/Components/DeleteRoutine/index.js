@@ -11,7 +11,7 @@ const DeleteRoutine = props => {
   >
     <div className={classes.playModeContainer}>
       {routine && <h1>Really delete {routine.title} ?</h1>}
-      <Button variant="contained" className={classes.root} onClick={() => deleteRoutine(routine.id)}>Confirm</Button>
+      <Button variant="contained" className={classes.root} onClick={() => deleteRoutine(routine._id)}>Confirm</Button>
       <Button variant="contained" className={classes.root} onClick={() => setDeleteModeStatus(false, null)}>Cancel</Button>
     </div>
 
