@@ -25,7 +25,7 @@ const Step = props => {
   )
 }
 const PlayRoutine = props => {
-  const {closePlayMode, routine, classes, open} = props; 
+  const {closePlayMode, routine, classes, open, setPlayModeStatus} = props; 
 
   const completeRoutine = id => {
     console.log('completed', id)
@@ -55,7 +55,7 @@ const PlayRoutine = props => {
       {routine && <h1>{routine.title}</h1>}
       <MapSteps />
       <Button variant="contained" className={classes.root} onClick={() => completeRoutine(routine.id)}>Mark as complete</Button>
-      <Button variant="contained" className={classes.root} onClick={() => closePlayMode()}>Close</Button>
+      <Button variant="contained" className={classes.root} onClick={() => setPlayModeStatus(false, null)}>Close</Button>
     </div>
   </Modal>
   )

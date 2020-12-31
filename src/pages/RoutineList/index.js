@@ -5,8 +5,10 @@ import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
 import DeleteRoutine from "./../../Components/DeleteRoutine";
+import Form from "./../../Components/Form";
 import RoutineForm from "./../../Components/RoutineForm";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
+import FormModal from './../../Components/Form';
 
 // Hit the API / DB, get a list of users routines
 // map them out with the title amd a button to play or edit
@@ -65,17 +67,16 @@ const RoutineList = props => {
     setCurrentlySelectedRoutine(null);
   }
   
+
+  const setPlayModeStatus = (open, routine) => {
+    open ? setPlayRoutineOpen(true) : setPlayRoutineOpen(false);
+    setCurrentlySelectedRoutine(routine);
+  }
   const discardRoutine = () => {
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
   }
-  const openPlayMode = routine => {
-    setPlayRoutineOpen(true);
-    setCurrentlySelectedRoutine(routine);
-  }
-  const closePlayMode = () => {
-    setPlayRoutineOpen(false);
-  }
+
   const openDeleteMode = routine => {
     setDeleteConfirmationOpen(true);
     setCurrentlySelectedRoutine(routine);
@@ -116,26 +117,10 @@ const RoutineList = props => {
           key={routine.id}
           openDeleteMode={openDeleteMode}
           openRoutineForm={openRoutineForm}
-          openPlayMode={openPlayMode}
+          setPlayModeStatus={setPlayModeStatus}
           />
         )
       })
-    )
-  }
-
-  const Form = () => {
-    return (
-      <Modal
-        open={routineFormOpen}
-      >
-        <RoutineForm
-          updateRoutine={updateRoutine}
-          saveNewRoutine={saveNewRoutine}
-          discardRoutine={discardRoutine}
-          defaultRoutine={currentlySelectedRoutine || null}
-          routineCount={userRoutines.length}
-        />
-      </Modal>
     )
   }
 
@@ -145,12 +130,20 @@ const RoutineList = props => {
       <List />
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
-      <Form />
+
+      <FormModal
+        open={routineFormOpen}
+        discardRoutine={discardRoutine}
+        updateRoutine={updateRoutine}
+        saveNewRoutine={saveNewRoutine}
+        currentlySelectedRoutine={currentlySelectedRoutine}
+        userRoutines={userRoutines}
+      />
 
       <PlayRoutine
         open={playRoutineOpen}
         routine={currentlySelectedRoutine}
-        closePlayMode={closePlayMode}
+        setPlayModeStatus={setPlayModeStatus}
       />
 
       <DeleteRoutine 
