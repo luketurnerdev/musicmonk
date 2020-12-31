@@ -24,12 +24,15 @@ const RoutineList = props => {
   const [routineFormOpen, setRoutineFormOpen] = useState(false);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
   // Async fetch function for useEffect
   async function getRoutines() {
+    setFetching(true);
     const response = await getAllRoutinesForUser(user.sub);
     console.log('Fetching routines from API.');
     console.log('Done: ', response);
+    setFetching(false);
     return response;
   }
 
@@ -110,9 +113,9 @@ const RoutineList = props => {
         />
     })
   }
-  const List = () => { 
-    return !userRoutines ? null 
-    : userRoutines.map(routine => {
+
+  const mapRoutines = () => {
+    return userRoutines.map(routine => {
       return <RoutineDisplay
         routine={routine}
         classes={classes}
@@ -120,15 +123,21 @@ const RoutineList = props => {
         setDeleteModeStatus={setDeleteModeStatus}
         openRoutineForm={openRoutineForm}
         setPlayModeStatus={setPlayModeStatus}
-        />
+      />
     })
+  }
+  const List = () => {
+    return (userRoutines.length ? mapRoutines() : <h1>None found</h1>)
   }
 
   return (
     <>
     <div className={classes.routineListContainer}>
-    <h1> Routine List </h1>
-    <List />
+    
+    {fetching 
+      ? <h1>Loading...</h1> 
+      : <List />
+    }
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
 
