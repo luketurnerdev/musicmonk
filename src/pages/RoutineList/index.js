@@ -77,14 +77,11 @@ const RoutineList = props => {
     setCurrentlySelectedRoutine(null);
   }
 
-  const openDeleteMode = routine => {
-    setDeleteConfirmationOpen(true);
+  const setDeleteModeStatus = (open, routine) => {
+    open ? setDeleteConfirmationOpen(true) : setDeleteConfirmationOpen(false);
     setCurrentlySelectedRoutine(routine);
   }
-  const closeDeleteMode = () => {
-    setDeleteConfirmationOpen(false);
-    setCurrentlySelectedRoutine(null);
-  }
+  
   const openRoutineForm = routine => {
     setCurrentlySelectedRoutine(routine);
     setRoutineFormOpen(true);
@@ -115,7 +112,7 @@ const RoutineList = props => {
           routine={routine}
           classes={classes}
           key={routine.id}
-          openDeleteMode={openDeleteMode}
+          setDeleteModeStatus={setDeleteModeStatus}
           openRoutineForm={openRoutineForm}
           setPlayModeStatus={setPlayModeStatus}
           />
@@ -149,7 +146,7 @@ const RoutineList = props => {
       <DeleteRoutine 
          routine={currentlySelectedRoutine}
          deleteRoutine={deleteRoutine} 
-         closeDeleteMode={closeDeleteMode}
+         setDeleteModeStatus={setDeleteModeStatus}
          open={deleteConfirmationOpen}
       />
     </>
