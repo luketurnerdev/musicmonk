@@ -1,8 +1,5 @@
+import axios from 'axios';
 const postNewRoutineToDb = async (userId, data) => {
-  //axios await stuff
-  console.log(userId);
-  console.log(data.steps);
-
   await axios.post(`http://localhost:3000/users/${userId}/routines`, {
     userId: userId,
     title: data.title,
@@ -17,4 +14,4 @@ const postNewRoutineToDb = async (userId, data) => {
   return data;
 }
 
-module.exports = {postNewRoutineToDb};
+export {postNewRoutineToDb};

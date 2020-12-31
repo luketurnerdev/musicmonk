@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Button, Modal, Grid} from '@material-ui/core/'
-import fakeData from "./../../fakeData";
-import {Play} from "./Modes";
+import {postNewRoutineToDb} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
@@ -37,28 +36,16 @@ const RoutineList = props => {
         console.log(err);
       })
   }
-  const postNewRoutineToDb = async (userId, data) => {
-    //axios await stuff
-    console.log(userId);
-    console.log(data);
 
-    await axios.post(`http://localhost:3000/users/${userId}/routines`, {
-      userId: userId,
-      title: data.title,
-      steps: data.steps
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    return data;
-  }
-
+  // Grab routines on mount
   useEffect(() => {
     getAllRoutinesForUser(user.sub);
-  }, [])
+  }, [routineFormOpen])
+
+  // Grab when form closed
+  useEffect(() => {
+    getAllRoutinesForUser(user.sub);
+  }, [routineFormOpen])
 
   const {classes} = props;
   // Default value is the existing list
@@ -66,7 +53,7 @@ const RoutineList = props => {
   const saveNewRoutine = newRoutineData => {    
     // Save to DB
     postNewRoutineToDb(user.sub, newRoutineData);
-    
+
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
   }
