@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Button, Modal, Grid} from '@material-ui/core/'
-import {postNewRoutineToDb} from "./../../api";
+import {postNewRoutineToDb, getAllRoutinesForUser} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
 import DeleteRoutine from "./../../Components/DeleteRoutine";
 import RoutineForm from "./../../Components/RoutineForm";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
-import axios from 'axios';
 
 // Hit the API / DB, get a list of users routines
 // map them out with the title amd a button to play or edit
@@ -24,27 +23,26 @@ const RoutineList = props => {
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
-  // Fetch the user's routines from DB on page load
-
-  const getAllRoutinesForUser = async (userId) => {
-      await axios.get(`http://localhost:3000/users/${userId}/routines`)
-      .then(resp => {
-        console.log(resp.data);
-        setUserRoutines(resp.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+  // Async fetch function for useEffect
+  async function getRoutines() {
+    const response = await getAllRoutinesForUser(user.sub);
+    console.log('Fetching routines from API.');
+    console.log('Done: ', response);
+    return response;
   }
 
   // Grab routines on mount
-  useEffect(() => {
-    getAllRoutinesForUser(user.sub);
-  }, [routineFormOpen])
+  useEffect(() => { 
+    getRoutines().then(resp => {
+      setUserRoutines(resp);
+    })
+  }, [])
 
   // Grab when form closed
   useEffect(() => {
-    getAllRoutinesForUser(user.sub);
+    getRoutines().then(resp => {
+      setUserRoutines(resp);
+    })
   }, [routineFormOpen])
 
   const {classes} = props;
