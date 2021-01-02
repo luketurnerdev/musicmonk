@@ -10,21 +10,18 @@ import RoutineForm from "./../../Components/RoutineForm";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
 import FormModal from './../../Components/Form';
 
-// Hit the API / DB, get a list of users routines
-// map them out with the title amd a button to play or edit
-
 //When this page first loads, fetch users routines from db (fake for now)
-//When the list is updated, setUserRoutines.
-//When edit is clicked, open up a modal with userRoutines[id] passed in (the whole object including steps)
+//When the list is updated (ie, POST, PUT OR DELETE is called), setUserRoutines.
 
 const RoutineList = props => {
   const {user} = props;
   const [userRoutines, setUserRoutines] = useState([]);
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
-  const [routineFormOpen, setRoutineFormOpen] = useState(false);
+  const [routineFormOpen, setRoutineFormOpen] = useState(null);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
   const [fetching, setFetching] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // Async fetch function for useEffect
   async function getRoutines() {
@@ -43,14 +40,12 @@ const RoutineList = props => {
     })
   }, [])
 
-  // Grab when form closed
+  // Grab when delete form closed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
   }, [routineFormOpen])
-
-  // Grab when delete form closed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
@@ -95,24 +90,13 @@ const RoutineList = props => {
     setRoutineFormOpen(true);
   }
 
-  const deleteRoutine = (routineId) => {
-    deleteOneRoutineFromDb(user.sub, routineId);
+  const deleteRoutine = async (routineId) => {
+    await deleteOneRoutineFromDb(user.sub, routineId);
     setDeleteModeStatus(false, null);
+    getRoutines();
+    // form closes, api fetches. routine is still being deleted.
   }
 
-  
-  const MapRoutines = () => {
-    return userRoutines.map(routine => {
-      return <RoutineDisplay
-        routine={routine}
-        classes={classes}
-        key={routine.id}
-        setDeleteModeStatus={setDeleteModeStatus}
-        openRoutineForm={openRoutineForm}
-        setPlayModeStatus={setPlayModeStatus}
-        />
-    })
-  }
 
   const mapRoutines = () => {
     return userRoutines.map(routine => {
@@ -133,7 +117,6 @@ const RoutineList = props => {
   return (
     <>
     <div className={classes.routineListContainer}>
-    
     {fetching 
       ? <h1>Loading...</h1> 
       : <List />
@@ -161,6 +144,7 @@ const RoutineList = props => {
          deleteRoutine={deleteRoutine} 
          setDeleteModeStatus={setDeleteModeStatus}
          open={deleteConfirmationOpen}
+         setSubmitting={setSubmitting}
       />
     </>
   )

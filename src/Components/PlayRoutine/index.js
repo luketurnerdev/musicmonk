@@ -28,8 +28,8 @@ const PlayRoutine = props => {
   const {closePlayMode, routine, classes, open, setPlayModeStatus} = props; 
 
   const completeRoutine = id => {
-    console.log('completed', id)
-    closePlayMode();
+    // TODO contribute to some kind of completion tracking here later
+    setPlayModeStatus(false, null);
   }
   const MapSteps = () => {
     return (
