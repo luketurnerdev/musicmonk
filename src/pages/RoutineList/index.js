@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Button, Modal, Grid} from '@material-ui/core/'
-import {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb} from "./../../api";
+import {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb, editOneRoutineInDb} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
@@ -62,11 +62,10 @@ const RoutineList = props => {
     setCurrentlySelectedRoutine(null);
   }
 
-  const updateRoutine = (id, newRoutineData) => {
-    // copy the array, modify relevant object, update state
-    let routines = userRoutines;
-    routines[routines.filter(routine => routine && (routine.id === id))[0].id] = newRoutineData;
-    setUserRoutines(routines)
+  const updateRoutine = (routineId, newData) => {
+    
+    console.log(routineId, newData);
+    editOneRoutineInDb(user.sub, routineId, newData);
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
   }

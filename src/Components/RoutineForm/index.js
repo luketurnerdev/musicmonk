@@ -39,7 +39,7 @@ const RoutineForm = props => {
 
       if (formData.title) {
         //continue
-        return isNewRoutine ? saveNewRoutine(newData) : updateRoutine(defaultRoutine.id, newData)
+        return isNewRoutine ? saveNewRoutine(newData) : updateRoutine(defaultRoutine._id, newData)
       }
 
   }
