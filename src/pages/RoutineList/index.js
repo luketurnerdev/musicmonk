@@ -76,6 +76,7 @@ const RoutineList = props => {
   }
   
 
+  // TOGGLE VARIOUS MODES
   const setPlayModeStatus = (open, routine) => {
     setPlayRoutineOpen(open);
     setCurrentlySelectedRoutine(routine);
@@ -84,18 +85,10 @@ const RoutineList = props => {
     setDeleteConfirmationOpen(open);
     setCurrentlySelectedRoutine(routine);
   }
-  const discardRoutine = () => {
-    setRoutineFormOpen(false);
-    setCurrentlySelectedRoutine(null);
-  }
-
-  const openRoutineForm = routine => {
+  const setFormModeStatus = (open, routine) => {
+    setRoutineFormOpen(open);
     setCurrentlySelectedRoutine(routine);
-    setRoutineFormOpen(true);
   }
-
-
-
 
   const mapRoutines = () => {
     return userRoutines.map(routine => {
@@ -104,7 +97,7 @@ const RoutineList = props => {
         classes={classes}
         key={routine.id}
         setDeleteModeStatus={setDeleteModeStatus}
-        openRoutineForm={openRoutineForm}
+        setFormModeStatus={setFormModeStatus}
         setPlayModeStatus={setPlayModeStatus}
       />
     })
@@ -125,7 +118,7 @@ const RoutineList = props => {
 
       <FormModal
         open={routineFormOpen}
-        discardRoutine={discardRoutine}
+        setFormModeStatus={setFormModeStatus}
         updateRoutine={updateRoutine}
         saveNewRoutine={saveNewRoutine}
         currentlySelectedRoutine={currentlySelectedRoutine}

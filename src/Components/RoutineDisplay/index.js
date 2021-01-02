@@ -5,7 +5,7 @@ import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 const RoutineDisplay = props => {
-  const {routine, classes, setDeleteModeStatus, setPlayModeStatus, openRoutineForm, } = props;
+  const {routine, classes, setDeleteModeStatus, setFormModeStatus, setPlayModeStatus} = props;
   return (
   <div key={routine.id} className={classes.routineDisplay}>
     <Grid container >
@@ -24,7 +24,7 @@ const RoutineDisplay = props => {
       <Grid item xs={2} className={classes.gridItem}>
           <Button
           variant="contained"
-          onClick={() => openRoutineForm(routine)}
+          onClick={() => setFormModeStatus(true, routine)}
           className={classes.editButton}
         >
             <EditOutlinedIcon />
