@@ -5,8 +5,6 @@ import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
 import DeleteRoutine from "./../../Components/DeleteRoutine";
-import Form from "./../../Components/Form";
-import RoutineForm from "./../../Components/RoutineForm";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
 import FormModal from './../../Components/Form';
 
@@ -14,14 +12,13 @@ import FormModal from './../../Components/Form';
 //When the list is updated (ie, POST, PUT OR DELETE is called), setUserRoutines.
 
 const RoutineList = props => {
-  const {user} = props;
+  const {classes, user} = props;
   const [userRoutines, setUserRoutines] = useState([]);
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
   const [routineFormOpen, setRoutineFormOpen] = useState(null);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
   const [fetching, setFetching] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   // Async fetch function for useEffect
   async function getRoutines() {
@@ -33,41 +30,49 @@ const RoutineList = props => {
     return response;
   }
 
-  // Grab routines on mount
+  //SIDE EFFECTS
+
+  // On mount
   useEffect(() => { 
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
   }, [])
 
-  // Grab when delete form closed
+  // When routine form closed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
   }, [routineFormOpen])
+  
+  // When delete is confirmed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
   }, [deleteConfirmationOpen])
 
-  const {classes} = props;
-  // Default value is the existing list
+  // API CALLS AND SUBSQUENT STATE CHANGES
 
   const saveNewRoutine = newRoutineData => {    
-    // Save to DB
     postNewRoutineToDb(user.sub, newRoutineData);
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
   }
 
-  const updateRoutine = (routineId, newData) => {
-    
+  const updateRoutine = async (routineId, newData) => {  
     console.log(routineId, newData);
-    editOneRoutineInDb(user.sub, routineId, newData);
+    await editOneRoutineInDb(user.sub, routineId, newData);
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
+    getRoutines();
+  }
+
+  const deleteRoutine = async (routineId) => {
+    await deleteOneRoutineFromDb(user.sub, routineId);
+    setDeleteModeStatus(false, null);
+    getRoutines();
   }
   
 
@@ -89,12 +94,7 @@ const RoutineList = props => {
     setRoutineFormOpen(true);
   }
 
-  const deleteRoutine = async (routineId) => {
-    await deleteOneRoutineFromDb(user.sub, routineId);
-    setDeleteModeStatus(false, null);
-    getRoutines();
-    // form closes, api fetches. routine is still being deleted.
-  }
+
 
 
   const mapRoutines = () => {
@@ -143,7 +143,6 @@ const RoutineList = props => {
          deleteRoutine={deleteRoutine} 
          setDeleteModeStatus={setDeleteModeStatus}
          open={deleteConfirmationOpen}
-         setSubmitting={setSubmitting}
       />
     </>
   )

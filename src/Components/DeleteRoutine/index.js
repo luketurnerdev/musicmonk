@@ -4,7 +4,7 @@ import styles from "./styles";
 import { withStyles } from '@material-ui/styles';
 
 const DeleteRoutine = props => {
-  const {deleteRoutine, routine, classes, setDeleteModeStatus, setSubmitting, open} = props; 
+  const {deleteRoutine, routine, classes, setDeleteModeStatus, open} = props; 
   return (
     <Modal
     open={open}
