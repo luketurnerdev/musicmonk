@@ -7,7 +7,7 @@ import Loading from "./../../Components/Loading"
 import RoutineForm from "./../../Components/RoutineForm"
 import RoutineList from "./../RoutineList";
 import Dashboard from "./../Dashboard";
-import Home from "./../../Components/Home";
+import Splash from "./../../Components/Splash";
 import AuthenticationButton from "../../Components/AuthenticationButton";
 import Profile from "./../Profile";
 import ProtectedRoute from "./../../auth/ProtectedRoute";
@@ -25,7 +25,7 @@ const App = props => {
       <h1>MusicMonk</h1>
       <div className="container flex-grow-1">
         <Switch>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={Splash}/>
           <ProtectedRoute exact path="/dashboard"component={(props) => (<Dashboard {...props} user={user} />)} />
           <ProtectedRoute exact path="/profile" component={Profile} />
         </Switch>
