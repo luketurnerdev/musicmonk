@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Button, Modal, Grid} from '@material-ui/core/'
+import React, {useState, useEffect, useCallback} from 'react';
+import {Button} from '@material-ui/core/'
 import {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb, editOneRoutineInDb} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
@@ -21,14 +21,14 @@ const RoutineList = props => {
   const [fetching, setFetching] = useState(false);
 
   // Async fetch function for useEffect
-  async function getRoutines() {
+  const getRoutines = useCallback(async () => {
     setFetching(true);
     const response = await getAllRoutinesForUser(user.sub);
     console.log('Fetching routines from API.');
     console.log('Done: ', response);
     setFetching(false);
     return response;
-  }
+  }, [])
 
   //SIDE EFFECTS
 
@@ -37,21 +37,21 @@ const RoutineList = props => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [])
+  }, [getRoutines])
 
   // When routine form closed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [routineFormOpen])
+  }, [routineFormOpen, getRoutines])
   
   // When delete is confirmed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [deleteConfirmationOpen])
+  }, [deleteConfirmationOpen, getRoutines])
 
   // API CALLS AND SUBSQUENT STATE CHANGES
 
