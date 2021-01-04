@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, Grid} from '@material-ui/core/'
+import {Button, Grid} from '@material-ui/core/'
 import PlayCircleOutlineSharpIcon from '@material-ui/icons/PlayCircleOutlineSharp';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';

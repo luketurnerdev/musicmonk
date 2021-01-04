@@ -25,7 +25,7 @@ const Step = props => {
   )
 }
 const PlayRoutine = props => {
-  const {closePlayMode, routine, classes, open, setPlayModeStatus} = props; 
+  const {routine, classes, open, setPlayModeStatus} = props; 
 
   const completeRoutine = id => {
     // TODO contribute to some kind of completion tracking here later

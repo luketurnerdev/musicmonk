@@ -13,7 +13,6 @@ const styles = {
     justifyContent: 'center',
     width: '100%',
     height: '100%',
-    alignItems: 'center',
   },
   routineName: {
     width: '30vw',

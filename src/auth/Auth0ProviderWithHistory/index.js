@@ -1,15 +1,16 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { navigate } from 'gatsby';
 
 const Auth0ProviderWithHistory = ({ children }) => {
   const history = useHistory();
   const domain = "musicmonk.au.auth0.com";
   const clientId = "RRYnmLrc7nhJ8A0Iiv6TRr4p8yxO5DI7";
-  const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
   const onRedirectCallback = (appState) => {
-    history.push(appState?.returnTo || window.location.pathname);
+    // Use Gatsby's navigate method to replace the url
+    navigate(appState?.returnTo || '/', { replace: true });
   };
 
   return (

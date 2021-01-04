@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Button, FormControl, TextField} from '@material-ui/core';
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
@@ -8,9 +8,11 @@ import ControlPointSharpIcon from '@material-ui/icons/ControlPointSharp';
 const RoutineForm = props => {
   const {defaultRoutine, updateRoutine, setFormModeStatus, classes, saveNewRoutine, routineCount} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: routineCount, steps: [], title: ''});
-  const [userSteps, setUserSteps] = useState(defaultRoutine && defaultRoutine.steps || []);
+  const [userSteps, setUserSteps] = useState(defaultRoutine ? defaultRoutine.steps : []);
   const [titleError, setTitleError] = useState('');
-  const [isNewRoutine, setIsNewRoutine] = useState(!defaultRoutine);
+
+  // If there is no default routine (ie edit mode), treat this as a new one
+  const isNewRoutine = !defaultRoutine;
   
   const checkTextLength = length => {
     if (length === 0) {

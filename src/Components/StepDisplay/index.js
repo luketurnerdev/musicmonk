@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, TextField} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
 
 const StepDisplay = props => {
-  const {step, index, classes, removeStep, editStep, setStepErrors, stepErrors} = props;
-  const [stepErrorText, setStepErrorText] = useState('');
+  const {step, index, removeStep, editStep,} = props;
 
   return (
     <div style={styles.step}>

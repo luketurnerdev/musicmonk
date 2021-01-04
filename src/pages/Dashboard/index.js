@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import RoutineList from "./../RoutineList";
+import NavBar from "./../../Components/NavBar";
 const Dashboard = props => {
   const {user} = props;
   return (
     <>
-    <h1>hi</h1>
+      <NavBar />
       <h1>Welcome, {user.nickname} !</h1>
       <RoutineList user={user} />
     </>

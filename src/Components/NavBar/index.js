@@ -10,7 +10,6 @@ const NavBar = () => {
         <div className="container">
           <div className="navbar-brand logo" />
           <MainNav />
-          <AuthNav />
         </div>
       </nav>
     </div>

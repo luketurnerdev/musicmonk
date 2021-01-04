@@ -28,7 +28,7 @@ const RoutineList = props => {
     console.log('Done: ', response);
     setFetching(false);
     return response;
-  }, [])
+  }, [user.sub])
 
   //SIDE EFFECTS
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const postNewRoutineToDb = async (userId, data) => {
-  await axios.post(`http://localhost:3000/users/${userId}/routines`, {
+  await axios.post(`${process.env.GATSBY_SERVER_URL}/users/${userId}/routines`, {
     userId: userId,
     title: data.title,
     steps: data.steps
@@ -18,7 +18,7 @@ const postNewRoutineToDb = async (userId, data) => {
 
 const getAllRoutinesForUser = async (userId) => {
   let resolved;
-  await axios.get(`http://localhost:3000/users/${userId}/routines`)
+  await axios.get(`${process.env.GATSBY_SERVER_URL}/users/${userId}/routines`)
   .then(resp => {
     console.log(resp.data);
     resolved = resp.data;
@@ -33,7 +33,7 @@ const getAllRoutinesForUser = async (userId) => {
 
 const deleteOneRoutineFromDb = async (userId, routineId) => {
   let resolved;
-  await axios.delete(`http://localhost:3000/users/${userId}/routines/${routineId}`)
+  await axios.delete(`${process.env.GATSBY_SERVER_URL}/users/${userId}/routines/${routineId}`)
   .then(resp => {
     console.log(resp.data);
     resolved = resp.data;
