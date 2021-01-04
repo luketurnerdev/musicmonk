@@ -19,6 +19,7 @@ const RoutineList = props => {
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
   const [fetching, setFetching] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   // Async fetch function for useEffect
   const getRoutines = useCallback(async () => {
@@ -28,7 +29,7 @@ const RoutineList = props => {
     console.log('Done: ', response);
     setFetching(false);
     return response;
-  }, [user.sub])
+  }, [])
 
   //SIDE EFFECTS
 
@@ -37,14 +38,14 @@ const RoutineList = props => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [getRoutines])
+  }, [])
 
   // When routine form closed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [routineFormOpen, getRoutines])
+  }, [routineFormOpen])
   
   // When delete is confirmed
   useEffect(() => {
@@ -55,8 +56,12 @@ const RoutineList = props => {
 
   // API CALLS AND SUBSQUENT STATE CHANGES
 
-  const saveNewRoutine = newRoutineData => {    
-    postNewRoutineToDb(user.sub, newRoutineData);
+  const saveNewRoutine = async newRoutineData => {   
+    setSaving(true); 
+
+    await postNewRoutineToDb(user.sub, newRoutineData);
+    setSaving(false);
+
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
   }
@@ -66,13 +71,11 @@ const RoutineList = props => {
     await editOneRoutineInDb(user.sub, routineId, newData);
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
-    getRoutines();
   }
 
   const deleteRoutine = async (routineId) => {
     await deleteOneRoutineFromDb(user.sub, routineId);
     setDeleteModeStatus(false, null);
-    getRoutines();
   }
   
 
@@ -123,6 +126,7 @@ const RoutineList = props => {
         saveNewRoutine={saveNewRoutine}
         currentlySelectedRoutine={currentlySelectedRoutine}
         userRoutines={userRoutines}
+        saving={saving}
       />
 
       <PlayRoutine

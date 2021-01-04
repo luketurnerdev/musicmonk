@@ -10,7 +10,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
 
   const onRedirectCallback = (appState) => {
     // Use Gatsby's navigate method to replace the url
-    navigate(appState?.returnTo || '/', { replace: true });
+    navigate(appState?.returnTo || '/#/dashboard', { replace: true });
   };
 
   return (

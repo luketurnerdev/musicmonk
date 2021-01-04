@@ -20,7 +20,6 @@ const getAllRoutinesForUser = async (userId) => {
   let resolved;
   await axios.get(`${process.env.GATSBY_SERVER_URL}/users/${userId}/routines`)
   .then(resp => {
-    console.log(resp.data);
     resolved = resp.data;
   })
   .catch(err => {

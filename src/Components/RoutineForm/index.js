@@ -6,7 +6,7 @@ import StepDisplay from "./../StepDisplay";
 import ControlPointSharpIcon from '@material-ui/icons/ControlPointSharp';
 
 const RoutineForm = props => {
-  const {defaultRoutine, updateRoutine, setFormModeStatus, classes, saveNewRoutine, routineCount} = props;
+  const {defaultRoutine, updateRoutine, setFormModeStatus, classes, saveNewRoutine, routineCount, saving} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: routineCount, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine ? defaultRoutine.steps : []);
   const [titleError, setTitleError] = useState('');
@@ -132,7 +132,7 @@ const RoutineForm = props => {
           variant="contained"
           className={classes.button}
           onClick={() => handleSubmit()}>
-          Save
+          {saving ? "Saving..." : "Save"}
       </Button>
       <Button
         variant="contained"
