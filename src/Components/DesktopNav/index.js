@@ -1,15 +1,22 @@
 import {NavLink} from "react-router-dom";
-import {Typography, Paper} from '@material-ui/core';
+import {Typography, Paper, Button} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import styles from "./styles";
 import {withStyles} from '@material-ui/styles';
 import LogoutButton from './../LogoutButton';
-import React from "react";
-
+import React, {useState} from "react";
 const DesktopNav = props => {
   const {classes} = props;
-  return (
-    <div className={classes.desktopNavContainer}>
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenuOpen = () => {
+    setMenuOpen(!menuOpen)
+  }
+  const OpenMenu = () => {
+    return <div className={classes.desktopNavContainer}>
+      <Button onClick={() => toggleMenuOpen()}>
+            <MenuIcon />
+      </Button>
       <Typography variant="subtitle" className={classes.title}>
         MusicMonk 
       </Typography>
@@ -34,13 +41,19 @@ const DesktopNav = props => {
                 <Typography variant="subtitle">Profile</Typography>
               </Paper>
           </NavLink>
-
-        
-        
       </div>
           <LogoutButton />
-
     </div>
+  }
+  return (
+    <>
+    
+    {menuOpen 
+    ? <OpenMenu /> 
+    : <Button onClick={() => toggleMenuOpen()}>
+      <MenuIcon />
+    </Button>}
+    </>
   )
 };
 
