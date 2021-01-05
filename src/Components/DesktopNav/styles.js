@@ -1,17 +1,32 @@
 const styles = {
-  headerGridContainer: {
-    width: '100%',
-    margin: '30px 0'
+  desktopNavContainer: {
+    border: '2px solid',
+    borderRadius: '10px',
+    width: '25vw',
+    height: '100vh',
   },
-  menuGrid: {
+  navList: {
+    height: '50%',
     textAlign: 'center',
+    display:'flex',
+    flexDirection:'column',
+    paddingTop: '30%',
   },
-  exitGrid: {
-    textAlign: 'center',
+  navItem: {
+    height: '5%',
+    margin: '10% 0',
+    backgroundColor: '#FFFFFF',
+    textAlign:'center',
   },
-  titleGrid: {
-    textAlign: 'center',
+  logoutButton: {
+    textAlign:'center'
   },
+  title: {
+    textAlign:'center',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: '20%'
+  }
 }
 
 export default styles;
