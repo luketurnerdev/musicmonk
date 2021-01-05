@@ -6,8 +6,8 @@ const Dashboard = props => {
   return (
     <>
       <NavBar />
-      {/* <h1>Welcome, {user.nickname} !</h1> */}
-      {/* <RoutineList user={user} /> */}
+      <h1>Welcome, {user.nickname} !</h1>
+      <RoutineList user={user} />
     </>
   );
 };

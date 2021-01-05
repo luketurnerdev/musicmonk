@@ -17,6 +17,7 @@ const styles = {
     margin: '10% 0',
     backgroundColor: '#FFFFFF',
     textAlign:'center',
+    textDecoration: 'none'
   },
   logoutButton: {
     textAlign:'center'

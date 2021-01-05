@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import {Grid, Typography, Paper} from '@material-ui/core';
+import {Typography, Paper} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import styles from "./styles";
 import {withStyles} from '@material-ui/styles';
@@ -14,17 +14,32 @@ const DesktopNav = props => {
         MusicMonk 
       </Typography>
       <div className={classes.navList}>
-        <Paper elevation={2} className={classes.navItem}>
-          Home
-        </Paper>
-        <Paper elevation={2} className={classes.navItem}>
-          Profile
-        </Paper>
-      </div>
 
-      <Paper elevation={2} className={classes.logoutButton}>
-          Logout
-      </Paper>
+          <NavLink
+            to="/"
+            exact
+            className={classes.navItem}
+          >
+              <Paper elevation={3}>
+                <Typography variant="subtitle">Home</Typography>
+              </Paper>
+          </NavLink>
+
+          <NavLink
+            to="/profile"
+            exact
+            className={classes.navItem}
+          >
+              <Paper elevation={3}>
+                <Typography variant="subtitle">Profile</Typography>
+              </Paper>
+          </NavLink>
+
+        
+        
+      </div>
+          <LogoutButton />
+
     </div>
   )
 };
