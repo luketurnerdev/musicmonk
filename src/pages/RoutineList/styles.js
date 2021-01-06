@@ -15,7 +15,12 @@ const styles = {
   },
   routineListContainer: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    border: '2px solid black',
+    width: '80%',
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)'
   }
 };
 
