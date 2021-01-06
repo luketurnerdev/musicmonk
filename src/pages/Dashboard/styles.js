@@ -1,6 +1,6 @@
 const styles = {
-  dashboardContainer: {
-    // color: 'red'
+  topMargin: {
+    color: 'red'
   },
 };
 
