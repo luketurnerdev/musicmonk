@@ -9,14 +9,18 @@ const DesktopNav = props => {
   const {classes} = props;
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const MenuButton = () => {
+    return (<Button onClick={() => toggleMenuOpen()}>
+            <MenuIcon className={menuOpen ? classes.menuIconOpen : classes.menuIconClosed} />
+            <h5>{menuOpen.toString()}</h5>
+      </Button>)
+  }
   const toggleMenuOpen = () => {
     setMenuOpen(!menuOpen)
   }
   const OpenMenu = () => {
     return <div className={classes.desktopNavContainer}>
-      <Button onClick={() => toggleMenuOpen()}>
-            <MenuIcon />
-      </Button>
+      <MenuButton />
       <Typography variant="subtitle" className={classes.title}>
         MusicMonk 
       </Typography>
@@ -50,9 +54,7 @@ const DesktopNav = props => {
     
     {menuOpen 
     ? <OpenMenu /> 
-    : <Button onClick={() => toggleMenuOpen()}>
-      <MenuIcon />
-    </Button>}
+    : <MenuButton />}
     </>
   )
 };

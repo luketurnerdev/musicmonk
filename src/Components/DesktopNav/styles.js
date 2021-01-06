@@ -27,6 +27,12 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     paddingTop: '20%'
+  },
+  menuIconOpen: {
+    color: 'red'
+  },
+  menuIconClosed: {
+    color: 'green'
   }
 }
 
