@@ -1,6 +1,7 @@
 import {NavLink} from "react-router-dom";
 import {Typography, Paper, Button} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import styles from "./styles";
 import {withStyles} from '@material-ui/styles';
 import LogoutButton from './../LogoutButton';
@@ -11,8 +12,7 @@ const DesktopNav = props => {
 
   const MenuButton = () => {
     return (<Button onClick={() => toggleMenuOpen()}>
-            <MenuIcon className={menuOpen ? classes.menuIconOpen : classes.menuIconClosed} />
-            <h5>{menuOpen.toString()}</h5>
+            {menuOpen ? <MenuOpenIcon /> : <MenuIcon />}
       </Button>)
   }
   const toggleMenuOpen = () => {

@@ -29,10 +29,10 @@ const styles = {
     paddingTop: '20%'
   },
   menuIconOpen: {
-    color: 'red'
+    
   },
   menuIconClosed: {
-    color: 'green'
+    //
   }
 }
 
