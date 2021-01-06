@@ -24,7 +24,6 @@
     "formik": "^2.2.6",
     "gatsby": "^2.24.85",
     "react": "^16.12.0",
-    "react-burger-menu": "^3.0.3",
     "react-dom": "^16.14.0",
     "react-dotenv": "^0.1.3",
     "react-router-dom": "^5.2.0"
