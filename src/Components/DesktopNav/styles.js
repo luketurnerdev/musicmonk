@@ -31,12 +31,6 @@ const styles = {
     justifyContent: 'center',
     paddingTop: '20%'
   },
-  menuIconOpen: {
-    
-  },
-  menuIconClosed: {
-    //
-  }
 }
 
 export default styles;

@@ -15,9 +15,7 @@ const App = props => {
   }
 
   return (
-    <div id="app" className="d-flex flex-column h-100">
-      {console.log(process.env.GATSBY_SERVER_URL)}
-      <div className="container flex-grow-1">
+    <div>
         <Switch>
           <Route exact path="/">
             {user ? <Redirect to="/dashboard" /> : <Splash />}
@@ -25,7 +23,6 @@ const App = props => {
           <ProtectedRoute exact path="/dashboard"component={(props) => (<Dashboard {...props} user={user} />)} />
           <ProtectedRoute exact path="/profile" component={Profile} />
         </Switch>
-      </div>
     </div>
   );
 };
