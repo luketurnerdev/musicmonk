@@ -1,5 +1,8 @@
 const styles = {
   desktopNavContainer: {
+    position: 'absolute',
+    backgroundColor: '#FFFFFF',
+    zIndex: '1',
     border: '2px solid',
     borderRadius: '10px',
     width: '25vw',
