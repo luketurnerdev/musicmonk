@@ -30,19 +30,11 @@ const RoutineForm = props => {
   
   const handleSubmit = () => {
     let newData = formData;
-    console.log(userSteps);
     newData.steps = userSteps;
-    // only include non-empty steps
 
-    // Only submit if:
-      // title is not empty
-      // stepErrors is false
-      // then choose to update or save new
-
-      if (formData.title) {
-        //continue
-        return isNewRoutine ? saveNewRoutine(newData) : updateRoutine(defaultRoutine._id, newData)
-      }
+    if (formData.title) {
+      return isNewRoutine ? saveNewRoutine(newData) : updateRoutine(defaultRoutine._id, newData)
+    }
 
   }
 
@@ -53,10 +45,6 @@ const RoutineForm = props => {
   }
   const removeStep = id => {
     
-    // if the array id matches the step id, set it to null or undefined.
-    // let stepToRemove = userSteps.filter(s => s.id === id);
-    // console.log("id selected : ", id);
-    // console.log(userSteps.splice(userSteps[id],1));
     let updatedList = userSteps.map(step => {
       if (step && step.id !== id) {
         return step;
@@ -128,6 +116,7 @@ const RoutineForm = props => {
       
       {mapSteps()}
     <div className={classes.exitButtons}>
+      {console.log(saving)}
       <Button
           variant="contained"
           className={classes.button}

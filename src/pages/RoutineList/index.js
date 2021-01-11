@@ -67,7 +67,7 @@ const RoutineList = props => {
   }
 
   const updateRoutine = async (routineId, newData) => {  
-    console.log(routineId, newData);
+    setSaving(true); 
     await editOneRoutineInDb(user.sub, routineId, newData);
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
