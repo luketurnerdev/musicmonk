@@ -1,26 +1,40 @@
 import React from 'react';
-import {Button, Grid} from '@material-ui/core/'
+import {Button, Grid, Typography} from '@material-ui/core/'
 import PlayCircleOutlineSharpIcon from '@material-ui/icons/PlayCircleOutlineSharp';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import styles from './styles';
+import { withStyles } from '@material-ui/styles';
 
 const RoutineDisplay = props => {
   const {routine, classes, setDeleteModeStatus, setFormModeStatus, setPlayModeStatus} = props;
+  
+  const PlayBox = () => {
+    return (
+      <Grid container>
+       <Grid item xs={6} className={classes.playGridItem}>
+        <Button
+            variant="contained"
+            onClick={() => setPlayModeStatus(true, routine)}
+            className={classes.startButton}
+          >
+              <PlayCircleOutlineSharpIcon className={classes.startButton}/>
+          </Button>
+       </Grid>
+       <Grid item xs={6} className={classes.playGridItem}>
+          <Typography variant="subtitle" className={classes.routineTitle}>
+            {routine.title}
+          </Typography>
+       </Grid>
+      </Grid>
+    )
+  }
   return (
   <div key={routine.id} className={classes.routineDisplay}>
     <Grid container >
-      <Grid item xs={6} className={classes.gridItem}>
-        <h1>{routine.title}</h1>
+      <Grid item xs={8}>
+          <PlayBox />
       </Grid>
-      <Grid item xs={2} className={classes.gridItem}>
-        <Button
-        variant="contained"
-        onClick={() => setPlayModeStatus(true, routine)}
-        className={classes.startButton}
-        >
-          <PlayCircleOutlineSharpIcon />
-      </Button>
-    </Grid>
       <Grid item xs={2} className={classes.gridItem}>
           <Button
           variant="contained"
@@ -44,4 +58,4 @@ const RoutineDisplay = props => {
   )
 }
 
-export default RoutineDisplay;
+export default withStyles(styles)(RoutineDisplay);

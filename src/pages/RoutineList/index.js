@@ -97,7 +97,6 @@ const RoutineList = props => {
     return userRoutines.map(routine => {
       return <RoutineDisplay
         routine={routine}
-        classes={classes}
         key={routine.id}
         setDeleteModeStatus={setDeleteModeStatus}
         setFormModeStatus={setFormModeStatus}
@@ -118,6 +117,8 @@ const RoutineList = props => {
     }
      <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
     </div>
+
+      {/* Various Modals */}
 
       <FormModal
         open={routineFormOpen}

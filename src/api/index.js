@@ -48,7 +48,7 @@ const editOneRoutineInDb = async (userId, routineId, newData) => {
   console.log(`edit function received user ${userId}, routine: ${routineId} and new data:`)
   console.log(newData);
   let resolved;
-  await axios.put(`http://localhost:3000/users/${userId}/routines/${routineId}`, newData)
+  await axios.put(`${process.env.GATSBY_SERVER_URL}/users/${userId}/routines/${routineId}`, newData)
   .then(resp => {
     console.log(resp.data);
     resolved = resp.data;
