@@ -3,7 +3,6 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    border: '2px solid',
     margin: '10px 0'
   },
   gridItem: {
@@ -12,12 +11,8 @@ const styles = {
     alignItems: 'center',
   },
   playBox: {
-    border: '2px solid',
-    width: '100%',
-    height: '85%',
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
+    width: '90%',
+    margin: '0 auto'
   },
   playGridItem: {
     display: 'flex',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Grid, Typography} from '@material-ui/core/'
+import {Button, Grid, Typography, Paper} from '@material-ui/core/'
 import PlayCircleOutlineSharpIcon from '@material-ui/icons/PlayCircleOutlineSharp';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
@@ -11,6 +11,7 @@ const RoutineDisplay = props => {
   
   const PlayBox = () => {
     return (
+    <Paper variant="outlined" elevation={2} className={classes.playBox}>
       <Grid container>
        <Grid item xs={6} className={classes.playGridItem}>
         <Button
@@ -27,6 +28,7 @@ const RoutineDisplay = props => {
           </Typography>
        </Grid>
       </Grid>
+    </Paper >
     )
   }
   return (
