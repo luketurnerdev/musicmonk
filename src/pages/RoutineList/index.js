@@ -69,6 +69,7 @@ const RoutineList = props => {
   const updateRoutine = async (routineId, newData) => {  
     setSaving(true); 
     await editOneRoutineInDb(user.sub, routineId, newData);
+    setSaving(false); 
     setRoutineFormOpen(false);
     setCurrentlySelectedRoutine(null);
   }
@@ -105,7 +106,7 @@ const RoutineList = props => {
     })
   }
   const List = () => {
-    return (userRoutines.length ? mapRoutines() : <h1>None found</h1>)
+    return (userRoutines.length ? mapRoutines() : <h1>No user routines found. Click below to create one!</h1>)
   }
 
   return (

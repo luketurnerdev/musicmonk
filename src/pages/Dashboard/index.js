@@ -20,7 +20,9 @@ const Dashboard = props => {
     <Grid container className={classes.dashboardContainer}>
 
       <Grid item xs={1}>
-        
+        <Typography variant="subtitle" className={classes.title}>
+          My Routines
+        </Typography>
       </Grid>
       <Grid item xs={11}>
         <RoutineList user={user} />
