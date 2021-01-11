@@ -18,8 +18,18 @@ const RoutineList = props => {
   const [routineFormOpen, setRoutineFormOpen] = useState(null);
   const [playRoutineOpen, setPlayRoutineOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
+  // Async API call state handlers
   const [fetching, setFetching] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  // 1 ) set deleting state to false on first load.
+  // 2 ) routine begins to be deleted. deleting = true. modal is closed.
+  // 3 ) Rest of the list is rendered, except the offending routine should show a spinner
+  // 4 ) API call finishes, deleting = false. spinner now shows null.
+
+
 
   // Async fetch function for useEffect
   const getRoutines = useCallback(async () => {
@@ -75,7 +85,9 @@ const RoutineList = props => {
   }
 
   const deleteRoutine = async (routineId) => {
+    setDeleting(true);
     await deleteOneRoutineFromDb(user.sub, routineId);
+    setDeleting(false);
     setDeleteModeStatus(false, null);
   }
   
@@ -142,6 +154,7 @@ const RoutineList = props => {
          deleteRoutine={deleteRoutine} 
          setDeleteModeStatus={setDeleteModeStatus}
          open={deleteConfirmationOpen}
+         deleting={deleting}
       />
     </>
   )
