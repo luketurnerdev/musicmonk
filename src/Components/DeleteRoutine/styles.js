@@ -6,7 +6,16 @@ const styles = {
     margin: '0 auto',
     alignItems: 'center'
   },
-  
+  title: {
+    position: 'relative',
+    top: '30%'
+  },
+  buttons: {
+    display: 'flex',
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  }
 };
 
 export default styles;

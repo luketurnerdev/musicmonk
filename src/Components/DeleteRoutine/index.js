@@ -10,10 +10,10 @@ const DeleteRoutine = props => {
     open={open}
   >
       <Grid container direction="column" className={classes.deleteModal}>
-        <Grid item xs={8}>
+        <Grid item xs={8} className={classes.title}>
           {routine && <h1>Really delete {routine.title} ?</h1>}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} className={classes.buttons}>
           <Button variant="contained" onClick={() => deleteRoutine(routine._id)}>
             {deleting? "Deleting..." : "Confirm"}
           </Button>
