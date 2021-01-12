@@ -6,6 +6,7 @@ const styles = {
     margin: '0 auto',
     alignItems: 'center'
   },
+  
 };
 
 export default styles;

@@ -20,7 +20,23 @@ const styles = {
     width: '80%',
     position: 'absolute',
     left: '50%',
-    transform: 'translateX(-50%)'
+    transform: 'translateX(-50%)',
+    height: '75%'
+  },
+  addNewButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    border: '2px solid black',
+    width: '80%',
+    position: 'relative',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    marginTop:'3%'
+  },
+  plusIcon: {
+    position: 'relative',
+    bottom: '2px',
+    left: '5px'
   }
 };
 

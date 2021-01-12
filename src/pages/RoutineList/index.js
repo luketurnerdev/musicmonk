@@ -7,6 +7,8 @@ import PlayRoutine from "./../../Components/PlayRoutine";
 import DeleteRoutine from "./../../Components/DeleteRoutine";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
 import FormModal from './../../Components/Form';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
 
 //When this page first loads, fetch users routines from db (fake for now)
 //When the list is updated (ie, POST, PUT OR DELETE is called), setUserRoutines.
@@ -128,7 +130,15 @@ const RoutineList = props => {
       ? <h1>Loading...</h1> 
       : <List />
     }
-     <Button variant="contained" onClick={() => setRoutineFormOpen(true)}>Add new routine</Button>
+     <Button 
+      variant="contained"
+      className={classes.addNewButton}
+      onClick={() => 
+        setRoutineFormOpen(true)}
+        >
+          Add new routine
+          <AddCircleOutlineIcon className={classes.plusIcon} />
+      </Button>
     </div>
 
       {/* Various Modals */}
