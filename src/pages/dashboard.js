@@ -25,7 +25,6 @@ const styles = {
 };
 
 const Dashboard = props => {
-  {console.log(process.env.REACT_APP_AUTH0_DOMAIN)}
   const user = getProfile();
   const {classes} = props;
   return (
