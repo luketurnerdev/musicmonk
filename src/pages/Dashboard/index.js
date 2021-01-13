@@ -7,7 +7,7 @@ import {withStyles} from "@material-ui/styles";
 import styles from "./styles";
 
 const Dashboard = props => {
-  const {user, classes} = props;
+  const {classes} = props;
   return (
   <>
     <div className={classes.titleBar}>
@@ -21,9 +21,9 @@ const Dashboard = props => {
 
       <Grid item xs={1}>
       </Grid>
-      <Grid item xs={11}>
+      {/* <Grid item xs={11}>
         <RoutineList user={user} />
-      </Grid>
+      </Grid> */}
     </Grid>
   </>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginButton from './../LoginButton';
+import LoginButton from '../../Components/LoginButton';
 import {Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/styles';
 import styles from './styles';
