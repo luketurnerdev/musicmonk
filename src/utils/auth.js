@@ -31,7 +31,7 @@ export const isAuthenticated = () => {
     return;
   }
 
-  return localStorage.getItem("isLoggedIn") === "true"
+  return localStorage.getItem("isLoggedIn") === "true";
 }
 
 export const login = () => {
@@ -39,7 +39,7 @@ export const login = () => {
     return
   }
 
-  auth.authorize()
+  auth.authorize();
 }
 
 const setSession = (cb = () => {}) => (err, authResult) => {
@@ -76,4 +76,9 @@ export const getProfile = () => {
 export const logout = () => {
   localStorage.setItem("isLoggedIn", false)
   auth.logout()
+}
+
+export const silentAuth = callback => {
+  if (!isAuthenticated()) return callback()
+  auth.checkSession({}, setSession(callback))
 }

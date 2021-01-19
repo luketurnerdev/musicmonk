@@ -1,10 +1,10 @@
 import React from "react";
-import RoutineList from "./RoutineList";
+import RoutineList from "../RoutineList";
 import {Typography} from '@material-ui/core';
-import NavBar from "./../Components/NavBar";
+import NavBar from "../../Components/NavBar";
 import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/styles";
-import { login, logout, isAuthenticated, getProfile } from "../utils/auth"
+import { login, logout, isAuthenticated, getProfile } from "../../utils/auth"
 
 const styles = {
   topMargin: {
@@ -26,8 +26,6 @@ const styles = {
 
 const Dashboard = props => {
   const user = getProfile();
-  // console.log('in dashboard. user:');
-  // console.log(user);
   const {classes} = props;
   return (
   <>
