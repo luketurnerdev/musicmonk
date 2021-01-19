@@ -2,7 +2,6 @@ import auth0 from "auth0-js"
 import { navigate } from "gatsby"
 
 const isBrowser = typeof window !== "undefined"
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 
 const auth = isBrowser
   ? new auth0.WebAuth({
@@ -13,9 +12,6 @@ const auth = isBrowser
       scope: "openid profile email",
     })
   : {}
-
-// src/utils/auth.js
-// above unchanged
 
 // insert after auth const
 const tokens = {
