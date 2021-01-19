@@ -4,10 +4,16 @@ import {Typography} from '@material-ui/core';
 import NavBar from "./../../Components/NavBar";
 import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/styles";
-import { getProfile } from "../../utils/auth"
+import { getProfile, login, isAuthenticated } from "../../utils/auth"
 import styles from "./styles";
 
 const Dashboard = props => {
+
+  if (!isAuthenticated()) {
+    login();
+    return <p>Redirecting to login...</p>;
+  }
+
   const user = getProfile();
   return (
   <>

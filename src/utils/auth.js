@@ -66,7 +66,7 @@ export const handleAuthentication = () => {
 }
 
 export const getProfile = () => {
-  return user
+  return user;
 }
 
 export const logout = () => {
