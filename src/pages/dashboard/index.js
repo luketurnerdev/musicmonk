@@ -14,7 +14,7 @@ const Dashboard = props => {
     <div>
       <NavBar /> 
       <Typography variant="subtitle">
-        MusicMonk 
+        MusicMonk
       </Typography>
 
     </div>

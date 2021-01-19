@@ -5,9 +5,9 @@ const isBrowser = typeof window !== "undefined"
 
 const auth = isBrowser
   ? new auth0.WebAuth({
-      domain: "musicmonk.au.auth0.com",
-      clientID: "RRYnmLrc7nhJ8A0Iiv6TRr4p8yxO5DI7",
-      redirectUri: "http://localhost:8000/callback",
+      domain: process.env.GATSBY_AUTH0_DOMAIN,
+      clientID: process.env.GATSBY_AUTH0_CLIENT_ID,
+      redirectUri: process.env.GATSBY_AUTH0_CALLBACK,
       responseType: "token id_token",
       scope: "openid profile email",
     })
