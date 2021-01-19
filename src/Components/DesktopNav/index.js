@@ -1,4 +1,4 @@
-import {NavLink} from "react-router-dom";
+import {Link} from '@reach/router';
 import {Typography, Paper, Button} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
@@ -27,35 +27,32 @@ const DesktopNav = props => {
       </Typography>
       <div className={classes.navList}>
 
-          <NavLink
+          <Link
             to="/"
-            exact
             className={classes.navItem}
           >
               <Paper elevation={3}>
                 <Typography variant="subtitle">Home</Typography>
               </Paper>
-          </NavLink>
+          </Link>
 
-          <NavLink
+          <Link
             to="/profile"
-            exact
             className={classes.navItem}
           >
               <Paper elevation={3}>
                 <Typography variant="subtitle">Profile</Typography>
               </Paper>
-          </NavLink>
+          </Link>
       </div>
           <LogoutButton />
     </div>
   }
   return (
-    <>
-    
-    {menuOpen 
-    ? <OpenMenu /> 
-    : <MenuButton />}
+    <>   
+      {menuOpen 
+      ? <OpenMenu /> 
+      : <MenuButton />}
     </>
   )
 };
