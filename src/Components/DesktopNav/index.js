@@ -6,7 +6,6 @@ import styles from "./styles";
 import {withStyles} from '@material-ui/styles';
 import LogoutButton from './../LogoutButton';
 import React, {useState} from "react";
-import { login, logout, isAuthenticated, getProfile } from "../../utils/auth";
 
 const DesktopNav = props => {
   const {classes} = props;

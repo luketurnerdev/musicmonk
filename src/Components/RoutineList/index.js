@@ -42,7 +42,7 @@ const RoutineList = props => {
     console.log('Done: ', response);
     setFetching(false);
     return response;
-  }, [])
+  }, [user.sub])
 
   //SIDE EFFECTS
 
@@ -51,14 +51,14 @@ const RoutineList = props => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [])
+  }, [getRoutines])
 
   // When routine form closed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [routineFormOpen])
+  }, [routineFormOpen, getRoutines])
   
   // When delete is confirmed
   useEffect(() => {

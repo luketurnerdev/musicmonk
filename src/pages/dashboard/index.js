@@ -1,15 +1,14 @@
 import React from "react";
-import RoutineList from "./../RoutineList";
+import RoutineList from "../../Components/RoutineList";
 import {Typography} from '@material-ui/core';
 import NavBar from "./../../Components/NavBar";
 import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/styles";
-import { login, logout, isAuthenticated, getProfile } from "../../utils/auth"
+import { getProfile } from "../../utils/auth"
 import styles from "./styles";
 
 const Dashboard = props => {
   const user = getProfile();
-  const {classes} = props;
   return (
   <>
     <div>

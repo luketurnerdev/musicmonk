@@ -13,7 +13,7 @@ const Splash = props => {
         MusicMonk 
       </Typography>
       <div>
-        <img src="https://i.imgur.com/NpyE2bl.png" width="300" height="400" />
+        <img src="https://i.imgur.com/NpyE2bl.png" alt="musicmonk-logo" width="300" height="400" />
       </div>
 
       <LoginButton className={classes.loginButton} />

@@ -1,5 +1,4 @@
-import React, {useContext} from "react";
-import Loading from "./../../Components/Loading"
+import React from "react";
 import Dashboard from "./../dashboard/index"
 import Splash from "../Splash";
 import Profile from "./../Profile";
