@@ -1,12 +1,11 @@
 import React from "react"
-import Dashboard from "./dashboard"
-import Splash from "./splash";
-
-import { Router } from "@reach/router"
+import Splash from "./../Components/splash";
 
 export default function Home() {
 
   return (
-    <Splash />
+    <div>
+       <Splash />
+    </div>
   );
 };

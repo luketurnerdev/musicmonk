@@ -17,6 +17,8 @@ const styles = {
   },
   navItem: {
     height: '5%',
+    width: '100%',
+    textTransform: 'none',
     margin: '10% 0',
     backgroundColor: '#FFFFFF',
     textAlign:'center',
