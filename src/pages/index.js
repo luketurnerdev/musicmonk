@@ -1,9 +1,12 @@
 import React from "react"
-import App from "./App";
+import Dashboard from "./dashboard"
+import Splash from "./splash";
+
+import { Router } from "@reach/router"
 
 export default function Home() {
 
   return (
-      <App /> 
+    <Splash />
   );
 };

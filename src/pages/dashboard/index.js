@@ -2,13 +2,12 @@ import React from "react";
 import RoutineList from "../../Components/RoutineList";
 import {Typography} from '@material-ui/core';
 import NavBar from "./../../Components/NavBar";
-import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/styles";
 import { getProfile, login, isAuthenticated } from "../../utils/auth"
 import styles from "./styles";
 
 const Dashboard = props => {
-
+  const {classes} = props;
   if (!isAuthenticated()) {
     login();
     return <p>Redirecting to login...</p>;
@@ -17,21 +16,15 @@ const Dashboard = props => {
   const user = getProfile();
   return (
   <>
-    <div>
+    <div className={classes.titleBar}>
       <NavBar /> 
-      <Typography variant="subtitle">
+      <Typography variant="subtitle" className={classes.title}>
         MusicMonk
       </Typography>
 
     </div>
-    <Grid container>
-
-      <Grid item xs={1}>
-      </Grid>
-      <Grid item xs={11}>
-        <RoutineList user={user} />
-      </Grid>
-    </Grid>
+    
+    <RoutineList user={user} />
   </>
   );
 };

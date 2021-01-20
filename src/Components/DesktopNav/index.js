@@ -16,9 +16,11 @@ const DesktopNav = props => {
             {menuOpen ? <MenuOpenIcon /> : <MenuIcon />}
       </Button>)
   }
+  
   const toggleMenuOpen = () => {
     setMenuOpen(!menuOpen)
   }
+
   const OpenMenu = () => {
     return <div className={classes.desktopNavContainer}>
       <MenuButton />
@@ -33,15 +35,6 @@ const DesktopNav = props => {
           >
               <Paper elevation={3}>
                 <Typography variant="subtitle">Home</Typography>
-              </Paper>
-          </Link>
-
-          <Link
-            to="/profile"
-            className={classes.navItem}
-          >
-              <Paper elevation={3}>
-                <Typography variant="subtitle">Profile</Typography>
               </Paper>
           </Link>
       </div>
