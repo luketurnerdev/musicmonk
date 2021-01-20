@@ -1,15 +1,12 @@
 import React from "react"
-import App from "./App";
-import {HashRouter as Router} from "react-router-dom";
-import Auth0ProviderWithHistory from "./../auth/Auth0ProviderWithHistory";
+import Dashboard from "./dashboard"
+import Splash from "./splash";
 
+import { Router } from "@reach/router"
 
 export default function Home() {
+
   return (
-    <Router>
-    <Auth0ProviderWithHistory>
-      <App />
-    </Auth0ProviderWithHistory>
-  </Router>
+    <Splash />
   );
 };

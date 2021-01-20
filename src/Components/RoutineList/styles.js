@@ -16,12 +16,14 @@ const styles = {
   routineListContainer: {
     display: 'flex',
     flexDirection: 'column',
-    border: '2px solid black',
     width: '80%',
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
     height: '75%'
+  },
+  list: {
+    border: '2px solid black'
   },
   addNewButton: {
     display: 'flex',
@@ -31,7 +33,7 @@ const styles = {
     position: 'relative',
     left: '50%',
     transform: 'translateX(-50%)',
-    marginTop:'3%'
+    marginTop:'15px'
   },
   plusIcon: {
     position: 'relative',

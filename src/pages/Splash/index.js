@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginButton from './../LoginButton';
+import LoginButton from '../../Components/LoginButton';
 import {Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/styles';
 import styles from './styles';
@@ -13,7 +13,7 @@ const Splash = props => {
         MusicMonk 
       </Typography>
       <div>
-        <img src="https://i.imgur.com/NpyE2bl.png" width="300" height="400" />
+        <img src="https://i.imgur.com/NpyE2bl.png" alt="musicmonk-logo" width="300" height="400" />
       </div>
 
       <LoginButton className={classes.loginButton} />

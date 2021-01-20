@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {Button} from '@material-ui/core/'
+import {Button, Typography} from '@material-ui/core/'
 import {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb, editOneRoutineInDb} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
@@ -8,6 +8,7 @@ import DeleteRoutine from "./../../Components/DeleteRoutine";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
 import FormModal from './../../Components/Form';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import Loading from "./../../Components/Loading";
 
 
 //When this page first loads, fetch users routines from db (fake for now)
@@ -22,7 +23,7 @@ const RoutineList = props => {
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
   // Async API call state handlers
-  const [fetching, setFetching] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -41,7 +42,7 @@ const RoutineList = props => {
     console.log('Done: ', response);
     setFetching(false);
     return response;
-  }, [])
+  }, [user.sub])
 
   //SIDE EFFECTS
 
@@ -50,14 +51,14 @@ const RoutineList = props => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [])
+  }, [getRoutines])
 
   // When routine form closed
   useEffect(() => {
     getRoutines().then(resp => {
       setUserRoutines(resp);
     })
-  }, [routineFormOpen])
+  }, [routineFormOpen, getRoutines])
   
   // When delete is confirmed
   useEffect(() => {
@@ -119,16 +120,27 @@ const RoutineList = props => {
       />
     })
   }
+
+  const NoneFoundMessage = () => {
+    return (
+      fetching 
+      ? <Loading />
+      : <Typography variant="subtitle">
+        No user routines found. Click below to create one!
+      </Typography>
+
+    )
+  }
   const List = () => {
-    return (userRoutines.length ? mapRoutines() : <h1>No user routines found. Click below to create one!</h1>)
+    return (userRoutines.length ? mapRoutines() : <NoneFoundMessage />)
   }
 
   return (
     <>
     <div className={classes.routineListContainer}>
     {fetching 
-      ? <h1>Loading...</h1> 
-      : <List />
+      ? <Loading />
+      : <div className={classes.list}> <List /> </div>
     }
      <Button 
       variant="contained"
