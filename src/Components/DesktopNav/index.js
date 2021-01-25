@@ -5,7 +5,7 @@ import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import styles from "./styles";
 import {withStyles} from '@material-ui/styles';
 import LogoutButton from './../LogoutButton';
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 const DesktopNav = props => {
   const {classes} = props;
@@ -28,15 +28,14 @@ const DesktopNav = props => {
         MusicMonk 
       </Typography>
       <div className={classes.navList}>
-
-          <Link
-            to="/"
+          <Button
+            onClick={() => setMenuOpen(false)}
             className={classes.navItem}
           >
-              <Paper elevation={3}>
+              <Paper elevation={3} style={{width:'100%'}}>
                 <Typography variant="subtitle">Home</Typography>
               </Paper>
-          </Link>
+          </Button>
       </div>
           <LogoutButton />
     </div>

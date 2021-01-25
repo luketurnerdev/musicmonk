@@ -1,10 +1,27 @@
 import React from "react";
-import RoutineList from "../../Components/RoutineList";
+import RoutineList from "./../Components/RoutineList";
+import NavBar from "./../Components/NavBar";
 import {Typography} from '@material-ui/core';
-import NavBar from "./../../Components/NavBar";
 import {withStyles} from "@material-ui/styles";
-import { getProfile, login, isAuthenticated } from "../../utils/auth"
-import styles from "./styles";
+import { getProfile, login, isAuthenticated } from "../utils/auth";
+
+const styles = {
+  topMargin: {
+    color: 'red'
+  },
+  title: {
+    fontSize: '40px',
+    textAlign: 'center',
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    paddingTop: '15px',
+  },
+  titleBar: {
+    width: '100%',
+    height: '10vh',
+  }
+};
 
 const Dashboard = props => {
   const {classes} = props;
