@@ -108,6 +108,7 @@ const RoutineForm = props => {
       'E.g., Piano Gig Practice',
       'E.g., Guitar Shredding Workout',
       'E.g., Jazz Chord Routine',
+      'E.g., Sweep Picking Practice'
     ];
     return examples[Math.floor(Math.random() * examples.length)];
   }
