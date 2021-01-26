@@ -117,6 +117,7 @@ const RoutineForm = props => {
     <div className={classes.routineForm}>
       <FormControl>
         <TextField
+          autoFocus={true}
           error={titleError}
           helperText={titleError || ""}
           className={classes.routineName}
