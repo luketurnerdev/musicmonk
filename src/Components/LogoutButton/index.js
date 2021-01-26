@@ -13,7 +13,6 @@ const LogoutButton = props => {
       style={{'text-decoration': 'none'}}
       className={classes.logoutButton}
       onClick={() => {
-        console.log('loggin out');
         logout();
       }}
     > <Typography variant="subtitle">Logout</Typography>
