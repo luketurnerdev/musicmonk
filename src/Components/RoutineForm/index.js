@@ -78,7 +78,6 @@ const RoutineForm = props => {
           })}
       </div>
 
-      <div className={classes.addStepContainer}>
         
       <Button
           variant="contained"
@@ -87,7 +86,6 @@ const RoutineForm = props => {
             <Typography variant="subtitle">Add new step</Typography>
             <ControlPointSharpIcon />
         </Button>
-      </div>
 
     </>
 
@@ -130,20 +128,20 @@ const RoutineForm = props => {
       </FormControl>
       
       {mapSteps()}
-    <div className={classes.exitButtons}>
-      <Button
+      <div className={classes.exitButtons}>
+        <Button
+            variant="contained"
+            className={classes.button}
+            onClick={() => handleSubmit()}>
+            {saving ? "Saving..." : "Save Routine"}
+        </Button>
+        <Button
           variant="contained"
           className={classes.button}
-          onClick={() => handleSubmit()}>
-          {saving ? "Saving..." : "Save Routine"}
-      </Button>
-      <Button
-        variant="contained"
-        className={classes.button}
-        onClick={() => setFormModeStatus(false, null)}>
-          Discard
-      </Button>
-  </div>
+          onClick={() => setFormModeStatus(false, null)}>
+            Discard
+        </Button>
+      </div>
 
     </div>
 

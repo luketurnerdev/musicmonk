@@ -1,8 +1,5 @@
 const styles = {
   formContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
     height: '100%',
   },
   routineForm: {
@@ -10,7 +7,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     width: '100%',
     height: '100%',
   },
@@ -27,23 +24,12 @@ const styles = {
     overflow: 'scroll',
     margin: '10px 0'
   },
-  stepsContainer: {
-
-  },
-  step: {
-    // margin: '0 auto'
-  },
   deleteStepButton: {
     width: '20%',
-    // margin: '0 auto'
   },
   button: {
     width: '20%',
     margin: '15px 5px'
-  },
-  addButton: {
-    // width: '20%',
-    // margin: '0 auto'
   },
   exitButtons: {
     display: 'flex',
