@@ -71,7 +71,11 @@ export const getProfile = () => {
 
 export const logout = () => {
   localStorage.setItem("isLoggedIn", false)
-  auth.logout();
+  auth.logout({
+    returnTo: process.env.GATSBY_PRODUCTION_URL,
+    clientID: process.env.GATSBY_AUTH0_CLIENT_ID
+  })
+
 }
 
 export const silentAuth = callback => {
