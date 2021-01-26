@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, FormControl, TextField} from '@material-ui/core';
+import {Button, FormControl, TextField, Typography} from '@material-ui/core';
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import StepDisplay from "./../StepDisplay";
@@ -80,12 +80,16 @@ const RoutineForm = props => {
           })}
       </div>
 
+      <div className={classes.addStepContainer}>
+        
       <Button
           variant="contained"
           className={classes.addButton}
           onClick={() => addStep()}>
+            <Typography variant="subtitle">Add new step</Typography>
             <ControlPointSharpIcon />
         </Button>
+      </div>
 
     </>
 
@@ -94,7 +98,6 @@ const RoutineForm = props => {
   }
 
   const checkForTitleErrors = title => {
-    console.log(title.length)
     if (title.length === 0) {
       setTitleError('Name is required.');
     }
@@ -116,7 +119,6 @@ const RoutineForm = props => {
       
       {mapSteps()}
     <div className={classes.exitButtons}>
-      {console.log(saving)}
       <Button
           variant="contained"
           className={classes.button}
