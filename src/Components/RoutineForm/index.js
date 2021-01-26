@@ -121,6 +121,7 @@ const RoutineForm = props => {
           error={titleError}
           helperText={titleError || ""}
           className={classes.routineName}
+          label="Routine Name"
           placeholder={routineName()}
           defaultValue={(defaultRoutine && defaultRoutine.title) || ''}
           onChange={e => handleFormUpdate('title', e.target.value)}
@@ -134,7 +135,7 @@ const RoutineForm = props => {
           variant="contained"
           className={classes.button}
           onClick={() => handleSubmit()}>
-          {saving ? "Saving..." : "Save"}
+          {saving ? "Saving..." : "Save Routine"}
       </Button>
       <Button
         variant="contained"
