@@ -10,11 +10,12 @@ const RoutineForm = props => {
   const [formData, setFormData] = useState(defaultRoutine || {id: routineCount, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine ? defaultRoutine.steps : []);
   const [titleError, setTitleError] = useState('');
+  const [stepError, setStepError] = useState('');
 
   // If there is no default routine (ie edit mode), treat this as a new one
   const isNewRoutine = !defaultRoutine;
   
-  const checkTextLength = length => {
+  const checkTitleLength = length => {
     if (length === 0) {
       setTitleError('Name is required.');
     } else {
@@ -22,9 +23,10 @@ const RoutineForm = props => {
     }
     return null;
   }
+
   const handleFormUpdate = (field, value) => {
     // perform check here for exceeding 0 chars
-    checkTextLength(value.length);
+    checkTitleLength(value.length);
     setFormData({...formData, [field]:value})
   }
   
@@ -32,7 +34,8 @@ const RoutineForm = props => {
     let newData = formData;
     newData.steps = userSteps;
 
-    if (formData.title) {
+    // Happy path
+    if (!titleError) {
       return isNewRoutine ? saveNewRoutine(newData) : updateRoutine(defaultRoutine._id, newData)
     }
 
@@ -93,12 +96,6 @@ const RoutineForm = props => {
 
   }
 
-  const checkForTitleErrors = title => {
-    if (title.length === 0) {
-      setTitleError('Name is required.');
-    }
-  }
-
   const routineName = () => {
     const examples = 
     [
@@ -123,7 +120,7 @@ const RoutineForm = props => {
           placeholder={routineName()}
           defaultValue={(defaultRoutine && defaultRoutine.title) || ''}
           onChange={e => handleFormUpdate('title', e.target.value)}
-          onBlur={e => checkForTitleErrors(e.target.value)}
+          onBlur={e => checkTitleLength(e.target.value.length)}
         />
       </FormControl>
       
