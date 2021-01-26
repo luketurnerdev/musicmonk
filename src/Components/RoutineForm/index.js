@@ -39,8 +39,6 @@ const RoutineForm = props => {
   }
 
   const addStep = () => {
-    console.log('clickityclack')
-    console.log(userSteps)
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
@@ -102,6 +100,17 @@ const RoutineForm = props => {
       setTitleError('Name is required.');
     }
   }
+
+  const routineName = () => {
+    const examples = 
+    [
+      'E.g., My Daily Guitar Routine',
+      'E.g., Piano Gig Practice',
+      'E.g., Guitar Shredding Workout',
+      'E.g., Jazz Chord Routine',
+    ];
+    return examples[Math.floor(Math.random() * examples.length)];
+  }
   return (
   <div className={classes.formContainer}>
     <div className={classes.routineForm}>
@@ -110,7 +119,7 @@ const RoutineForm = props => {
           error={titleError}
           helperText={titleError || ""}
           className={classes.routineName}
-          label="Routine name"
+          placeholder={routineName()}
           defaultValue={(defaultRoutine && defaultRoutine.title) || ''}
           onChange={e => handleFormUpdate('title', e.target.value)}
           onBlur={e => checkForTitleErrors(e.target.value)}
