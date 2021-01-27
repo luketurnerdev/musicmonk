@@ -4,7 +4,6 @@ import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import StepDisplay from "./../StepDisplay";
 import ControlPointSharpIcon from '@material-ui/icons/ControlPointSharp';
-import { red } from '@material-ui/core/colors';
 
 const RoutineForm = props => {
   const {defaultRoutine, updateRoutine, setFormModeStatus, classes, saveNewRoutine, routineCount, saving} = props;
