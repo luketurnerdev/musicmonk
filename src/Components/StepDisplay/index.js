@@ -48,7 +48,7 @@ const StepDisplay = props => {
         }}
         onBlur={e => checkStepLength(e.target.value.length)}
          />
-      <Button style={styles.button} onClick={() => removeStep(index)}>
+      <Button style={styles.button} color="primary" onClick={() => removeStep(index)}>
         <DeleteForeverSharpIcon style={styles.deleteStepButton} />
       </Button>
     </div>

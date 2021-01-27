@@ -1,17 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import {Button, FormControl, TextField, Typography} from '@material-ui/core';
+import {Button, FormControl, TextField, Typography, Paper} from '@material-ui/core';
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import StepDisplay from "./../StepDisplay";
 import ControlPointSharpIcon from '@material-ui/icons/ControlPointSharp';
+import { red } from '@material-ui/core/colors';
 
 const RoutineForm = props => {
   const {defaultRoutine, updateRoutine, setFormModeStatus, classes, saveNewRoutine, routineCount, saving} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: routineCount, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine ? defaultRoutine.steps : []);
+
+  //Validation state
   const [titleError, setTitleError] = useState('');
   const [exampleTitle, setExampleTitle] = useState('');
   const [emptySteps, setEmptySteps] = useState(false);
+  const [pageError, setPageError] = useState('');
 
   useEffect(() => {
     pickRandomTitle()
@@ -31,9 +35,17 @@ const RoutineForm = props => {
     setFormData({...formData, [field]:value})
   }
   
+  const listContainsNullOrNoSteps = () => {
+    if (userSteps.length === 0) return true;
+    userSteps.forEach(step => {
+      if (!step) {return true}
+    })
+  }
   const handleSubmit = () => {
     let newData = formData;
     newData.steps = userSteps;
+    console.log(listContainsNullOrNoSteps())
+    listContainsNullOrNoSteps ? setPageError('At least one step is required.') : setPageError('');
 
     // Only submit if routine contains 1) Title 2) At least one step 3) No empty steps
     if (!titleError && newData.steps.length >= 1 && !emptySteps) {
@@ -88,6 +100,7 @@ const RoutineForm = props => {
       <Button
           variant="contained"
           className={classes.addButton}
+          color="primary"
           onClick={() => addStep()}>
             <Typography variant="subtitle">Add new step</Typography>
             <ControlPointSharpIcon />
@@ -128,16 +141,21 @@ const RoutineForm = props => {
       </FormControl>
       
       {mapSteps()}
+
+      {pageError && <span className={classes.pageError}>{pageError}</span>}
+
       <div className={classes.exitButtons}>
         <Button
             variant="contained"
             className={classes.button}
+            color={saving ? "secondary" : "primary" }
             onClick={() => handleSubmit()}>
             {saving ? "Saving..." : "Save Routine"}
         </Button>
         <Button
           variant="contained"
           className={classes.button}
+          color="secondary"
           onClick={() => setFormModeStatus(false, null)}>
             Discard
         </Button>

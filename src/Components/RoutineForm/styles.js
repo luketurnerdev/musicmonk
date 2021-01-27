@@ -25,6 +25,9 @@ const styles = {
     overflow: 'scroll',
     margin: '10px 0'
   },
+  pageError: {
+    color: 'red'
+  },
   deleteStepButton: {
     width: '20%',
   },
