@@ -10,8 +10,8 @@ const RoutineForm = props => {
   const [formData, setFormData] = useState(defaultRoutine || {id: routineCount, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine ? defaultRoutine.steps : []);
   const [titleError, setTitleError] = useState('');
-  const [stepError, setStepError] = useState('');
   const [exampleTitle, setExampleTitle] = useState('');
+  const [emptySteps, setEmptySteps] = useState(false);
 
   useEffect(() => {
     pickRandomTitle()
@@ -20,18 +20,14 @@ const RoutineForm = props => {
   // If there is no default routine (ie edit mode), treat this as a new one
   const isNewRoutine = !defaultRoutine;
   
-  const checkTextLength = (length, type) => {
-    if (length === 0) {
-      type === "title" ? setTitleError('Name is required.') : setStepError('Step cannot be empty.')
-    } else {
-      type === "title" ? setTitleError('') : setStepError('')
-    }
+  const checkTextLength = length => {
+    length === 0 ? setTitleError('Name is required.') : setTitleError('');
     return null;
   }
 
   const handleFormUpdate = (field, value) => {
     // perform check here for exceeding 0 chars
-    checkTextLength(value.length, 'title');
+    checkTextLength(value.length);
     setFormData({...formData, [field]:value})
   }
   
@@ -40,8 +36,7 @@ const RoutineForm = props => {
     newData.steps = userSteps;
 
     // Only submit if routine contains 1) Title 2) At least one step 3) No empty steps
-    console.log(titleError, stepError, newData.steps.length)
-    if (!titleError && newData.steps.length >= 1 && !stepError) {
+    if (!titleError && newData.steps.length >= 1 && !emptySteps) {
       return isNewRoutine ? saveNewRoutine(newData) : updateRoutine(defaultRoutine._id, newData)
     }
 
@@ -82,7 +77,7 @@ const RoutineForm = props => {
                 removeStep={removeStep}
                 editStep={editStep}
                 checkTextLength={checkTextLength}
-                stepError={stepError}
+                setEmptySteps={setEmptySteps}
               />
             )
             : null

@@ -1,11 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, TextField} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
 
 const StepDisplay = props => {
-  const {step, index, removeStep, editStep, checkTextLength, stepError} = props;
+  const {step, index, removeStep, editStep, setEmptySteps} = props;
+  const [stepError, setStepError] = useState('');
+  const [currentStep, setCurrentStep] = useState(index+1);
+
+  const checkStepLength = length => {
+    if (length === 0) {
+      setStepError('Step cannot be empty.');
+      setEmptySteps(true);
+    } else {
+      setStepError('');
+      setEmptySteps(false);
+    }
+    return null;
+  }
+
   const stepName = () => {
     // Only render example on first step
     const examples = 
@@ -21,7 +35,7 @@ const StepDisplay = props => {
   return (
     <div style={styles.step}>
       <TextField
-        label={`Step ${index+1}`}
+        label={`Step ${currentStep}`}
         error={stepError}
         helperText={stepError || ""}
         placeholder={stepName()}
@@ -30,9 +44,9 @@ const StepDisplay = props => {
         defaultValue={step.text}
         onChange={e => {
           editStep(index, e.target.value)
-          checkTextLength(e.target.value.length, 'step')
+          checkStepLength(e.target.value.length)
         }}
-        onBlur={e => checkTextLength(e.target.value.length, 'step')}
+        onBlur={e => checkStepLength(e.target.value.length)}
          />
       <Button style={styles.button} onClick={() => removeStep(index)}>
         <DeleteForeverSharpIcon style={styles.deleteStepButton} />
