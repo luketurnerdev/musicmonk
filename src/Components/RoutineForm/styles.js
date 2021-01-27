@@ -18,6 +18,7 @@ const styles = {
   stepList: {
     border: '2px solid',
     width: '50%',
+    height: '50%',
     display: 'flex',
     alignItems:'center',
     flexDirection: 'column',
