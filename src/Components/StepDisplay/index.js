@@ -5,8 +5,7 @@ import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
 
 const StepDisplay = props => {
-  const {step, index, removeStep, editStep} = props;
-  console.log(index === 0)
+  const {step, index, removeStep, editStep, checkTextLength, stepError} = props;
   const stepName = () => {
     // Only render example on first step
     const examples = 
@@ -23,11 +22,17 @@ const StepDisplay = props => {
     <div style={styles.step}>
       <TextField
         label={`Step ${index+1}`}
+        error={stepError}
+        helperText={stepError || ""}
         placeholder={stepName()}
         autoFocus={true}
         fullWidth={true}
         defaultValue={step.text}
-        onChange={e => editStep(index, e.target.value)}
+        onChange={e => {
+          editStep(index, e.target.value)
+          checkTextLength(e.target.value.length, 'step')
+        }}
+        onBlur={e => checkTextLength(e.target.value.length, 'step')}
          />
       <Button style={styles.button} onClick={() => removeStep(index)}>
         <DeleteForeverSharpIcon style={styles.deleteStepButton} />
