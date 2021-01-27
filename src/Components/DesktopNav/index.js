@@ -1,21 +1,19 @@
-import {Link} from '@reach/router';
 import {Typography, Paper, Button} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import styles from "./styles";
 import {withStyles} from '@material-ui/styles';
 import LogoutButton from './../LogoutButton';
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 
 const DesktopNav = props => {
   const {classes} = props;
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const MenuButton = () => {
-    return (<Button onClick={() => toggleMenuOpen()}>
+  const MenuButton = () => 
+      <Button onClick={() => toggleMenuOpen()}>
             {menuOpen ? <MenuOpenIcon /> : <MenuIcon />}
-      </Button>)
-  }
+      </Button>
   
   const toggleMenuOpen = () => {
     setMenuOpen(!menuOpen)
@@ -24,9 +22,11 @@ const DesktopNav = props => {
   const OpenMenu = () => {
     return <div className={classes.desktopNavContainer}>
       <MenuButton />
-      <Typography variant="subtitle" className={classes.title}>
-        MusicMonk 
-      </Typography>
+
+          <Typography variant="subtitle" className={classes.title}>
+              MusicMonk 
+          </Typography>
+
       <div className={classes.navList}>
           <Button
             onClick={() => setMenuOpen(false)}

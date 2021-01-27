@@ -1,8 +1,5 @@
 const styles = {
   formContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
     height: '100%',
   },
   routineForm: {
@@ -10,7 +7,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     width: '100%',
     height: '100%',
   },
@@ -21,29 +18,22 @@ const styles = {
   stepList: {
     border: '2px solid',
     width: '50%',
+    height: '50%',
     display: 'flex',
     alignItems:'center',
     flexDirection: 'column',
     overflow: 'scroll',
     margin: '10px 0'
   },
-  stepsContainer: {
-
-  },
-  step: {
-    // margin: '0 auto'
+  pageError: {
+    color: 'red'
   },
   deleteStepButton: {
     width: '20%',
-    // margin: '0 auto'
   },
   button: {
     width: '20%',
     margin: '15px 5px'
-  },
-  addButton: {
-    // width: '20%',
-    // margin: '0 auto'
   },
   exitButtons: {
     display: 'flex',

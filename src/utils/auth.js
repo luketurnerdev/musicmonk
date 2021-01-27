@@ -71,7 +71,6 @@ export const getProfile = () => {
 
 export const logout = () => {
   localStorage.setItem("isLoggedIn", false);
-  console.log(process.env.NODE_ENV);
   const logoutURL = process.env.NODE_ENV === 'development' 
     ? process.env.GATSBY_DEVELOPMENT_URL
     : process.env.GATSBY_PRODUCTION_URL
