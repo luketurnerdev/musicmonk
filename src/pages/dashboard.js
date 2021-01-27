@@ -20,7 +20,7 @@ const styles = {
   titleBar: {
     width: '100%',
     height: '10vh',
-  }
+  },
 };
 
 const Dashboard = props => {
@@ -35,9 +35,9 @@ const Dashboard = props => {
   <>
     <div className={classes.titleBar}>
       <NavBar /> 
-      <Typography variant="subtitle" className={classes.title}>
-        MusicMonk
-      </Typography>
+        <Typography variant="subtitle" className={classes.title}>
+          MusicMonk
+        </Typography>
 
     </div>
     

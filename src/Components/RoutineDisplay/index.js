@@ -16,6 +16,7 @@ const RoutineDisplay = props => {
        <Grid item xs={6} className={classes.playGridItem}>
         <Button
             variant="contained"
+            color="primary"
             onClick={() => setPlayModeStatus(true, routine)}
             className={classes.startButton}
           >
@@ -40,6 +41,7 @@ const RoutineDisplay = props => {
       <Grid item xs={2} className={classes.gridItem}>
           <Button
           variant="contained"
+          color="primary"
           onClick={() => setFormModeStatus(true, routine)}
           className={classes.editButton}
         >
@@ -49,6 +51,7 @@ const RoutineDisplay = props => {
       <Grid item xs={2} className={classes.gridItem}>
           <Button
           variant="contained"
+          color="secondary"
           onClick={() => setDeleteModeStatus(true, routine)}
           className={classes.editButton}
         >

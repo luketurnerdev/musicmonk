@@ -144,6 +144,7 @@ const RoutineList = props => {
     }
      <Button 
       variant="contained"
+      color="primary"
       className={classes.addNewButton}
       onClick={() => 
         setRoutineFormOpen(true)}
