@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, FormControl, TextField, Typography} from '@material-ui/core';
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
@@ -11,12 +11,16 @@ const RoutineForm = props => {
   const [userSteps, setUserSteps] = useState(defaultRoutine ? defaultRoutine.steps : []);
   const [titleError, setTitleError] = useState('');
   const [stepError, setStepError] = useState('');
+  const [exampleTitle, setExampleTitle] = useState('');
+
+  useEffect(() => {
+    pickRandomTitle()
+  }, [])
 
   // If there is no default routine (ie edit mode), treat this as a new one
   const isNewRoutine = !defaultRoutine;
   
   const checkTextLength = (length, type) => {
-    console.log(length, type)
     if (length === 0) {
       type === "title" ? setTitleError('Name is required.') : setStepError('Step cannot be empty.')
     } else {
@@ -100,7 +104,7 @@ const RoutineForm = props => {
 
   }
 
-  const routineName = () => {
+  const pickRandomTitle = () => {
     const examples = 
     [
       'E.g., My Daily Guitar Routine',
@@ -109,7 +113,7 @@ const RoutineForm = props => {
       'E.g., Jazz Chord Routine',
       'E.g., Sweep Picking Practice'
     ];
-    return examples[Math.floor(Math.random() * examples.length)];
+    setExampleTitle(examples[Math.floor(Math.random() * examples.length)]);
   }
   return (
   <div className={classes.formContainer}>
@@ -121,7 +125,7 @@ const RoutineForm = props => {
           helperText={titleError || ""}
           className={classes.routineName}
           label="Routine Name"
-          placeholder={routineName()}
+          placeholder={exampleTitle}
           defaultValue={(defaultRoutine && defaultRoutine.title) || ''}
           onChange={e => handleFormUpdate('title', e.target.value)}
           onBlur={e => checkTextLength(e.target.value.length)}
