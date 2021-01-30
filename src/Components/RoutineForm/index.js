@@ -34,17 +34,10 @@ const RoutineForm = props => {
     setFormData({...formData, [field]:value})
   }
   
-  const listContainsNullOrNoSteps = () => {
-    if (userSteps.length === 0) return true;
-    userSteps.forEach(step => {
-      if (!step) {return true}
-    })
-  }
   const handleSubmit = () => {
     let newData = formData;
     newData.steps = userSteps;
-    console.log(listContainsNullOrNoSteps())
-    listContainsNullOrNoSteps ? setPageError('At least one step is required.') : setPageError('');
+    userSteps.length === 0 ? setPageError('At least one step is required.') : setPageError('');
 
     // Only submit if routine contains 1) Title 2) At least one step 3) No empty steps
     if (!titleError && newData.steps.length >= 1 && !emptySteps) {
@@ -57,7 +50,7 @@ const RoutineForm = props => {
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
-    
+    setEmptySteps(false);
     let updatedList = userSteps.map(step => {
       if (step && step.id !== id) {
         return step;

@@ -7,7 +7,10 @@ import styles from "./styles";
 const StepDisplay = props => {
   const {step, index, removeStep, editStep, setEmptySteps} = props;
   const [stepError, setStepError] = useState('');
+  
+  // TODO update currentStep properly after deletion re-orders the array
   const [currentStep, setCurrentStep] = useState(index+1);
+
 
   const checkStepLength = length => {
     if (length === 0) {
