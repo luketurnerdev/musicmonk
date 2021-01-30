@@ -12,13 +12,15 @@ const styles = {
     backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'column',
-    alignItems:'center'
+    alignItems:'center',
+    height: '100%'
   },
   stepContainer: {
     display: 'flex',
     border: '2px solid black',
     borderRadius: '15px',
     padding: '2px 15px'
+    
   }
 };
 
