@@ -47,6 +47,7 @@ const RoutineForm = props => {
   }
 
   const addStep = () => {
+    setPageError('');
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {

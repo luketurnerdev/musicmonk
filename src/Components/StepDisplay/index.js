@@ -7,7 +7,7 @@ import styles from "./styles";
 const StepDisplay = props => {
   const {step, index, removeStep, editStep, setEmptySteps} = props;
   const [stepError, setStepError] = useState('');
-  
+
   // TODO update currentStep properly after deletion re-orders the array
   const [currentStep, setCurrentStep] = useState(index+1);
 
@@ -29,7 +29,7 @@ const StepDisplay = props => {
     [
       'E.g., Practice E Minor Scale',
       'E.g., Stretch for 5 minutes',
-      'E.g., Alternate Picking Exercises',
+      'E.g., Do a backflip',
       'E.g., Practice a song',
       'E.g., Practice naming notes on the fretboard for 5 minutes'
     ];
