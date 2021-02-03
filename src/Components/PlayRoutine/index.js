@@ -1,29 +1,9 @@
 import React, {useState} from 'react';
-import {Button, Typography, Modal} from '@material-ui/core';
+import {Button, Typography, Modal, Grid} from '@material-ui/core';
 import styles from "./styles";
 import { withStyles } from '@material-ui/styles';
-import RadioButtonUncheckedSharpIcon from '@material-ui/icons/RadioButtonUncheckedSharp';
-import CheckCircleOutlineSharpIcon from '@material-ui/icons/CheckCircleOutlineSharp';
-
-const Step = props => {
-  const {step, classes} = props;
-  const [stepComplete, setStepComplete] = useState(false);
-
-  const completeStep = () => {
-    setStepComplete(!stepComplete);
-  }
-  return (
-    <div className={classes.stepContainer}>
-      <Typography variant="subtitle2">{step.text}</Typography >
-      
-      {stepComplete ? 
-      <Button onClick ={() => completeStep()}> <CheckCircleOutlineSharpIcon /> </Button>
-      :
-      <Button onClick ={() => completeStep()}> <RadioButtonUncheckedSharpIcon /></Button>
-      }
-    </div>
-  )
-}
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const PlayRoutine = props => {
   // initial state: on step 1 of X
@@ -33,6 +13,30 @@ const PlayRoutine = props => {
   //  current page === last page? show 'mark as complete'
   const {routine, classes, open, setPlayModeStatus} = props; 
   const [currentPage, setCurrentPage] = useState(0);
+  const lastStepIndex = routine ? routine.steps.length-1 : null;
+
+  const Step = props => {
+    const {step, classes, routine} = props;
+    const [stepComplete, setStepComplete] = useState(false);
+  
+    const completeStep = () => {
+      setStepComplete(!stepComplete);
+    }
+
+    return (
+      <Grid container className={classes.stepContainer} alignContent="center" alignItems="center">
+        <Grid item xs={4} className={classes.gridItem}>
+         {currentPage > 0 && <BackButton />}       
+        </Grid>
+        <Grid item xs={4} className={classes.gridItem}>
+          <Typography variant="subtitle2">{step.text}</Typography >
+        </Grid>
+        <Grid item xs={4} className={classes.gridItem}>
+          {currentPage < lastStepIndex && <ForwardButton />}
+        </Grid>
+      </Grid>
+    )
+  }
 
   const completeRoutine = id => {
     // TODO contribute to some kind of completion tracking here later
@@ -55,7 +59,7 @@ const PlayRoutine = props => {
   }
 
   const goForward = () => {
-      if (currentPage < routine.steps.length-1 ) {
+      if (currentPage < lastStepIndex ) {
        return setCurrentPage(currentPage+1)
       }
       else {
@@ -63,17 +67,15 @@ const PlayRoutine = props => {
       }
     }
 
-
-
   const goBackward = () => {
       return setCurrentPage(currentPage-1)
    }
     
    const ForwardButton = () => {
-     return <Button variant="contained" onClick={() => goForward()}>Forward</Button>
+     return <Button variant="contained" onClick={() => goForward()}><ArrowForwardIcon /></Button>
     }
     const BackButton = () => {
-    return <Button variant="contained" onClick={() => goBackward()}>Backward</Button>
+    return <Button variant="contained" onClick={() => goBackward()}><ArrowBackIcon /></Button>
    }
   
   return (
@@ -81,16 +83,18 @@ const PlayRoutine = props => {
         open={open}
       >
     <div className={classes.playModeContainer}>
-      {routine && <h1>{routine.title}</h1>}
-      {routine && <h1>page index: {currentPage} Text: {routine.steps[currentPage].text}</h1>}
-      <MapSteps />
-      <Button variant="contained" className={classes.root} onClick={() => completeRoutine(routine.id)}>Mark as complete</Button>
+      <h1>{routine.title}</h1>
+      <Step
+        key={routine.steps[currentPage]}
+        step={routine.steps[currentPage]}
+        classes={classes}
+      />  
+      
+      {currentPage === lastStepIndex && 
+        <Button variant="contained" className={classes.root} onClick={() => completeRoutine(routine.id)}>Mark as complete</Button>
+      }
+      <Button variant="contained" onClick={() => goForward()}>Skip Step</Button>
       <Button variant="contained" className={classes.root} onClick={() => setPlayModeStatus(false, null)}>Close</Button>
-
-      
-      {routine && currentPage < routine.steps.length-1 && <ForwardButton />}
-      {currentPage > 0 && <BackButton />}
-      
     </div>
   </Modal>
   )
