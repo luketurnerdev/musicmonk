@@ -12,7 +12,14 @@ const styles = {
   step: {
     display: 'flex',
     width: '80%',
+    flexDirection: 'column'
   },
+  timerDisplay: {
+    display: 'flex',
+  },
+  mins: {
+    margin: '0 auto'
+  }
 }
 
 export default styles;

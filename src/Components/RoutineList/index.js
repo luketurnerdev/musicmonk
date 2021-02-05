@@ -166,11 +166,12 @@ const RoutineList = props => {
         saving={saving}
       />
 
-      <PlayRoutine
+      {currentlySelectedRoutine &&<PlayRoutine
         open={playRoutineOpen}
         routine={currentlySelectedRoutine}
         setPlayModeStatus={setPlayModeStatus}
       />
+      }
 
       <DeleteRoutine 
          routine={currentlySelectedRoutine}
