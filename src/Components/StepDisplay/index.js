@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, TextField} from '@material-ui/core';
+import {Button, TextField, Grid} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
@@ -26,11 +26,20 @@ const StepDisplay = props => {
 
     // Checkbox
     return (
-      <div style={styles.timerDisplay} >
-        <h5>Add timer? </h5>
-        <CheckBox />
-        {checked && <h5>5 mins</h5>}
-      </div>
+        <Grid container>
+          <Grid item xs={3}>
+            <h5>Add timer? </h5>
+          </Grid>
+          <Grid item xs={3}>
+            <CheckBox />
+          </Grid>
+          <Grid item xs={3}>
+            {checked && <TextField style={styles.timerDigit}></TextField>}
+          </Grid>
+          <Grid item xs={3}>
+           {checked && <h5 style={styles.mins}>mins</h5> }
+          </Grid>
+        </Grid>
     )
   }
 

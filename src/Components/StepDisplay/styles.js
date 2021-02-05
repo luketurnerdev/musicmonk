@@ -17,6 +17,9 @@ const styles = {
   timerDisplay: {
     display: 'flex',
   },
+  mins: {
+    margin: '0 auto'
+  }
 }
 
 export default styles;
