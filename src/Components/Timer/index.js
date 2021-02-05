@@ -15,18 +15,17 @@ const Timer = (props, {expiryTimestamp}) => {
   } = useTimer({ expiryTimestamp, onExpire: () => console.warn('onExpire called') });
 
   console.log(timeLimit);
-
+  const pauseOrResume = () => {
+    isRunning ? pause() : resume();
+  }
   return (
-    <div style={{textAlign: 'center'}}>
-      <h1>react-timer-hook </h1>
-      <p>Timer Demo</p>
+    <div style={{textAlign: 'center', margin: '0 auto'}}>
       <div style={{fontSize: '100px'}}>
         <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
       </div>
       <p>{isRunning ? 'Running' : 'Not running'}</p>
       <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={resume}>Resume</button>
+      <button onClick={() => pauseOrResume()}>Pause</button>
       <button onClick={() => {
         // Restarts to 5 minutes timer
         const time = new Date();

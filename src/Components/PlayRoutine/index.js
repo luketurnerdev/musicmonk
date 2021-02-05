@@ -20,7 +20,7 @@ const PlayRoutine = props => {
     const {step, classes, routine} = props;
     const [stepComplete, setStepComplete] = useState(false);
     // routine prop may now contain timer as an integer of seconds.
-    // e.g., routine.timer should have a value of 0 (no timer) or the amount of seconds (eg 60)
+    // e.g., step.timer should have a value of 0 (no timer) or the amount of seconds (eg 60)
     const completeStep = () => {
       setStepComplete(!stepComplete);
     }
@@ -40,9 +40,9 @@ const PlayRoutine = props => {
         <Grid item xs={4} className={classes.gridItem}>
           {currentPage < lastStepIndex && <ForwardButton />}
         </Grid>
+          <Timer expiryTimestamp={time} timeLimit={60}/>
       </Grid>
 
-      <Timer expiryTimestamp={time} timeLimit={60}/>
       </>
 
     )

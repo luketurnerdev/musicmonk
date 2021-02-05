@@ -24,7 +24,7 @@ const styles = {
   gridItem: {
     display: 'flex',
     justifyContent: 'center'
-  }
+  },
 };
 
 export default styles;
