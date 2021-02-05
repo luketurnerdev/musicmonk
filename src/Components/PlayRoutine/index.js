@@ -4,8 +4,9 @@ import styles from "./styles";
 import { withStyles } from '@material-ui/styles';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import Timer from "./../Timer";
 const PlayRoutine = props => {
+
   // initial state: on step 1 of X
   // track current page
   //  current page is NOT first page? show left arrow
@@ -18,12 +19,17 @@ const PlayRoutine = props => {
   const Step = props => {
     const {step, classes, routine} = props;
     const [stepComplete, setStepComplete] = useState(false);
-  
+    // routine prop may now contain timer as an integer of seconds.
+    // e.g., routine.timer should have a value of 0 (no timer) or the amount of seconds (eg 60)
     const completeStep = () => {
       setStepComplete(!stepComplete);
     }
+    const time = new Date();
+    // TODO replace with time prop
+    time.setSeconds(time.getSeconds() + 60); 
 
     return (
+      <>
       <Grid container className={classes.stepContainer} alignContent="center" alignItems="center">
         <Grid item xs={4} className={classes.gridItem}>
          {currentPage > 0 && <BackButton />}       
@@ -35,6 +41,10 @@ const PlayRoutine = props => {
           {currentPage < lastStepIndex && <ForwardButton />}
         </Grid>
       </Grid>
+
+      <Timer expiryTimestamp={time} timeLimit={60}/>
+      </>
+
     )
   }
 

@@ -9,6 +9,10 @@ const StepDisplay = props => {
   const [stepError, setStepError] = useState('');
 
   // TODO update currentStep properly after deletion re-orders the array
+  // psudeo
+  // 1) track state when new step added
+  // 2) track state when step deleted (from above)
+  // keep a separate count that reflects the 'true' numbers (skips deleted step)
   const [currentStep, setCurrentStep] = useState(index+1);
 
 
