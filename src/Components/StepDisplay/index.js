@@ -3,6 +3,8 @@ import {Button, TextField} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const StepDisplay = props => {
   const {step, index, removeStep, editStep, setEmptySteps} = props;
@@ -15,6 +17,22 @@ const StepDisplay = props => {
   // keep a separate count that reflects the 'true' numbers (skips deleted step)
   const [currentStep, setCurrentStep] = useState(index+1);
 
+  const TimerOption = () => {
+    const [checked, setChecked] = useState(false);
+    const CheckBox = () => 
+        <Button onClick={() => setChecked(!checked)}>
+          {checked ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+        </Button>
+
+    // Checkbox
+    return (
+      <div style={styles.timerDisplay} >
+        <h5>Add timer? </h5>
+        <CheckBox />
+        {checked && <h5>5 mins</h5>}
+      </div>
+    )
+  }
 
   const checkStepLength = length => {
     if (length === 0) {
@@ -55,6 +73,7 @@ const StepDisplay = props => {
         }}
         onBlur={e => checkStepLength(e.target.value.length)}
          />
+         <TimerOption />
       <Button style={styles.button} color="primary" onClick={() => removeStep(index)}>
         <DeleteForeverSharpIcon style={styles.deleteStepButton} />
       </Button>

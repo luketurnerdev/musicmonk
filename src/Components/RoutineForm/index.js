@@ -116,6 +116,9 @@ const RoutineForm = props => {
     ];
     setExampleTitle(examples[Math.floor(Math.random() * examples.length)]);
   }
+
+
+  
   return (
   <div className={classes.formContainer}>
     <div className={classes.routineForm}>

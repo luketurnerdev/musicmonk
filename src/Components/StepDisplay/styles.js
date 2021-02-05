@@ -12,6 +12,10 @@ const styles = {
   step: {
     display: 'flex',
     width: '80%',
+    flexDirection: 'column'
+  },
+  timerDisplay: {
+    display: 'flex',
   },
 }
 
