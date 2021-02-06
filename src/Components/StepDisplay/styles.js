@@ -33,6 +33,9 @@ const styles = {
     width: '0',
     margin: '0 auto'
   },
+  deleteStepButton: {
+    marginTop: '5%',
+  }
 }
 
 export default styles;

@@ -116,8 +116,9 @@ const StepDisplay = props => {
          <TimerOption />
     </div>
 
-    <Button style={styles.button} color="primary" onClick={() => removeStep(index)}>
-      <DeleteForeverSharpIcon style={styles.deleteStepButton} />
+    <Button style={styles.deleteStepButton} color="secondary" variant="outlined" onClick={() => removeStep(index)}>
+        Delete Step
+        <DeleteForeverSharpIcon  />
     </Button>
     </>
   )

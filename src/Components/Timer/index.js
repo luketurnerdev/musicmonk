@@ -1,7 +1,8 @@
-import { useEventCallback } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import React, {useEffect} from 'react';
 import { useTimer } from 'react-timer-hook';
-
+import PauseIcon from '@material-ui/icons/Pause';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 const Timer = (props, {expiryTimestamp}) => {
   const {timeLimit} = props;
@@ -38,10 +39,14 @@ const Timer = (props, {expiryTimestamp}) => {
     <div style={{textAlign: 'center', margin: '0 auto'}}>
       <TimerRunning />
       <p>{isRunning ? 'Running' : 'Not running'}</p>
-      <button onClick={() => {
+      <Button onClick={() => {
         restartTimerWithDateObject();
-      }}>Restart</button>
-      <button onClick={() => pauseOrResume()}>Pause / Resume</button>
+      }}>
+        Restart
+      </Button>
+      <Button onClick={() => pauseOrResume()}>
+        {isRunning? <PauseIcon/> : <PlayArrowIcon />}
+      </Button>
     </div>
   );
 }
