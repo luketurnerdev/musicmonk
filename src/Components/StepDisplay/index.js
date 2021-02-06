@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Button, TextField, Select, InputLabel, FormControl, MenuItem} from '@material-ui/core';
+import {Button, TextField, Select, InputLabel, MenuItem} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
@@ -10,7 +10,6 @@ const StepDisplay = props => {
   const [stepError, setStepError] = useState('');
   const [stepText, setStepText] = useState(step.text || '')
   const [stepTimer, setStepTimer] = useState(step.timer || 0);
-  const [expired, setExpired] = useState(false);
   const [currentStep, setCurrentStep] = useState(index+1);
   const [checked, setChecked] = useState(true);
 
@@ -21,7 +20,7 @@ const StepDisplay = props => {
 
   useEffect(() => {
     updateStepValues();
-  }, [stepText, stepTimer])
+  }, [stepText, stepTimer, updateStepValues])
 
   // TODO update currentStep properly after deletion re-orders the array
   // psudeo

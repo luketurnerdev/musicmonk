@@ -18,7 +18,7 @@ const Timer = (props, {expiryTimestamp}) => {
   } = useTimer({ expiryTimestamp, onExpire: () => setExpired(true)});
 
 
-  // Start the timer immediately
+  // Start the timer immediately on load
   useEffect(() => {
     restartTimerWithDateObject();
   }, [])
