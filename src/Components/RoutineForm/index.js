@@ -65,13 +65,13 @@ const RoutineForm = props => {
   }
   const editStep = (index, values) => {
     console.log(values);
-    // console.log(`submitting`);
-    // let copy = userSteps;
-    // copy[index].text = values.text;
-    // copy[index].timer = values.timer;
+    console.log(`submitting`);
+    let copy = userSteps;
+    copy[index].text = values.text;
+    copy[index].timer = values.timer;
 
-    // console.log(copy)
-    // setUserSteps(copy);
+    console.log(copy)
+    setUserSteps(copy);
   }
 
   const mapSteps = () => {
