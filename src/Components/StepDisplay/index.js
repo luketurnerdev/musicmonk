@@ -10,6 +10,7 @@ const StepDisplay = props => {
   const [stepError, setStepError] = useState('');
   const [stepText, setStepText] = useState(step.text || '')
   const [stepTimer, setStepTimer] = useState(step.timer || 0);
+  const [expired, setExpired] = useState(false);
   const [currentStep, setCurrentStep] = useState(index+1);
   const [checked, setChecked] = useState(true);
 
@@ -49,6 +50,7 @@ const StepDisplay = props => {
               }}
               fullWidth={true}
             >
+              <MenuItem value={1}>[debug] 1 second</MenuItem>
               <MenuItem value={60}>1 Minute</MenuItem>
               <MenuItem value={120}>2 Minutes</MenuItem>
               <MenuItem value={180}>3 Minutes</MenuItem>
