@@ -24,8 +24,8 @@ const PlayRoutine = props => {
     const completeStep = () => {
       setStepComplete(!stepComplete);
     }
+    
     const time = new Date();
-    // TODO replace with time prop
     time.setSeconds(time.getSeconds() + (step.timer || 60)); 
 
     return (
@@ -40,7 +40,7 @@ const PlayRoutine = props => {
         <Grid item xs={4} className={classes.gridItem}>
           {currentPage < lastStepIndex && <ForwardButton />}
         </Grid>
-          <Timer expiryTimestamp={time} timeLimit={step.timer || 30}/>
+          {step.timer && <Timer expiryTimestamp={time} timeLimit={step.timer || 30}/>}
       </Grid>
 
       </>
