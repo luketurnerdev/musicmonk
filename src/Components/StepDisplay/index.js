@@ -1,46 +1,65 @@
 import React, {useState} from 'react';
-import {Button, TextField, Grid} from '@material-ui/core';
+import {Button, TextField, Select, InputLabel, FormControl, MenuItem} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CloseIcon from '@material-ui/icons/Close';
 
 const StepDisplay = props => {
   const {step, index, removeStep, editStep, setEmptySteps} = props;
   const [stepError, setStepError] = useState('');
+  const [stepText, setStepText] = useState('')
+  const [stepTimer, setStepTimer] = useState(0);
 
   // TODO update currentStep properly after deletion re-orders the array
   // psudeo
   // 1) track state when new step added
   // 2) track state when step deleted (from above)
   // keep a separate count that reflects the 'true' numbers (skips deleted step)
+
   const [currentStep, setCurrentStep] = useState(index+1);
+  const [checked, setChecked] = useState(false);
 
   const TimerOption = () => {
-    const [checked, setChecked] = useState(false);
-    const CheckBox = () => 
-        <Button onClick={() => setChecked(!checked)}>
-          {checked ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
-        </Button>
 
-    // Checkbox
-    return (
-        <Grid container>
-          <Grid item xs={3}>
-            <h5>Add timer? </h5>
-          </Grid>
-          <Grid item xs={3}>
-            <CheckBox />
-          </Grid>
-          <Grid item xs={3}>
-            {checked && <TextField style={styles.timerDigit}></TextField>}
-          </Grid>
-          <Grid item xs={3}>
-           {checked && <h5 style={styles.mins}>mins</h5> }
-          </Grid>
-        </Grid>
-    )
+    const [stepTimer, setStepTimer] = useState(0);
+
+    const TimerField = () => {
+
+      return(
+        <div style={styles.timerOption}>
+          <FormControl style={styles.formControlRoot}>
+            <InputLabel
+              style={styles.inputLabel}
+             id="demo-simple-select-label">Set Timer Amount</InputLabel>
+            <Select
+              labelId="timerdigit"
+              id="timerdigit"
+              onChange={e => setStepTimer(e.target.value)}
+              fullWidth={true}
+            >
+              <MenuItem value={10}>1 Minute</MenuItem>
+              <MenuItem value={20}>2 Minutes</MenuItem>
+              <MenuItem value={30}>3 Minutes</MenuItem>
+              <MenuItem value={30}>5 Minutes</MenuItem>
+              <MenuItem value={30}>10 Minutes</MenuItem>
+              <MenuItem value={30}>15 Minutes</MenuItem>
+              <MenuItem value={30}>20 Minutes</MenuItem>
+              <MenuItem value={30}>25 Minutes</MenuItem>
+              <MenuItem value={30}>30 Minutes</MenuItem>
+            </Select>
+      </FormControl>
+
+  
+        <Button onClick={() => setChecked(false)} style={styles.deleteButton}>
+            <CloseIcon />
+          </Button>
+        </div>
+      )
+    }
+
+    // Conditional render
+    return checked ? <TimerField /> : <Button onClick={() => setChecked(true)}>Add timer </Button>;
   }
 
   const checkStepLength = length => {
@@ -66,6 +85,7 @@ const StepDisplay = props => {
     ];
     return index === 0 ? examples[Math.floor(Math.random() * examples.length)] : "";
   }
+
   return (
     <div style={styles.step}>
       <TextField
@@ -73,14 +93,13 @@ const StepDisplay = props => {
         error={stepError}
         helperText={stepError || ""}
         placeholder={stepName()}
-        autoFocus={true}
         fullWidth={true}
         defaultValue={step.text}
         onChange={e => {
-          editStep(index, e.target.value)
-          checkStepLength(e.target.value.length)
+          setStepText(e.target.value)
+          // checkStepLength(e.target.value.length)
         }}
-        onBlur={e => checkStepLength(e.target.value.length)}
+        // onBlur={e => checkStepLength(e.target.value.length)}
          />
          <TimerOption />
       <Button style={styles.button} color="primary" onClick={() => removeStep(index)}>

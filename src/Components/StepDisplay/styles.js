@@ -14,12 +14,19 @@ const styles = {
     width: '80%',
     flexDirection: 'column'
   },
-  timerDisplay: {
+  timerOption: {
     display: 'flex',
+    justifyContent: 'space-between'
   },
-  mins: {
-    margin: '0 auto'
-  }
+  formControlRoot: {
+    width: '100%',
+  },
+  inputLabel: {
+    fontSize: '20px'
+  },
+  deleteButton: {
+    marginTop: '20px'
+  },
 }
 
 export default styles;
