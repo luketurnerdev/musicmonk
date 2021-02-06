@@ -63,9 +63,14 @@ const RoutineForm = props => {
 
     setUserSteps(updatedList);
   }
-  const editStep = (index, value) => {
+  const editStep = (index, values) => {
+    console.log(values);
+    console.log(`submitting`);
     let copy = userSteps;
-    copy[index].text = value;
+    copy[index].text = values.text;
+    copy[index].timer = values.timer;
+
+    console.log(copy)
     setUserSteps(copy);
   }
 
@@ -76,6 +81,7 @@ const RoutineForm = props => {
           {userSteps && userSteps.map((step, index) => {
             return step ? (
               <StepDisplay
+                key={index}
                 step={step}
                 index={index}
                 classes={classes}
@@ -124,7 +130,7 @@ const RoutineForm = props => {
     <div className={classes.routineForm}>
       <FormControl>
         <TextField
-          autoFocus={true}
+          // autoFocus={true}
           error={titleError}
           helperText={titleError || ""}
           className={classes.routineName}

@@ -24,9 +24,9 @@ const PlayRoutine = props => {
     const completeStep = () => {
       setStepComplete(!stepComplete);
     }
+
     const time = new Date();
-    // TODO replace with time prop
-    time.setSeconds(time.getSeconds() + 60); 
+    time.setSeconds(time.getSeconds() + (step.timer || 60)); 
 
     return (
       <>
@@ -40,7 +40,7 @@ const PlayRoutine = props => {
         <Grid item xs={4} className={classes.gridItem}>
           {currentPage < lastStepIndex && <ForwardButton />}
         </Grid>
-          <Timer expiryTimestamp={time} timeLimit={60}/>
+          {step.timer !== 0 && <Timer expiryTimestamp={time} timeLimit={step.timer || 30}/>}
       </Grid>
 
       </>
@@ -51,21 +51,6 @@ const PlayRoutine = props => {
   const completeRoutine = id => {
     // TODO contribute to some kind of completion tracking here later
     setPlayModeStatus(false, null);
-  }
-  const MapSteps = () => {
-    return (
-      <>
-        {routine.steps.map(step => {
-          return step && (
-              <Step
-                key={step.id}
-                step={step}
-                classes={classes}
-              />  
-          ) 
-        })}
-      </>
-    )
   }
 
   const goForward = () => {

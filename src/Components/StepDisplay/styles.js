@@ -3,7 +3,6 @@ const styles = {
     backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'column',
-    // alignItems: 'center',
     position: 'absolute',
     width: '100%',
     height: '100%',
@@ -11,14 +10,31 @@ const styles = {
   },
   step: {
     display: 'flex',
-    width: '80%',
-    flexDirection: 'column'
+    width: '90%',
+    flexDirection: 'column',
+    marginTop: '3%'
   },
-  timerDisplay: {
+  timerOption: {
     display: 'flex',
+    justifyContent: 'space-between'
   },
-  mins: {
+  formControlRoot: {
+    width: '100%',
+    marginTop:'2%'
+  },
+  addTimer: {
+    marginTop:'2%'
+  },
+  inputLabel: {
+    fontSize: '20px'
+  },
+  deleteButton: {
+    marginTop: '5%',
+    width: '0',
     margin: '0 auto'
+  },
+  deleteStepButton: {
+    marginTop: '5%',
   }
 }
 
