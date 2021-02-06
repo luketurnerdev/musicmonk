@@ -19,6 +19,7 @@ const StepDisplay = props => {
   useEffect(() => {
     updateStepValues();
   }, [stepText, stepTimer])
+
   // TODO update currentStep properly after deletion re-orders the array
   // psudeo
   // 1) track state when new step added
@@ -33,8 +34,7 @@ const StepDisplay = props => {
     const TimerField = () => {
 
       return(
-        <div style={styles.timerOption}>
-          <FormControl style={styles.formControlRoot}>
+        <div style={styles.formControlRoot}>
             <InputLabel
               style={styles.inputLabel}
               id="demo-simple-select-label">
@@ -43,7 +43,7 @@ const StepDisplay = props => {
             <Select
               labelId="timerdigit"
               id="timerdigit"
-              value={step.timer || stepTimer}
+              value={stepTimer}
               onChange={e => {
                 setStepTimer(e.target.value)
               }}
@@ -59,7 +59,6 @@ const StepDisplay = props => {
               <MenuItem value={1500}>25 Minutes</MenuItem>
               <MenuItem value={1800}>30 Minutes</MenuItem>
             </Select>
-      </FormControl>
 
   
         <Button onClick={() => {
