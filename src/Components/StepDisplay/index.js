@@ -62,7 +62,11 @@ const StepDisplay = props => {
       </FormControl>
 
   
-        <Button onClick={() => setChecked(false)} style={styles.deleteButton}>
+        <Button onClick={() => {
+           setChecked(false)
+           setStepTimer(0);
+        }} 
+        style={styles.deleteButton}>
             <CloseIcon />
           </Button>
         </div>
