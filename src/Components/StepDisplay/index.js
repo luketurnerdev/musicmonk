@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Button, TextField, Select, InputLabel, FormControl, MenuItem} from '@material-ui/core';
+import {Button, TextField, Select, InputLabel, MenuItem} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
@@ -8,8 +8,10 @@ import CloseIcon from '@material-ui/icons/Close';
 const StepDisplay = props => {
   const {step, index, removeStep, editStep, setEmptySteps} = props;
   const [stepError, setStepError] = useState('');
-  const [stepText, setStepText] = useState('')
-  const [stepTimer, setStepTimer] = useState(0);
+  const [stepText, setStepText] = useState(step.text || '')
+  const [stepTimer, setStepTimer] = useState(step.timer || 0);
+  const [currentStep, setCurrentStep] = useState(index+1);
+  const [checked, setChecked] = useState(true);
 
   const updateStepValues = () => {
     let values = {text: stepText, timer: stepTimer};
@@ -18,23 +20,21 @@ const StepDisplay = props => {
 
   useEffect(() => {
     updateStepValues();
-  }, [stepText, stepTimer])
+  }, [stepText, stepTimer, updateStepValues])
+
   // TODO update currentStep properly after deletion re-orders the array
   // psudeo
   // 1) track state when new step added
   // 2) track state when step deleted (from above)
   // keep a separate count that reflects the 'true' numbers (skips deleted step)
 
-  const [currentStep, setCurrentStep] = useState(index+1);
-  const [checked, setChecked] = useState(false);
 
   const TimerOption = () => {
 
     const TimerField = () => {
 
       return(
-        <div style={styles.timerOption}>
-          <FormControl style={styles.formControlRoot}>
+        <div style={styles.formControlRoot}>
             <InputLabel
               style={styles.inputLabel}
               id="demo-simple-select-label">
@@ -43,12 +43,13 @@ const StepDisplay = props => {
             <Select
               labelId="timerdigit"
               id="timerdigit"
-              value={step.timer || stepTimer}
+              value={stepTimer}
               onChange={e => {
                 setStepTimer(e.target.value)
               }}
               fullWidth={true}
             >
+              <MenuItem value={1}>[debug] 1 second</MenuItem>
               <MenuItem value={60}>1 Minute</MenuItem>
               <MenuItem value={120}>2 Minutes</MenuItem>
               <MenuItem value={180}>3 Minutes</MenuItem>
@@ -59,7 +60,6 @@ const StepDisplay = props => {
               <MenuItem value={1500}>25 Minutes</MenuItem>
               <MenuItem value={1800}>30 Minutes</MenuItem>
             </Select>
-      </FormControl>
 
   
         <Button onClick={() => {

@@ -19,6 +19,7 @@ const styles = {
     justifyContent: 'space-between'
   },
   formControlRoot: {
+    display: 'flex',
     width: '100%',
     marginTop:'2%'
   },
