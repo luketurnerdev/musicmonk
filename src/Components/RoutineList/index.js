@@ -38,8 +38,6 @@ const RoutineList = props => {
   const getRoutines = useCallback(async () => {
     setFetching(true);
     const response = await getAllRoutinesForUser(user.sub);
-    console.log('Fetching routines from API.');
-    console.log('Done: ', response);
     setFetching(false);
     return response;
   }, [user.sub])

@@ -8,8 +8,10 @@ import CloseIcon from '@material-ui/icons/Close';
 const StepDisplay = props => {
   const {step, index, removeStep, editStep, setEmptySteps} = props;
   const [stepError, setStepError] = useState('');
-  const [stepText, setStepText] = useState('')
-  const [stepTimer, setStepTimer] = useState(0);
+  const [stepText, setStepText] = useState(step.text || '')
+  const [stepTimer, setStepTimer] = useState(step.timer || 0);
+  const [currentStep, setCurrentStep] = useState(index+1);
+  const [checked, setChecked] = useState(true);
 
   const updateStepValues = () => {
     let values = {text: stepText, timer: stepTimer};
@@ -26,8 +28,6 @@ const StepDisplay = props => {
   // 2) track state when step deleted (from above)
   // keep a separate count that reflects the 'true' numbers (skips deleted step)
 
-  const [currentStep, setCurrentStep] = useState(index+1);
-  const [checked, setChecked] = useState(false);
 
   const TimerOption = () => {
 
