@@ -64,13 +64,14 @@ const RoutineForm = props => {
     setUserSteps(updatedList);
   }
   const editStep = (index, values) => {
-    // Find the step in question and insert the values
-    console.log(`submitted`);
-    console.log(values)
-    let copy = userSteps;
-    copy[index].text = values.text;
-    copy[index].timer = values.timer;
-    setUserSteps(copy);
+    console.log(values);
+    // console.log(`submitting`);
+    // let copy = userSteps;
+    // copy[index].text = values.text;
+    // copy[index].timer = values.timer;
+
+    // console.log(copy)
+    // setUserSteps(copy);
   }
 
   const mapSteps = () => {

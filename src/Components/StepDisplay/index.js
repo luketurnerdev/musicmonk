@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, TextField, Select, InputLabel, FormControl, MenuItem} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
@@ -11,6 +11,14 @@ const StepDisplay = props => {
   const [stepText, setStepText] = useState('')
   const [stepTimer, setStepTimer] = useState(0);
 
+  const updateStepValues = () => {
+    let values = {text: stepText, timer: stepTimer};
+    editStep(index, values);
+  }
+
+  useEffect(() => {
+    updateStepValues();
+  }, [stepText, stepTimer])
   // TODO update currentStep properly after deletion re-orders the array
   // psudeo
   // 1) track state when new step added
@@ -22,8 +30,6 @@ const StepDisplay = props => {
 
   const TimerOption = () => {
 
-    const [stepTimer, setStepTimer] = useState(0);
-
     const TimerField = () => {
 
       return(
@@ -31,22 +37,27 @@ const StepDisplay = props => {
           <FormControl style={styles.formControlRoot}>
             <InputLabel
               style={styles.inputLabel}
-             id="demo-simple-select-label">Set Timer Amount</InputLabel>
+              id="demo-simple-select-label">
+                Set Timer Amount
+              </InputLabel>
             <Select
               labelId="timerdigit"
               id="timerdigit"
-              onChange={e => setStepTimer(e.target.value)}
+              value={step.timer || stepTimer}
+              onChange={e => {
+                setStepTimer(e.target.value)
+              }}
               fullWidth={true}
             >
-              <MenuItem value={10}>1 Minute</MenuItem>
-              <MenuItem value={20}>2 Minutes</MenuItem>
-              <MenuItem value={30}>3 Minutes</MenuItem>
-              <MenuItem value={30}>5 Minutes</MenuItem>
-              <MenuItem value={30}>10 Minutes</MenuItem>
-              <MenuItem value={30}>15 Minutes</MenuItem>
-              <MenuItem value={30}>20 Minutes</MenuItem>
-              <MenuItem value={30}>25 Minutes</MenuItem>
-              <MenuItem value={30}>30 Minutes</MenuItem>
+              <MenuItem value={60}>1 Minute</MenuItem>
+              <MenuItem value={120}>2 Minutes</MenuItem>
+              <MenuItem value={180}>3 Minutes</MenuItem>
+              <MenuItem value={300}>5 Minutes</MenuItem>
+              <MenuItem value={600}>10 Minutes</MenuItem>
+              <MenuItem value={900}>15 Minutes</MenuItem>
+              <MenuItem value={1200}>20 Minutes</MenuItem>
+              <MenuItem value={1500}>25 Minutes</MenuItem>
+              <MenuItem value={1800}>30 Minutes</MenuItem>
             </Select>
       </FormControl>
 
@@ -59,7 +70,7 @@ const StepDisplay = props => {
     }
 
     // Conditional render
-    return checked ? <TimerField /> : <Button onClick={() => setChecked(true)}>Add timer </Button>;
+    return checked ? <TimerField /> : <Button style={styles.addTimer} onClick={() => setChecked(true)}>Add timer </Button>;
   }
 
   const checkStepLength = length => {
@@ -87,6 +98,7 @@ const StepDisplay = props => {
   }
 
   return (
+    <>
     <div style={styles.step}>
       <TextField
         label={`Step ${currentStep}`}
@@ -96,16 +108,18 @@ const StepDisplay = props => {
         fullWidth={true}
         defaultValue={step.text}
         onChange={e => {
+          checkStepLength(e.target.value.length);
           setStepText(e.target.value)
-          // checkStepLength(e.target.value.length)
         }}
-        // onBlur={e => checkStepLength(e.target.value.length)}
+        onBlur={e => checkStepLength(e.target.value.length)}
          />
          <TimerOption />
-      <Button style={styles.button} color="primary" onClick={() => removeStep(index)}>
-        <DeleteForeverSharpIcon style={styles.deleteStepButton} />
-      </Button>
     </div>
+
+    <Button style={styles.button} color="primary" onClick={() => removeStep(index)}>
+      <DeleteForeverSharpIcon style={styles.deleteStepButton} />
+    </Button>
+    </>
   )
 }
 
