@@ -9,6 +9,7 @@ import RoutineDisplay from "./../../Components/RoutineDisplay";
 import FormModal from './../../Components/Form';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Loading from "./../../Components/Loading";
+import axios from 'axios';
 
 
 //When this page first loads, fetch users routines from db (fake for now)
@@ -33,6 +34,15 @@ const RoutineList = props => {
   // 4 ) API call finishes, deleting = false. spinner now shows null.
 
 
+  // Serverless routine fetch
+
+  const fetchServerlessRoutines = () => {
+    axios.get('/.netlify/functions/getAllUserRoutines')
+    .then(res => {
+      console.log(res);
+      alert(res);
+    })
+  }
 
   // Async fetch function for useEffect
   const getRoutines = useCallback(async () => {
@@ -150,6 +160,8 @@ const RoutineList = props => {
           Add new routine
           <AddCircleOutlineIcon className={classes.plusIcon} />
       </Button>
+
+      <Button onClick={() => fetchServerlessRoutines()}>[Test] Get routines</Button>
     </div>
 
       {/* Various Modals */}

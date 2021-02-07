@@ -44,16 +44,3 @@ const run = () => {
 
   })
 }
-
-///
-const getAllRoutines = async (userId) => {
-  const routines = await Routine.find({userId: userId});
-  // find all routines where routine.userId ==== userId
-  console.log('get all routines function')
-  if (!routines || routines === []) {
-    return null;
-  }
-  else {
-    return routines;
-  }
-}
