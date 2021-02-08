@@ -36,18 +36,25 @@ const RoutineList = props => {
 
   // Serverless routine fetch
 
-  const fetchServerlessRoutines = () => {
-    axios.get('/.netlify/functions/getAllUserRoutines')
-    .then(res => {
-      console.log(res);
-      alert(res);
+  const fetchServerlessRoutines = async () => {
+    console.log('fetchserverless')
+    await axios.get(`https://sleepy-leavitt-00577e.netlify.app/.netlify/functions/getAllUserRoutines`)
+    .then(resp => {
+      console.log(resp)
     })
+    .catch(err => {
+      console.log(err)
+    })
+
+    // console.log(routines);
   }
 
   // Async fetch function for useEffect
   const getRoutines = useCallback(async () => {
+    console.log('inside getroutines')
     setFetching(true);
     const response = await getAllRoutinesForUser(user.sub);
+    console.log(response)
     setFetching(false);
     return response;
   }, [user.sub])
