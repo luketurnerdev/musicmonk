@@ -40,7 +40,7 @@ const run = () => {
       statusCode: 200,
       body: JSON.stringify(doc)
     };
-    return response;
+    return response.data;
 
   })
 }
