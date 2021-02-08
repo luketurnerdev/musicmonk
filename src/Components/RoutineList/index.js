@@ -40,9 +40,19 @@ const RoutineList = props => {
     ? ''
     : process.env.GATSBY_PRODUCTION_URL
 
-  const fetchServerlessRoutines = async () => {
+  const fetchHello = async () => {
     console.log('fetchserverless ' + url)
     axios.get(`${url}/.netlify/functions/hello`)
+    .then(res => {
+      console.log(res)
+    })
+
+    // console.log(routines);
+    return null;
+  }
+  const fetchServerlessRoutines = async () => {
+    console.log('fetchserverless ' + url)
+    axios.get(`${url}/.netlify/functions/getAllUserRoutines`)
     .then(res => {
       console.log(res)
     })
