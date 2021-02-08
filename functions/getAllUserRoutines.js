@@ -35,6 +35,11 @@ const run = () => {
     // TODO = change this to specify the userID as below
     // const doc = yield Model.find({userId: userId});
     const doc = yield Model.find();
+    
+    console.log('model:')
+    console.log(Model)
+    console.log('doc:')
+    console.log(doc)
 
     const response = {
       statusCode: 200,
