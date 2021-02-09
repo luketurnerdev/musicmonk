@@ -5,7 +5,7 @@ let conn = null;
 
 const uri=process.env.GATSBY_MONGODB_CONNECTION_STRING
 
-exports.handler = function(event, context, callback) {
+exports.handler = function(userId, context, callback) {
   context.callbackWaitsForEmptyEventLoop = false;
   run().
     then(res => {

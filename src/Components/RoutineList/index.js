@@ -37,31 +37,23 @@ const RoutineList = props => {
   // Serverless routine fetch
 
   const url = process.env.NODE_ENV === 'development' 
-    ? 'http://localhost:8888'
+    ? process.env.GATSBY_NETLIFY_SERVER
     : process.env.GATSBY_PRODUCTION_URL
 
-  const fetchHello = async () => {
-    console.log('fetchserverless ' + url)
-    axios.get(`${url}/.netlify/functions/hello`)
-    .then(res => {
-      console.log(res)
-    })
-
-    // console.log(routines);
-    return null;
-  }
   const fetchServerlessRoutines = async () => {
     console.log('fetchserverless')
+    console.log(url)
     let response;
     // need to add user id here in axios call
-    axios.get(`${url}/.netlify/functions/getAllUserRoutines`)
+    axios.get('http://localhost:8888/.netlify/functions/getAllUserRoutines')
+    // axios.get(`${url}/.netlify/functions/getAllUserRoutines`)
     .then(res => {
       // response = res.data;
       console.log(res.data);
-      setUserRoutines(res.data);
+      // setUserRoutines(res.data);
     })
 
-    // return response;
+    return response;
   }
 
   // Async fetch function for useEffect
