@@ -4,8 +4,11 @@ import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
 import CloseIcon from '@material-ui/icons/Close';
+import useBreakpoint from "./../../hooks/useBreakpoint";
+
 
 const StepDisplay = props => {
+  const mobile = useBreakpoint() === 'sm' ? true : false;
   const {step, index, removeStep, editStep, setEmptySteps} = props;
   const [stepError, setStepError] = useState('');
   const [stepText, setStepText] = useState(step.text || '')
@@ -102,13 +105,13 @@ const StepDisplay = props => {
 
   return (
     <>
-    <div style={styles.step}>
+    <div style={mobile ? styles.stepMobile : styles.step}>
       <TextField
         label={`Enter step text:`}
         error={stepError}
         helperText={stepError || ""}
         placeholder={stepName()}
-        fullWidth={true}
+        fullWidth={!mobile}
         defaultValue={step.text}
         onChange={e => {
           checkStepLength(e.target.value.length);

@@ -103,7 +103,7 @@ const RoutineForm = props => {
           className={classes.addButton}
           color="primary"
           onClick={() => addStep()}>
-            <Typography variant="subtitle">Add new step</Typography>
+            <Typography variant="subtitle">New step</Typography>
             <ControlPointSharpIcon />
         </Button>
 
@@ -132,10 +132,13 @@ const RoutineForm = props => {
     <div className={classes.routineForm}>
       <FormControl>
         <TextField
-          className={classes.routineName}
+          InputLabelProps={{
+            className: classes.routineLabel
+          }}
+          InputProps={{className: classes.inputText}}
+          className={mobile ? classes.routineNameMobile : classes.routineName}
           error={titleError}
           helperText={titleError || ""}
-          className={classes.routineName}
           label="Routine Name"
           placeholder={exampleTitle}
           defaultValue={(defaultRoutine && defaultRoutine.title) || ''}
@@ -151,14 +154,14 @@ const RoutineForm = props => {
       <div className={classes.exitButtons}>
         <Button
             variant="contained"
-            className={classes.button}
-            color={saving ? "secondary" : "primary" }
+            className={mobile? classes.buttonMobile : classes.button}
+            style={saving ? {backgroundColor:'#16e312'} : {backgroundColor: '#32a893'}}
             onClick={() => handleSubmit()}>
-            {saving ? "Saving..." : "Save Routine"}
+            {saving ? "Saving..." : "Save"}
         </Button>
         <Button
           variant="contained"
-          className={classes.button}
+          className={mobile? classes.buttonMobile : classes.button}
           color="secondary"
           onClick={() => setFormModeStatus(false, null)}>
             Discard

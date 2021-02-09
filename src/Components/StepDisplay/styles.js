@@ -14,6 +14,12 @@ const styles = {
     flexDirection: 'column',
     marginTop: '3%'
   },
+  stepMobile: {
+    display: 'flex',
+    width: '90%',
+    flexDirection: 'column',
+    marginTop: '3%',
+  },
   timerOption: {
     display: 'flex',
     justifyContent: 'space-between'

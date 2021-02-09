@@ -14,6 +14,21 @@ const styles = {
   routineName: {
     width: '30vw',
   },
+  inputText: {
+    fontSize:'15px',
+  },
+  routineLabel: {
+    fontSize:'15px'
+  },
+  routineNameMobile: {
+    
+    '&& div': {
+      '&& input': {
+        fontSize: '15px',
+      }
+    },
+    width: '80vw',
+  },
 
   //StepList sizes
 
@@ -30,7 +45,7 @@ const styles = {
   stepListMobile: {
     border: '1px solid',
     width: '80%',
-    height: '10%',
+    height: '90%',
     display: 'flex',
     alignItems:'center',
     flexDirection: 'column',
@@ -46,6 +61,17 @@ const styles = {
   button: {
     width: '20%',
     margin: '15px 5px'
+  },
+  addButton: {
+    backgroundColor: '#32a893',
+  },
+  buttonMobile: {
+    width: '30%',
+    height: '20px',
+    margin: '15px 5px',
+    '&& span': {
+      fontSize: '10px'
+    }
   },
   exitButtons: {
     display: 'flex',

@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import throttle from 'lodash.throttle';
 
 const getDeviceConfig = (width) => {
-  if (width >= 320 && width < 720 ) 
+  if (width < 720 ) 
   {
     return 'sm';
   } 
