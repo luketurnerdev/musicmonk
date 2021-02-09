@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Button, TextField, Select, InputLabel, MenuItem} from '@material-ui/core';
+import {Button, TextField, Select, InputLabel, MenuItem, FormControl} from '@material-ui/core';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
@@ -37,20 +37,17 @@ const StepDisplay = props => {
     const TimerField = () => {
 
       return(
-        <div className={classes.formControlRoot}>
-            <InputLabel
-              className={classes.inputLabel}
-              id="demo-simple-select-label">
-                Set Timer Amount
-              </InputLabel>
+        <div>
+          <FormControl className={classes.formControlRoot}>
+            <InputLabel className={classes.timerInputLabel}>Timer Amount</InputLabel>
             <Select
-              labelId="timerdigit"
+              className={classes.timerSelect}
+              labelId="Timer amount"
               id="timerdigit"
-              value={stepTimer}
+              value={stepTimer !=0 ? stepTimer : "Timer Amount"}
               onChange={e => {
                 setStepTimer(e.target.value)
               }}
-              fullWidth={true}
             >
               <MenuItem value={60}>1 Minute</MenuItem>
               <MenuItem value={120}>2 Minutes</MenuItem>
@@ -63,14 +60,14 @@ const StepDisplay = props => {
               <MenuItem value={1800}>30 Minutes</MenuItem>
             </Select>
 
-  
-        <Button onClick={() => {
+            <Button onClick={() => {
            setChecked(false)
            setStepTimer(0);
         }} 
         className={classes.deleteButton}>
             <CloseIcon />
           </Button>
+          </FormControl>
         </div>
       )
     }
@@ -108,7 +105,7 @@ const StepDisplay = props => {
     <div className={mobile ? classes.stepMobile : classes.step}>
       <TextField
         InputLabelProps={{className:classes.textInputLabel}}
-        InputProps={{className:classes.textInput}}
+        InputProps={{className:classes.textInputLabel}}
         label={`Enter step text:`}
         error={stepError}
         helperText={stepError || ""}
