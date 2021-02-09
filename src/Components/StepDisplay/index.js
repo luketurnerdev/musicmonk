@@ -49,7 +49,6 @@ const StepDisplay = props => {
               }}
               fullWidth={true}
             >
-              <MenuItem value={1}>[debug] 1 second</MenuItem>
               <MenuItem value={60}>1 Minute</MenuItem>
               <MenuItem value={120}>2 Minutes</MenuItem>
               <MenuItem value={180}>3 Minutes</MenuItem>
@@ -105,7 +104,7 @@ const StepDisplay = props => {
     <>
     <div style={styles.step}>
       <TextField
-        label={`Step ${currentStep}`}
+        label={`Enter step text:`}
         error={stepError}
         helperText={stepError || ""}
         placeholder={stepName()}

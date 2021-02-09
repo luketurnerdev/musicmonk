@@ -13,12 +13,24 @@ const styles = {
   },
   routineName: {
     width: '30vw',
-
   },
+
+  //StepList sizes
+
   stepList: {
-    border: '2px solid',
-    width: '50%',
-    height: '50%',
+    border: '20px solid',
+    width: '80%',
+    height: '80%',
+    display: 'flex',
+    alignItems:'center',
+    flexDirection: 'column',
+    overflow: 'scroll',
+    margin: '10px 0'
+  },
+  stepListMobile: {
+    border: '1px solid',
+    width: '80%',
+    height: '10%',
     display: 'flex',
     alignItems:'center',
     flexDirection: 'column',

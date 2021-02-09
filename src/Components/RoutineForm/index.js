@@ -4,8 +4,10 @@ import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import StepDisplay from "./../StepDisplay";
 import ControlPointSharpIcon from '@material-ui/icons/ControlPointSharp';
+import useBreakpoint from "./../../hooks/useBreakpoint";
 
 const RoutineForm = props => {
+  const mobile = useBreakpoint() === 'sm' ? true : false;
   const {defaultRoutine, updateRoutine, setFormModeStatus, classes, saveNewRoutine, routineCount, saving} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: routineCount, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine ? defaultRoutine.steps : []);
@@ -77,7 +79,7 @@ const RoutineForm = props => {
   const mapSteps = () => {
     return (
       <>
-        <div className={classes.stepList}>
+        <div className={mobile ? classes.stepListMobile : classes.stepList}>
           {userSteps && userSteps.map((step, index) => {
             return step ? (
               <StepDisplay
@@ -130,7 +132,7 @@ const RoutineForm = props => {
     <div className={classes.routineForm}>
       <FormControl>
         <TextField
-          // autoFocus={true}
+          className={classes.routineName}
           error={titleError}
           helperText={titleError || ""}
           className={classes.routineName}
