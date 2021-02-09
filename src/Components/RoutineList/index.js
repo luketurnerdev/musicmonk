@@ -175,7 +175,7 @@ const RoutineList = props => {
           <AddCircleOutlineIcon className={classes.plusIcon} />
       </Button>
 
-      <Button onClick={() => fetchServerlessRoutines()}>[Test] Get routines</Button>
+      {/* <Button onClick={() => fetchServerlessRoutines()}>[Test] Get routines</Button> */}
     </div>
 
       {/* Various Modals */}
