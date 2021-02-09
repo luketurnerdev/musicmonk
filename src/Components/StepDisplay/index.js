@@ -9,7 +9,7 @@ import useBreakpoint from "./../../hooks/useBreakpoint";
 
 const StepDisplay = props => {
   const mobile = useBreakpoint() === 'sm' ? true : false;
-  const {step, index, removeStep, editStep, setEmptySteps} = props;
+  const {step, index, removeStep, editStep, setEmptySteps, classes} = props;
   const [stepError, setStepError] = useState('');
   const [stepText, setStepText] = useState(step.text || '')
   const [stepTimer, setStepTimer] = useState(step.timer || 0);
@@ -37,9 +37,9 @@ const StepDisplay = props => {
     const TimerField = () => {
 
       return(
-        <div style={styles.formControlRoot}>
+        <div className={classes.formControlRoot}>
             <InputLabel
-              style={styles.inputLabel}
+              className={classes.inputLabel}
               id="demo-simple-select-label">
                 Set Timer Amount
               </InputLabel>
@@ -68,7 +68,7 @@ const StepDisplay = props => {
            setChecked(false)
            setStepTimer(0);
         }} 
-        style={styles.deleteButton}>
+        className={classes.deleteButton}>
             <CloseIcon />
           </Button>
         </div>
@@ -76,7 +76,7 @@ const StepDisplay = props => {
     }
 
     // Conditional render
-    return checked ? <TimerField /> : <Button style={styles.addTimer} onClick={() => setChecked(true)}>Add timer </Button>;
+    return checked ? <TimerField /> : <Button className={classes.addTimer} onClick={() => setChecked(true)}>Add timer </Button>;
   }
 
   const checkStepLength = length => {
@@ -105,8 +105,10 @@ const StepDisplay = props => {
 
   return (
     <>
-    <div style={mobile ? styles.stepMobile : styles.step}>
+    <div className={mobile ? classes.stepMobile : classes.step}>
       <TextField
+        InputLabelProps={{className:classes.textInputLabel}}
+        InputProps={{className:classes.textInput}}
         label={`Enter step text:`}
         error={stepError}
         helperText={stepError || ""}
@@ -122,7 +124,7 @@ const StepDisplay = props => {
          <TimerOption />
     </div>
 
-    <Button style={styles.deleteStepButton} color="secondary" variant="outlined" onClick={() => removeStep(index)}>
+    <Button className={classes.deleteStepButton} color="secondary" variant="contained" onClick={() => removeStep(index)}>
         Delete Step
         <DeleteForeverSharpIcon  />
     </Button>

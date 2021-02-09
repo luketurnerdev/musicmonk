@@ -41,7 +41,13 @@ const styles = {
     margin: '0 auto'
   },
   deleteStepButton: {
+    width: '80%',
+    height: '25px',
+    margin: '0 auto',
     marginTop: '5%',
+    '&& span': {
+      fontSize: '12px'
+    }
   }
 }
 

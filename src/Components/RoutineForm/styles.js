@@ -55,9 +55,9 @@ const styles = {
   pageError: {
     color: 'red'
   },
-  deleteStepButton: {
-    width: '20%',
-  },
+  // deleteStepButton: {
+  //   // width: '80%',
+  // },
   button: {
     width: '20%',
     margin: '15px 5px'
