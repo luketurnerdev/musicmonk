@@ -38,11 +38,17 @@ const RoutineScroll = props => {
         </div>
       </Grid>
       <Grid item xs={4} className={classes.middleGridItems}>
-        <PlayCircleOutlineIcon className={classes.playIcon} />
+        <Button onClick={() => setPlayModeStatus(true, routines[currentRoutine])}>
+          <PlayCircleOutlineIcon className={classes.playIcon} />
+        </Button>
       </Grid>
       <Grid item xs={4} className={classes.middleGridItems}>
-        <CreateIcon />
-        <DeleteIcon />
+      <Button onClick={() => setFormModeStatus(true, routines[currentRoutine])}>
+        <CreateIcon style={{border:'1px solid', borderRadius: '10px', fontSize: '50px'}}  />
+      </Button>
+      <Button onClick={() => setDeleteModeStatus(true, routines[currentRoutine])}>
+        <DeleteIcon style={{border:'1px solid', borderRadius: '10px', fontSize: '50px'}} />
+      </Button>
       </Grid>
     </Grid>
 

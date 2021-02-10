@@ -12,7 +12,7 @@ const styles = {
   },
   buttons: {
     display: 'flex',
-    width: '50%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'space-around'
   }

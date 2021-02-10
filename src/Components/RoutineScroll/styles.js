@@ -16,11 +16,8 @@ const styles = {
   middleGrid: {
     height: '100%',
     display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center'
   },
   middleGridInner: {
-    // height: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -31,7 +28,7 @@ const styles = {
     maxWidth: '100%',
     width: '100%',
     display: 'flex',
-    justifyContent:'center',
+    justifyContent:'space-evenly',
     maxHeight: '20vh',
     alignItems: 'center'
   },
