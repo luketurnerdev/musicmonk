@@ -29,12 +29,16 @@ const styles = {
     width: '100%',
     display: 'flex',
     justifyContent:'space-evenly',
-    maxHeight: '20vh',
+    maxHeight: '15vh',
     alignItems: 'center'
   },
   routineTitle: {
     margin: '0 auto',
-    textAlign: 'center'
+    textAlign: 'center',
+    height: '60%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   playIcon: {
     height: '100px',

@@ -14,9 +14,6 @@ const styles = {
     width: '100%',
     textAlign: 'center'
   },
-  innerItems: {
-
-  },
   buttons: {
     display: 'flex',
     width: '100%',

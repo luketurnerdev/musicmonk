@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Button, Grid} from '@material-ui/core';
+import {Button, Grid, Paper} from '@material-ui/core';
 import styles from "./styles";
 import {withStyles} from "@material-ui/styles";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -7,11 +7,12 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Loading from './../Loading';
 
 
 const RoutineScroll = props => {
   const {routines, setPlayModeStatus, setDeleteModeStatus, setFormModeStatus, classes} = props;
-  const [currentRoutine, setCurrentRoutine] = useState(0);
+  const [currentRoutine, setCurrentRoutine] = useState(routines.length-1);
 
 
   useEffect(() => {
@@ -33,9 +34,9 @@ const RoutineScroll = props => {
       className={classes.middleGridInner}
     >
       <Grid item xs={4} className={classes.middleGridItems}>
-        <div className={classes.routineTitle}>
-          <h3>{routines[currentRoutine].title}</h3>
-        </div>
+        <Paper className={classes.routineTitle}>
+          {routines ? <h3>{routines[currentRoutine].title}</h3> : <Loading />}
+        </Paper>
       </Grid>
       <Grid item xs={4} className={classes.middleGridItems}>
         <Button onClick={() => setPlayModeStatus(true, routines[currentRoutine])}>

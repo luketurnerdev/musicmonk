@@ -19,7 +19,7 @@ const DeleteRoutine = props => {
             style={deleting ? {backgroundColor: 'red'} : {backgroundColor: '#32a893'} }>
             <span>{deleting ? "Deleting..." : "Confirm"}</span>
           </Button>
-          <Button onClick={() => setDeleteModeStatus(false, null)}variant="contained">Cancel</Button>
+          <Button onClick={() => setDeleteModeStatus(false, null)} variant="contained">Cancel</Button>
         </div>
       </div>
     </Paper>
