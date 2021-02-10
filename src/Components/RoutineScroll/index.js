@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Button} from '@material-ui/core';
 
 const RoutineScroll = props => {
-  const {routines} = props;
+  const {routines, setPlayModeStatus, setDeleteModeStatus, setFormModeStatus} = props;
   const [currentRoutine, setCurrentRoutine] = useState(0);
 
 
@@ -22,6 +22,9 @@ const RoutineScroll = props => {
       <div>
         {routines[currentRoutine].title}
         Estimated time to complete: xyz
+        <Button onClick={() => setPlayModeStatus(true, routines[currentRoutine])}>Play</Button>
+        <Button>Edit</Button>
+        <Button>Delete</Button>
       </div>
       <Button onClick={() => goForward()}>Forward</Button>
     </div>
