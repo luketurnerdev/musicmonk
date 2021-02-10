@@ -6,6 +6,9 @@ const RoutineScroll = props => {
   const [currentRoutine, setCurrentRoutine] = useState(0);
 
 
+  useEffect(() => {
+    routines && setCurrentRoutine(routines.length-1);
+  }, [])
   const goForward = () => {
     currentRoutine === routines.length-1
       ? setCurrentRoutine(0)
