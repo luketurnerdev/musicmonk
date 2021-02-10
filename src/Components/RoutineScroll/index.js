@@ -23,8 +23,8 @@ const RoutineScroll = props => {
         {routines[currentRoutine].title}
         Estimated time to complete: xyz
         <Button onClick={() => setPlayModeStatus(true, routines[currentRoutine])}>Play</Button>
-        <Button>Edit</Button>
-        <Button>Delete</Button>
+        <Button onClick={() => setFormModeStatus(true, routines[currentRoutine])}>Edit</Button>
+        <Button onClick={() => setDeleteModeStatus(true, routines[currentRoutine])}>Delete</Button>
       </div>
       <Button onClick={() => goForward()}>Forward</Button>
     </div>
