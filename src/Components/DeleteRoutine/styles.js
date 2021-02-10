@@ -1,10 +1,14 @@
 const styles = {
   deleteModal: {
     backgroundColor: 'white',
-    width: '50%',
+    width: '70%',
     height: '85%',
     margin: '0 auto',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'absolute',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    top: '50%',
   },
   title: {
     position: 'relative',
