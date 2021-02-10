@@ -157,39 +157,55 @@ const RoutineList = props => {
   }
   const MobileList = () => {
     return (userRoutines.length ? 
-      <RoutineScroll
-      routines={userRoutines}
-      setDeleteModeStatus={setDeleteModeStatus}
-      setFormModeStatus={setFormModeStatus}
-      setPlayModeStatus={setPlayModeStatus}
-    />  : 
+      <div className={classes.mobileListContainer}>
+        <RoutineScroll
+          routines={userRoutines}
+          setDeleteModeStatus={setDeleteModeStatus}
+          setFormModeStatus={setFormModeStatus}
+          setPlayModeStatus={setPlayModeStatus}
+        /> 
+        <Button 
+      variant="contained"
+      color="primary"
+      className={classes.addNewButton}
+      onClick={() => setRoutineFormOpen(true)}>
+          Add new routine
+          <AddCircleOutlineIcon className={classes.plusIcon} />
+      </Button>
+
+      </div> : 
     <NoneFoundMessage />)
   }
   const List = () => {
-    return (userRoutines.length ? mapRoutines() : <NoneFoundMessage />)
+    return (userRoutines.length ? 
+      <>
+        {mapRoutines() }
+
+        <Button 
+        variant="contained"
+        color="primary"
+        className={classes.addNewButton}
+        onClick={() => 
+          setRoutineFormOpen(true)}
+          >
+            Add new routine
+            <AddCircleOutlineIcon className={classes.plusIcon} />
+        </Button>
+      </>
+      : <NoneFoundMessage />)
   }
 
   return (
     <>
-    <div className={classes.routineListContainer}>
+    <div className>
     {fetching 
       ? <Loading />
-      : <div className={classes.list}> 
+      : <div> 
         {size === 'sm' ? 
-        <MobileList />
+        <MobileList/>
         : <List/>}
       </div>
     }
-     <Button 
-      variant="contained"
-      color="primary"
-      className={classes.addNewButton}
-      onClick={() => 
-        setRoutineFormOpen(true)}
-        >
-          Add new routine
-          <AddCircleOutlineIcon className={classes.plusIcon} />
-      </Button>
 
       {/* <Button onClick={() => fetchServerlessRoutines()}>[Test] Get routines</Button> */}
     </div>

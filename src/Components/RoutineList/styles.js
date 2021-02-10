@@ -22,6 +22,16 @@ const styles = {
     transform: 'translateX(-50%)',
     height: '75%'
   },
+  mobileListContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '80%',
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    height: '100%',
+    border: '2px solid'
+  },
   list: {
     border: '2px solid black'
   },
