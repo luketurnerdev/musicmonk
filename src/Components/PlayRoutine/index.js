@@ -87,6 +87,7 @@ const PlayRoutine = props => {
       <Typography variant="subtitle" style={{margin:'5px'}}>
         {routine.title}
       </Typography>
+      
         <Step
           key={routine.steps[currentPage]}
           step={routine.steps[currentPage]}

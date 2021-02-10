@@ -30,7 +30,8 @@ const styles = {
   },
   title: {
     textAlign: 'center',
-    margin: '10px'
+    margin: '10px',
+    padding: '15px'
   },
   stepInner: {
     border: '2px solid black',
