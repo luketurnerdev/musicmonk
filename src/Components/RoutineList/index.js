@@ -179,7 +179,7 @@ const RoutineList = props => {
   const List = () => {
     return (userRoutines.length ? 
       <>
-        {mapRoutines() }
+        {mapRoutines()}
 
         <Button 
         variant="contained"
