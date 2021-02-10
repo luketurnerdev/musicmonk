@@ -1,12 +1,13 @@
 const styles = {
-  root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: 'white',
-    height: 48,
-    padding: '10px 30px',
+  completeButton: {
+    backgroundColor: '#16e312',
+    fontSize: '15px',
+    height: '75%',
+    marginTop: '5px'
+  },
+  completeContainer: {
+    display: 'flex',
+
   },
   playModeContainer: {
     backgroundColor: 'white',
@@ -14,17 +15,38 @@ const styles = {
     flexDirection: 'column',
     alignItems:'center',
     height: '100%',
+    border: '1px solid',
+    borderRadius: '10px'
   },
   stepContainer: {
-    border: '2px solid black',
-    borderRadius: '15px',
     width: '80%',
-    height: '100%'
+    height: '80%',
+    border: '1px solid',
+    borderRadius: '10px'
   },
   gridItem: {
     display: 'flex',
     justifyContent: 'center'
   },
+  title: {
+    textAlign: 'center',
+    margin: '10px'
+  },
+  stepInner: {
+    border: '2px solid black',
+    borderRadius: '15px',
+  },
+  button: {
+    height: '10%',
+    fontSize: '12px'
+  },
+  buttons: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    marginTop: '10px'
+  },  
 };
 
 export default styles;

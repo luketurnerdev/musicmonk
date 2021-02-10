@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Button, Typography, Modal, Grid} from '@material-ui/core';
+import {Button, Typography, Modal, Grid, Paper} from '@material-ui/core';
 import styles from "./styles";
 import { withStyles } from '@material-ui/styles';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Timer from "./../Timer";
+import CheckIcon from '@material-ui/icons/Check';
 const PlayRoutine = props => {
 
   // initial state: on step 1 of X
@@ -35,16 +36,21 @@ const PlayRoutine = props => {
          {currentPage > 0 && <BackButton />}       
         </Grid>
         <Grid item xs={4} className={classes.gridItem}>
-          <Typography variant="subtitle2">{step.text}</Typography >
+          <Paper className={classes.title}>
+            <Typography variant="subtitle2">{step.text}</Typography >
+          </Paper>
         </Grid>
         <Grid item xs={4} className={classes.gridItem}>
           {currentPage < lastStepIndex && <ForwardButton />}
         </Grid>
-          {step.timer !== 0 && <Timer expiryTimestamp={time} timeLimit={step.timer || 30}/>}
+          {step.timer && step.timer !== 0 && <Timer expiryTimestamp={time} timeLimit={step.timer || 30}/>}
+        <div className={classes.buttons}>
+            <Button variant="contained" className={classes.button} onClick={() => goForward()}>Skip Step</Button>
+            <Button variant="contained" className={classes.button} onClick={() => setPlayModeStatus(false, null)}>Close</Button>
+        </div>
       </Grid>
 
-      </>
-
+    </>
     )
   }
 
@@ -78,19 +84,25 @@ const PlayRoutine = props => {
         open={open}
       >
     <div className={classes.playModeContainer}>
-      <h1>{routine.title}</h1>
-      <Step
-        key={routine.steps[currentPage]}
-        step={routine.steps[currentPage]}
-        classes={classes}
-      />  
+      <h1 style={{margin:'5px'}}>{routine.title}</h1>
+        <Step
+          key={routine.steps[currentPage]}
+          step={routine.steps[currentPage]}
+          classes={classes}
+        /> 
+
       
       {currentPage === lastStepIndex && 
-        <Button variant="contained" className={classes.root} onClick={() => completeRoutine(routine.id)}>Mark as complete</Button>
+      <div className={classes.completeContainer}>
+          <Button variant="contained" 
+            className={classes.completeButton} 
+            onClick={() => completeRoutine(routine.id)}
+          >Mark as complete <CheckIcon />
+        </Button>
+      </div>
       }
-      <Button variant="contained" onClick={() => goForward()}>Skip Step</Button>
-      <Button variant="contained" className={classes.root} onClick={() => setPlayModeStatus(false, null)}>Close</Button>
     </div>
+      
   </Modal>
   )
 }
