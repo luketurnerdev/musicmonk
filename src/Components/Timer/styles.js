@@ -9,7 +9,8 @@ const styles = {
     textAlign: 'center',
     margin: '0 auto',
     border: '1px solid',
-    borderRadius: '10px'
+    borderRadius: '10px',
+    marginTop: '25px'
   },
   buttons: {
     display: 'flex'

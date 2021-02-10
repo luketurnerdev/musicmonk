@@ -43,7 +43,7 @@ const styles = {
   buttons: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     width: '100%',
     marginTop: '10px'
   },  

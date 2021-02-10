@@ -45,8 +45,8 @@ const PlayRoutine = props => {
         </Grid>
           {step.timer && step.timer !== 0 && <Timer expiryTimestamp={time} timeLimit={step.timer || 30}/>}
         <div className={classes.buttons}>
-            <Button variant="contained" className={classes.button} onClick={() => goForward()}>Skip Step</Button>
-            <Button variant="contained" className={classes.button} onClick={() => setPlayModeStatus(false, null)}>Close</Button>
+            <Button variant="contained" color="primary" className={classes.button} onClick={() => goForward()}>Skip Step</Button>
+            <Button variant="contained" style={{backgroundColor: 'red'}} className={classes.button} onClick={() => setPlayModeStatus(false, null)}>Close</Button>
         </div>
       </Grid>
 
@@ -84,7 +84,9 @@ const PlayRoutine = props => {
         open={open}
       >
     <div className={classes.playModeContainer}>
-      <h1 style={{margin:'5px'}}>{routine.title}</h1>
+      <Typography variant="subtitle" style={{margin:'5px'}}>
+        {routine.title}
+      </Typography>
         <Step
           key={routine.steps[currentPage]}
           step={routine.steps[currentPage]}
@@ -94,7 +96,8 @@ const PlayRoutine = props => {
       
       {currentPage === lastStepIndex && 
       <div className={classes.completeContainer}>
-          <Button variant="contained" 
+          <Button 
+            variant="contained" 
             className={classes.completeButton} 
             onClick={() => completeRoutine(routine.id)}
           >Mark as complete <CheckIcon />
