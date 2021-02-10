@@ -33,7 +33,7 @@ const styles = {
   //StepList sizes
 
   stepList: {
-    border: '20px solid',
+    border: '2px solid',
     width: '80%',
     height: '80%',
     display: 'flex',

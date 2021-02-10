@@ -106,7 +106,7 @@ const StepDisplay = props => {
       <TextField
         InputLabelProps={{className:classes.textInputLabel}}
         InputProps={{className:classes.textInputLabel}}
-        label={`Enter step text:`}
+        label={`Enter step text (required):`}
         error={stepError}
         helperText={stepError || ""}
         placeholder={stepName()}

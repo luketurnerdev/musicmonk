@@ -22,6 +22,10 @@ const RoutineForm = props => {
     pickRandomTitle()
   }, [])
 
+  useEffect(() => {
+    emptySteps ? setPageError('One or more steps are empty!') : setPageError('');
+  }, [emptySteps])
+
   // If there is no default routine (ie edit mode), treat this as a new one
   const isNewRoutine = !defaultRoutine;
   
@@ -50,6 +54,7 @@ const RoutineForm = props => {
 
   const addStep = () => {
     setPageError('');
+    setEmptySteps(true);
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
@@ -125,6 +130,7 @@ const RoutineForm = props => {
     setExampleTitle(examples[Math.floor(Math.random() * examples.length)]);
   }
 
+  const buttonColor = pageError ? '#FFFFFF' : '#32a893';
 
   
   return (
@@ -149,13 +155,12 @@ const RoutineForm = props => {
       
       {mapSteps()}
 
-      {pageError && <span className={classes.pageError}>{pageError}</span>}
-
       <div className={classes.exitButtons}>
         <Button
             variant="contained"
+            disabled={pageError}
             className={mobile? classes.buttonMobile : classes.button}
-            style={saving ? {backgroundColor:'#16e312'} : {backgroundColor: '#32a893'}}
+            style={saving ? {backgroundColor:'#16e312'} : {backgroundColor: buttonColor}}
             onClick={() => handleSubmit()}>
             {saving ? "Saving..." : "Save"}
         </Button>
