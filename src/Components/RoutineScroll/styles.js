@@ -30,8 +30,19 @@ const styles = {
   },
   middleGridItems: {
     maxWidth: '100%',
-    border: '2px solid',
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    justifyContent:'center',
+    maxHeight: '20vh',
+    alignItems: 'center'
+  },
+  routineTitle: {
+    margin: '0 auto',
+    textAlign: 'center'
+  },
+  playIcon: {
+    height: '100px',
+    width: '150px'
   }
 };
 

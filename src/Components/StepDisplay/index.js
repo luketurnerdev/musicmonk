@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Button, TextField, Select, InputLabel, MenuItem, FormControl} from '@material-ui/core';
-import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
+import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
 import CloseIcon from '@material-ui/icons/Close';
@@ -123,7 +123,7 @@ const StepDisplay = props => {
 
     <Button className={classes.deleteStepButton} color="secondary" variant="contained" onClick={() => removeStep(index)}>
         Delete Step
-        <DeleteForeverSharpIcon  />
+        <DeleteIcon  />
     </Button>
     </>
   )

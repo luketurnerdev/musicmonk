@@ -4,6 +4,10 @@ import styles from "./styles";
 import {withStyles} from "@material-ui/styles";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const RoutineScroll = props => {
   const {routines, setPlayModeStatus, setDeleteModeStatus, setFormModeStatus, classes} = props;
@@ -33,14 +37,15 @@ const RoutineScroll = props => {
     >
       <Grid item xs={4} className={classes.middleGridItems}>
         <div className={classes.routineTitle}>
-          <h4>{routines[currentRoutine].title}</h4>
+          <h3>{routines[currentRoutine].title}</h3>
         </div>
       </Grid>
       <Grid item xs={4} className={classes.middleGridItems}>
-        <span>play</span>
+        <PlayCircleOutlineIcon className={classes.playIcon} />
       </Grid>
       <Grid item xs={4} className={classes.middleGridItems}>
-        <span>edit, del</span>
+        <CreateIcon />
+        <DeleteIcon />
       </Grid>
     </Grid>
 
@@ -56,17 +61,6 @@ const RoutineScroll = props => {
         <Button onClick={() => goForward()}><ArrowForwardIcon /></Button>
       </Grid>
     </Grid> 
-    // <div className={classes.scrollContainer}>
-    //   <Button onClick={() => goBack()}>Back</Button>
-    //   <div>
-    //     {routines[currentRoutine].title}
-    //     Estimated time to complete: xyz
-    //     <Button onClick={() => setPlayModeStatus(true, routines[currentRoutine])}>Play</Button>
-    //     <Button onClick={() => setFormModeStatus(true, routines[currentRoutine])}>Edit</Button>
-    //     <Button onClick={() => setDeleteModeStatus(true, routines[currentRoutine])}>Delete</Button>
-    //   </div>
-    //   <Button onClick={() => goForward()}>Forward</Button>
-    // </div>
   )
 }
 
