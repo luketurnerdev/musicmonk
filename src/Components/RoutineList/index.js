@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {Button, Typography} from '@material-ui/core/'
+import {Button, Typography, Paper} from '@material-ui/core/'
 import {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb, editOneRoutineInDb} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
@@ -149,22 +149,17 @@ const RoutineList = props => {
     return (
       fetching 
       ? <Loading />
-      : <Typography variant="subtitle">
+      : 
+      <Paper>
+        <Typography variant="subtitle">
         No user routines found. Click below to create one!
       </Typography>
+      </Paper>
 
     )
   }
-  const MobileList = () => {
-    return (userRoutines.length ? 
-      <div className={classes.mobileListContainer}>
-        <RoutineScroll
-          routines={userRoutines}
-          setDeleteModeStatus={setDeleteModeStatus}
-          setFormModeStatus={setFormModeStatus}
-          setPlayModeStatus={setPlayModeStatus}
-        /> 
-        <Button 
+  const AddNewRoutineButton = () => 
+    <Button 
           variant="contained"
           color="primary"
           className={classes.addNewButton}
@@ -173,9 +168,22 @@ const RoutineList = props => {
           <AddCircleOutlineIcon className={classes.plusIcon} />
       </Button>
 
-      </div> : 
-    <NoneFoundMessage />)
-  }
+  const MobileList = () => 
+  <div className={classes.mobileListContainer}>
+   { userRoutines.length ? 
+        <RoutineScroll
+          routines={userRoutines}
+          setDeleteModeStatus={setDeleteModeStatus}
+          setFormModeStatus={setFormModeStatus}
+          setPlayModeStatus={setPlayModeStatus}
+        /> 
+
+       : <NoneFoundMessage />}
+       <AddNewRoutineButton />
+    </div>
+
+
+  
   const List = () => {
     return (userRoutines.length ? 
       <>
