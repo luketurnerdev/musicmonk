@@ -39,6 +39,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: '20px'
   },
   playIcon: {
     height: '100px',
