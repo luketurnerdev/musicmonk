@@ -30,9 +30,6 @@ const RoutineScroll = props => {
 
   const MiddleSection = () =>
     <Grid container 
-      // direction="column" 
-      // alignItems="center" 
-      // justify="space-evenly"
       className={classes.middleGridInner}
     >
       <Grid item xs={4} className={classes.middleGridItems}>

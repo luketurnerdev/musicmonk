@@ -29,8 +29,10 @@ const styles = {
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
-    height: '100%',
-    border: '2px solid'
+    height: '85%',
+    border: '1px solid',
+    borderRadius: '15px',
+    justifyContent: 'space-evenly'
   },
   list: {
     border: '2px solid black'
@@ -43,7 +45,11 @@ const styles = {
     position: 'relative',
     left: '50%',
     transform: 'translateX(-50%)',
-    marginTop:'15px'
+    marginTop:'15px',
+    height: '5vh',
+    '&& span': {
+      fontSize: '12px'
+    }
   },
   plusIcon: {
     position: 'relative',

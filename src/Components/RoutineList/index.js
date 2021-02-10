@@ -165,10 +165,10 @@ const RoutineList = props => {
           setPlayModeStatus={setPlayModeStatus}
         /> 
         <Button 
-      variant="contained"
-      color="primary"
-      className={classes.addNewButton}
-      onClick={() => setRoutineFormOpen(true)}>
+          variant="contained"
+          color="primary"
+          className={classes.addNewButton}
+          onClick={() => setRoutineFormOpen(true)}>
           Add new routine
           <AddCircleOutlineIcon className={classes.plusIcon} />
       </Button>
