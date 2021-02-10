@@ -13,6 +13,25 @@ const styles = {
     height: '100%',
     display: 'flex',
     justifyContent: 'space-evenly'
+  },
+  middleGrid: {
+    height: '100%',
+    display: 'flex',
+    // flexDirection: 'column',
+    // alignItems: 'center'
+  },
+  middleGridInner: {
+    // height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent:'space-evenly',
+    maxWidth: '100%'
+  },
+  middleGridItems: {
+    maxWidth: '100%',
+    border: '2px solid',
+    width: '100%'
   }
 };
 

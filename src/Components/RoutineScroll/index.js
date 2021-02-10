@@ -25,15 +25,21 @@ const RoutineScroll = props => {
   }
 
   const MiddleSection = () =>
-    <Grid container>
-      <Grid item xs={4}>
-        <span>Name</span>
+    <Grid container 
+      // direction="column" 
+      // alignItems="center" 
+      // justify="space-evenly"
+      className={classes.middleGridInner}
+    >
+      <Grid item xs={4} className={classes.middleGridItems}>
+        <div className={classes.routineTitle}>
+          <h4>{routines[currentRoutine].title}</h4>
+        </div>
       </Grid>
-      <Grid item xs={4}>
-
+      <Grid item xs={4} className={classes.middleGridItems}>
         <span>play</span>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={4} className={classes.middleGridItems}>
         <span>edit, del</span>
       </Grid>
     </Grid>
@@ -43,7 +49,7 @@ const RoutineScroll = props => {
       <Grid item xs={2} className={classes.smallOuterGrids}>
         <Button onClick={() => goBack()}><ArrowBackIcon /></Button>
       </Grid>
-      <Grid item xs={8} className={classes.middleGrid}>
+      <Grid item xs={8} className={classes.middleGrid} >
         <MiddleSection />
       </Grid>
       <Grid item xs={2} className={classes.smallOuterGrids}>
