@@ -2,7 +2,7 @@ const styles = {
   deleteModal: {
     backgroundColor: 'white',
     width: '70%',
-    height: '85%',
+    height: '30%',
     margin: '0 auto',
     alignItems: 'center',
     position: 'absolute',
@@ -11,8 +11,11 @@ const styles = {
     top: '50%',
   },
   title: {
-    position: 'relative',
-    top: '30%'
+    width: '100%',
+    textAlign: 'center'
+  },
+  innerItems: {
+
   },
   buttons: {
     display: 'flex',
