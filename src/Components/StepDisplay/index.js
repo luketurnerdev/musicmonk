@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {Button, TextField, Select, InputLabel, MenuItem} from '@material-ui/core';
-import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp'
+import {Button, TextField, Select, InputLabel, MenuItem, FormControl} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles } from '@material-ui/styles';
 import styles from "./styles";
 import CloseIcon from '@material-ui/icons/Close';
+import useBreakpoint from "./../../hooks/useBreakpoint";
+
 
 const StepDisplay = props => {
-  const {step, index, removeStep, editStep, setEmptySteps} = props;
+  const mobile = useBreakpoint() === 'sm' ? true : false;
+  const {step, index, removeStep, editStep, setEmptySteps, classes} = props;
   const [stepError, setStepError] = useState('');
   const [stepText, setStepText] = useState(step.text || '')
   const [stepTimer, setStepTimer] = useState(step.timer || 0);
@@ -34,22 +37,18 @@ const StepDisplay = props => {
     const TimerField = () => {
 
       return(
-        <div style={styles.formControlRoot}>
-            <InputLabel
-              style={styles.inputLabel}
-              id="demo-simple-select-label">
-                Set Timer Amount
-              </InputLabel>
+        <div>
+          <FormControl className={classes.formControlRoot}>
+            <InputLabel className={classes.timerInputLabel}>Timer Amount</InputLabel>
             <Select
-              labelId="timerdigit"
+              className={classes.timerSelect}
+              labelId="Timer amount"
               id="timerdigit"
-              value={stepTimer}
+              value={stepTimer !=0 ? stepTimer : "Timer Amount"}
               onChange={e => {
                 setStepTimer(e.target.value)
               }}
-              fullWidth={true}
             >
-              <MenuItem value={1}>[debug] 1 second</MenuItem>
               <MenuItem value={60}>1 Minute</MenuItem>
               <MenuItem value={120}>2 Minutes</MenuItem>
               <MenuItem value={180}>3 Minutes</MenuItem>
@@ -61,20 +60,20 @@ const StepDisplay = props => {
               <MenuItem value={1800}>30 Minutes</MenuItem>
             </Select>
 
-  
-        <Button onClick={() => {
+            <Button onClick={() => {
            setChecked(false)
            setStepTimer(0);
         }} 
-        style={styles.deleteButton}>
+        className={classes.deleteButton}>
             <CloseIcon />
           </Button>
+          </FormControl>
         </div>
       )
     }
 
     // Conditional render
-    return checked ? <TimerField /> : <Button style={styles.addTimer} onClick={() => setChecked(true)}>Add timer </Button>;
+    return checked ? <TimerField /> : <Button className={classes.addTimer} onClick={() => setChecked(true)}>Add timer </Button>;
   }
 
   const checkStepLength = length => {
@@ -103,13 +102,15 @@ const StepDisplay = props => {
 
   return (
     <>
-    <div style={styles.step}>
+    <div className={mobile ? classes.stepMobile : classes.step}>
       <TextField
-        label={`Step ${currentStep}`}
+        InputLabelProps={{className:classes.textInputLabel}}
+        InputProps={{className:classes.textInputLabel}}
+        label={`Enter step text (required):`}
         error={stepError}
         helperText={stepError || ""}
         placeholder={stepName()}
-        fullWidth={true}
+        fullWidth={!mobile}
         defaultValue={step.text}
         onChange={e => {
           checkStepLength(e.target.value.length);
@@ -120,9 +121,9 @@ const StepDisplay = props => {
          <TimerOption />
     </div>
 
-    <Button style={styles.deleteStepButton} color="secondary" variant="outlined" onClick={() => removeStep(index)}>
+    <Button className={classes.deleteStepButton} color="secondary" variant="contained" onClick={() => removeStep(index)}>
         Delete Step
-        <DeleteForeverSharpIcon  />
+        <DeleteIcon  />
     </Button>
     </>
   )

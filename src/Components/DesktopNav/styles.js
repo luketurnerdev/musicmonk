@@ -8,6 +8,15 @@ const styles = {
     width: '25vw',
     height: '100vh',
   },
+  mobileNavContainer: {
+    position: 'absolute',
+    backgroundColor: '#FFFFFF',
+    zIndex: '1',
+    border: '2px solid',
+    borderRadius: '10px',
+    width: '50vw',
+    height: '100vh',
+  },
   navList: {
     height: '50%',
     textAlign: 'center',

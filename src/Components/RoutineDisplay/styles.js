@@ -19,9 +19,6 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center'
   },
-  routineTitle: {
-
-  },
   startButton: {
     height: '80%',
     width: '40%'
@@ -36,7 +33,7 @@ const styles = {
     width: '80%',
     position: 'absolute',
     left: '50%',
-    transform: 'translateX(-50%)'
+    transform: 'translateX(-50%)',
   }
 };
 

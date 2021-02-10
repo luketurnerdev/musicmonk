@@ -1,21 +1,24 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {Button, Typography} from '@material-ui/core/'
+import {Button, Typography, Paper} from '@material-ui/core/'
 import {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb, editOneRoutineInDb} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
 import DeleteRoutine from "./../../Components/DeleteRoutine";
 import RoutineDisplay from "./../../Components/RoutineDisplay";
+import RoutineScroll from "./../../Components/RoutineScroll";
 import FormModal from './../../Components/Form';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Loading from "./../../Components/Loading";
 import axios from 'axios';
+import useBreakpoint from "./../../hooks/useBreakpoint";
 
 
 //When this page first loads, fetch users routines from db (fake for now)
 //When the list is updated (ie, POST, PUT OR DELETE is called), setUserRoutines.
 
 const RoutineList = props => {
+  const size = useBreakpoint();
   const {classes, user} = props;
   const [userRoutines, setUserRoutines] = useState([]);
   const [currentlySelectedRoutine, setCurrentlySelectedRoutine] = useState(null);
@@ -93,7 +96,6 @@ const RoutineList = props => {
 
   const saveNewRoutine = async newRoutineData => {   
     setSaving(true); 
-
     await postNewRoutineToDb(user.sub, newRoutineData);
     setSaving(false);
 
@@ -147,35 +149,73 @@ const RoutineList = props => {
     return (
       fetching 
       ? <Loading />
-      : <Typography variant="subtitle">
+      : 
+      <Paper>
+        <Typography variant="subtitle">
         No user routines found. Click below to create one!
       </Typography>
+      </Paper>
 
     )
   }
-  const List = () => {
-    return (userRoutines.length ? mapRoutines() : <NoneFoundMessage />)
-  }
-
-  return (
-    <>
-    <div className={classes.routineListContainer}>
-    {fetching 
-      ? <Loading />
-      : <div className={classes.list}> <List /> </div>
-    }
-     <Button 
-      variant="contained"
-      color="primary"
-      className={classes.addNewButton}
-      onClick={() => 
-        setRoutineFormOpen(true)}
-        >
+  const AddNewRoutineButton = () => 
+    <Button 
+          variant="contained"
+          color="primary"
+          className={classes.addNewButton}
+          onClick={() => setRoutineFormOpen(true)}>
           Add new routine
           <AddCircleOutlineIcon className={classes.plusIcon} />
       </Button>
 
-      <Button onClick={() => fetchServerlessRoutines()}>[Test] Get routines</Button>
+  const MobileList = () => 
+  <div className={classes.mobileListContainer}>
+   { userRoutines.length ? 
+        <RoutineScroll
+          routines={userRoutines}
+          setDeleteModeStatus={setDeleteModeStatus}
+          setFormModeStatus={setFormModeStatus}
+          setPlayModeStatus={setPlayModeStatus}
+        /> 
+
+       : <NoneFoundMessage />}
+       <AddNewRoutineButton />
+    </div>
+
+
+  
+  const List = () => {
+    return (userRoutines.length ? 
+      <>
+        {mapRoutines()}
+
+        <Button 
+        variant="contained"
+        color="primary"
+        className={classes.addNewButton}
+        onClick={() => 
+          setRoutineFormOpen(true)}
+          >
+            Add new routine
+            <AddCircleOutlineIcon className={classes.plusIcon} />
+        </Button>
+      </>
+      : <NoneFoundMessage />)
+  }
+
+  return (
+    <>
+    <div className>
+    {fetching 
+      ? <Loading />
+      : <div> 
+        {size === 'sm' ? 
+        <MobileList/>
+        : <List/>}
+      </div>
+    }
+
+      {/* <Button onClick={() => fetchServerlessRoutines()}>[Test] Get routines</Button> */}
     </div>
 
       {/* Various Modals */}

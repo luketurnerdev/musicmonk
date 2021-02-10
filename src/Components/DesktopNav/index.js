@@ -5,8 +5,10 @@ import styles from "./styles";
 import {withStyles} from '@material-ui/styles';
 import LogoutButton from './../LogoutButton';
 import React, {useState} from "react";
+import useBreakpoint from "./../../hooks/useBreakpoint";
 
 const DesktopNav = props => {
+  const size = useBreakpoint();
   const {classes} = props;
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -20,7 +22,7 @@ const DesktopNav = props => {
   }
 
   const OpenMenu = () => {
-    return <div className={classes.desktopNavContainer}>
+    return <div className={size === 'sm' ? classes.mobileNavContainer : classes.desktopNavContainer}>
       <MenuButton />
 
           <Typography variant="subtitle" className={classes.title}>

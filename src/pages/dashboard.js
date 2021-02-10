@@ -15,7 +15,6 @@ const styles = {
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
-    paddingTop: '15px',
   },
   titleBar: {
     width: '100%',

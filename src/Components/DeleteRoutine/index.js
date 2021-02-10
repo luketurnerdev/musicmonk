@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, Grid} from '@material-ui/core';
+import {Button, Modal, Grid, Paper} from '@material-ui/core';
 import styles from "./styles";
 import { withStyles } from '@material-ui/styles';
 
@@ -9,17 +9,20 @@ const DeleteRoutine = props => {
     <Modal
     open={open}
   >
-      <Grid container direction="column" className={classes.deleteModal}>
-        <Grid item xs={8} className={classes.title}>
-          {routine && <h1>Really delete {routine.title} ?</h1>}
-        </Grid>
-        <Grid item xs={4} className={classes.buttons}>
-          <Button variant="contained" onClick={() => deleteRoutine(routine._id)}>
-            {deleting? "Deleting..." : "Confirm"}
+    <Paper variant="elevation" className={classes.deleteModal}>
+      <div className={classes.innerItems}>
+        <div className={classes.title}>
+          {routine && <h5>Really delete {routine.title} ?</h5>}
+        </div>
+        <div className={classes.buttons}>
+          <Button variant="contained" onClick={() => deleteRoutine(routine._id)} 
+            style={deleting ? {backgroundColor: 'red'} : {backgroundColor: '#32a893'} }>
+            <span>{deleting ? "Deleting..." : "Confirm"}</span>
           </Button>
-        <Button variant="contained" onClick={() => setDeleteModeStatus(false, null)}>Cancel</Button>
-        </Grid>
-      </Grid>
+          <Button onClick={() => setDeleteModeStatus(false, null)} variant="contained">Cancel</Button>
+        </div>
+      </div>
+    </Paper>
   </Modal>
   )
 }

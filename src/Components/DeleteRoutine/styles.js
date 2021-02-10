@@ -1,18 +1,22 @@
 const styles = {
   deleteModal: {
     backgroundColor: 'white',
-    width: '50%',
-    height: '85%',
+    width: '70%',
+    height: '30%',
     margin: '0 auto',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'absolute',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    top: '50%',
   },
   title: {
-    position: 'relative',
-    top: '30%'
+    width: '100%',
+    textAlign: 'center'
   },
   buttons: {
     display: 'flex',
-    width: '50%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'space-around'
   }

@@ -14,28 +14,54 @@ const styles = {
     flexDirection: 'column',
     marginTop: '3%'
   },
+  stepMobile: {
+    display: 'flex',
+    width: '90%',
+    flexDirection: 'column',
+    marginTop: '3%',
+  },
   timerOption: {
     display: 'flex',
     justifyContent: 'space-between'
   },
   formControlRoot: {
     display: 'flex',
+    flexDirection: 'row',
     width: '100%',
     marginTop:'2%'
   },
   addTimer: {
     marginTop:'2%'
   },
-  inputLabel: {
-    fontSize: '20px'
+  timerSelect: {
+    width:'85%',
+    fontSize: '15px'
+  },
+  timerInputLabelMobile: {
+    fontSize: '12px',
+    margin: '10px 5px',
+    textAlign: 'center',
+  },
+  timerInputLabel: {
+    fontSize: '12px',
+    margin: '0 2px',
+    textAlign: 'center',
   },
   deleteButton: {
     marginTop: '5%',
     width: '0',
-    margin: '0 auto'
   },
   deleteStepButton: {
+    width: '80%',
+    height: '25px',
+    margin: '0 auto',
     marginTop: '5%',
+    '&& span': {
+      fontSize: '12px'
+    }
+  },
+  textInputLabel: {
+    fontSize: '15px'
   }
 }
 

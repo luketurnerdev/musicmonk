@@ -13,12 +13,39 @@ const styles = {
   },
   routineName: {
     width: '30vw',
-
   },
+  inputText: {
+    fontSize:'15px',
+  },
+  routineLabel: {
+    fontSize:'15px'
+  },
+  routineNameMobile: {
+    
+    '&& div': {
+      '&& input': {
+        fontSize: '15px',
+      }
+    },
+    width: '80vw',
+  },
+
+  //StepList sizes
+
   stepList: {
     border: '2px solid',
-    width: '50%',
-    height: '50%',
+    width: '80%',
+    height: '80%',
+    display: 'flex',
+    alignItems:'center',
+    flexDirection: 'column',
+    overflow: 'scroll',
+    margin: '10px 0'
+  },
+  stepListMobile: {
+    border: '1px solid',
+    width: '80%',
+    height: '90%',
     display: 'flex',
     alignItems:'center',
     flexDirection: 'column',
@@ -28,12 +55,20 @@ const styles = {
   pageError: {
     color: 'red'
   },
-  deleteStepButton: {
-    width: '20%',
-  },
   button: {
     width: '20%',
     margin: '15px 5px'
+  },
+  addButton: {
+    backgroundColor: '#32a893',
+  },
+  buttonMobile: {
+    width: '30%',
+    height: '20px',
+    margin: '15px 5px',
+    '&& span': {
+      fontSize: '10px'
+    }
   },
   exitButtons: {
     display: 'flex',

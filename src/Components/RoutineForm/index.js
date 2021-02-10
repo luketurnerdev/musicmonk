@@ -4,8 +4,10 @@ import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import StepDisplay from "./../StepDisplay";
 import ControlPointSharpIcon from '@material-ui/icons/ControlPointSharp';
+import useBreakpoint from "./../../hooks/useBreakpoint";
 
 const RoutineForm = props => {
+  const mobile = useBreakpoint() === 'sm' ? true : false;
   const {defaultRoutine, updateRoutine, setFormModeStatus, classes, saveNewRoutine, routineCount, saving} = props;
   const [formData, setFormData] = useState(defaultRoutine || {id: routineCount, steps: [], title: ''});
   const [userSteps, setUserSteps] = useState(defaultRoutine ? defaultRoutine.steps : []);
@@ -19,6 +21,10 @@ const RoutineForm = props => {
   useEffect(() => {
     pickRandomTitle()
   }, [])
+
+  useEffect(() => {
+    emptySteps ? setPageError('One or more steps are empty!') : setPageError('');
+  }, [emptySteps])
 
   // If there is no default routine (ie edit mode), treat this as a new one
   const isNewRoutine = !defaultRoutine;
@@ -48,6 +54,7 @@ const RoutineForm = props => {
 
   const addStep = () => {
     setPageError('');
+    setEmptySteps(true);
     setUserSteps(steps => [...steps, {id: userSteps.length, text: ''}])
   }
   const removeStep = id => {
@@ -77,7 +84,7 @@ const RoutineForm = props => {
   const mapSteps = () => {
     return (
       <>
-        <div className={classes.stepList}>
+        <div className={mobile ? classes.stepListMobile : classes.stepList}>
           {userSteps && userSteps.map((step, index) => {
             return step ? (
               <StepDisplay
@@ -101,7 +108,7 @@ const RoutineForm = props => {
           className={classes.addButton}
           color="primary"
           onClick={() => addStep()}>
-            <Typography variant="subtitle">Add new step</Typography>
+            <Typography variant="subtitle">New step</Typography>
             <ControlPointSharpIcon />
         </Button>
 
@@ -123,6 +130,7 @@ const RoutineForm = props => {
     setExampleTitle(examples[Math.floor(Math.random() * examples.length)]);
   }
 
+  const buttonColor = pageError ? '#FFFFFF' : '#32a893';
 
   
   return (
@@ -130,10 +138,13 @@ const RoutineForm = props => {
     <div className={classes.routineForm}>
       <FormControl>
         <TextField
-          // autoFocus={true}
+          InputLabelProps={{
+            className: classes.routineLabel
+          }}
+          InputProps={{className: classes.inputText}}
+          className={mobile ? classes.routineNameMobile : classes.routineName}
           error={titleError}
           helperText={titleError || ""}
-          className={classes.routineName}
           label="Routine Name"
           placeholder={exampleTitle}
           defaultValue={(defaultRoutine && defaultRoutine.title) || ''}
@@ -144,19 +155,18 @@ const RoutineForm = props => {
       
       {mapSteps()}
 
-      {pageError && <span className={classes.pageError}>{pageError}</span>}
-
       <div className={classes.exitButtons}>
         <Button
             variant="contained"
-            className={classes.button}
-            color={saving ? "secondary" : "primary" }
+            disabled={pageError}
+            className={mobile? classes.buttonMobile : classes.button}
+            style={saving ? {backgroundColor:'#16e312'} : {backgroundColor: buttonColor}}
             onClick={() => handleSubmit()}>
-            {saving ? "Saving..." : "Save Routine"}
+            {saving ? "Saving..." : "Save"}
         </Button>
         <Button
           variant="contained"
-          className={classes.button}
+          className={mobile? classes.buttonMobile : classes.button}
           color="secondary"
           onClick={() => setFormModeStatus(false, null)}>
             Discard

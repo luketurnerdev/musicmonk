@@ -3,9 +3,13 @@ import React, {useEffect, useState} from 'react';
 import { useTimer } from 'react-timer-hook';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import {withStyles} from '@material-ui/styles';
+import styles from "./styles";
+import useBreakpoint from "./../../hooks/useBreakpoint";
 
 const Timer = (props, {expiryTimestamp}) => {
-  const {timeLimit} = props;
+  const size = useBreakpoint();
+  const {timeLimit, classes} = props;
   const [expired, setExpired] = useState(false);
   const {
     seconds,
@@ -35,15 +39,14 @@ const Timer = (props, {expiryTimestamp}) => {
   }
 
   const TimerRunning = () => {
-    return <div style={{fontSize: '100px'}}>
+    return <div className={size === 'sm' ? classes.timerMobile : classes.timer}>
         <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
       </div>
   }
   
   return (
-    <div style={{textAlign: 'center', margin: '0 auto'}}>
+    <div className={classes.timerContainer}>
       <TimerRunning />
-      <p>{isRunning ? 'Running' : 'Not running'}</p>
       <Button onClick={() => {
         restartTimerWithDateObject();
       }}>
@@ -59,4 +62,4 @@ const Timer = (props, {expiryTimestamp}) => {
   );
 }
 
-export default Timer;
+export default withStyles(styles)(Timer);
