@@ -40,7 +40,6 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     padding: '20px'
-
   },
   playIcon: {
     fontSize: '5em'
