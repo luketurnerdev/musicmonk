@@ -7,7 +7,7 @@ const classes = {
   spinner: {width: '10px'}
 }
 const Loading = () => (
-  <div className={classes.spinner}>
+  <div style={{position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '30%'}}>
     <img src={loadingImg} alt="Loading..." />
   </div>
 );
