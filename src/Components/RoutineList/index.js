@@ -40,7 +40,7 @@ const RoutineList = props => {
   // Serverless routine fetch
 
   const url = process.env.NODE_ENV === 'development' 
-    ? process.env.GATSBY_NETLIFY_SERVER
+    ? 'http://localhost:8888'
     : process.env.GATSBY_PRODUCTION_URL
 
   const fetchServerlessRoutines = async (userId) => {
@@ -48,7 +48,7 @@ const RoutineList = props => {
     console.log(url)
     let response;
     // need to add user id here in axios call
-    await axios.get('http://localhost:8888/.netlify/functions/getAllUserRoutines',
+    await axios.get(`${url}/.netlify/functions/getAllUserRoutines`,
         {
           params: {
             userId: userId
