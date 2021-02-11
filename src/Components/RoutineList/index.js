@@ -205,7 +205,7 @@ const RoutineList = props => {
 
   return (
     <>
-    <div className>
+    <div>
     {fetching 
       ? <Loading />
       : <div> 

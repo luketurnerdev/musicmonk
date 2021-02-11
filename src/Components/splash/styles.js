@@ -1,11 +1,10 @@
 const styles = {
   loginContainer: {
+    margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
-    position: 'absolute',
-    transform: 'translateX(-50%)',
-    left: '50%',
-    top: '30%'
+    alignItems: 'center',
+    padding: '5%',
   },
   title: {
     fontSize: '40px',

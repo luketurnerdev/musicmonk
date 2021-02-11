@@ -3,15 +3,11 @@ import LoginButton from '../../Components/LoginButton';
 import {Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/styles';
 import styles from './styles';
-import { login, isAuthenticated } from "../../utils/auth";
+import Loading from "./../Loading";
 
 
 const Splash = props => {
   const {classes} = props;
-
-  if (!isAuthenticated()) {
-    login();
-  }
   return (
     <div className={classes.loginContainer}>
       <Typography variant="subtitle" className={classes.title}>
