@@ -48,16 +48,17 @@ const RoutineList = props => {
     console.log(url)
     let response;
     // need to add user id here in axios call
-    response = await axios.get('http://localhost:8888/.netlify/functions/getAllUserRoutines',
+    await axios.get('http://localhost:8888/.netlify/functions/getAllUserRoutines',
         {
           params: {
             userId: userId
           }
         }
        )
-    .then (resp => console.log(resp))
+    .then (resp => {
+      response = resp.data;
+    })
     .catch(err => console.log(err))
-    // axios.get(`${url}/.netlify/functions/getAllUserRoutines`)
     return response;
   }
 
@@ -65,7 +66,7 @@ const RoutineList = props => {
   const getRoutines = useCallback(async () => {
     console.log('inside getroutines')
     setFetching(true);
-    const response = await getAllRoutinesForUser(user.sub);
+    const response = await fetchServerlessRoutines(user.sub);
     console.log(response)
     setFetching(false);
     return response;
