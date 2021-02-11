@@ -31,12 +31,6 @@ const RoutineList = props => {
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  // 1 ) set deleting state to false on first load.
-  // 2 ) routine begins to be deleted. deleting = true. modal is closed.
-  // 3 ) Rest of the list is rendered, except the offending routine should show a spinner
-  // 4 ) API call finishes, deleting = false. spinner now shows null.
-
-
   // Serverless routine fetch
 
   const url = process.env.NODE_ENV === 'development' 
@@ -44,10 +38,8 @@ const RoutineList = props => {
     : process.env.GATSBY_PRODUCTION_URL
 
   const fetchServerlessRoutines = async (userId) => {
-    console.log('fetchserverless')
-    console.log(url)
     let response;
-    // need to add user id here in axios call
+
     await axios.get(`${url}/.netlify/functions/getAllUserRoutines`,
         {
           params: {
@@ -217,8 +209,7 @@ const RoutineList = props => {
         : <List/>}
       </div>
     }
-    
-      <Button onClick={() => fetchServerlessRoutines(user.sub)}>[Test] Get routines</Button>
+  
     </div>
 
       {/* Various Modals */}
