@@ -75,7 +75,8 @@ const RoutineForm = props => {
     console.log(`submitting`);
     let copy = userSteps;
     copy[index].text = values.text;
-    copy[index].timer = values.timer;
+    if (values.timer) {copy[index].timer = values.timer};
+    
 
     console.log(copy)
     setUserSteps(copy);

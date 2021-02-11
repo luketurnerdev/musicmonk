@@ -25,10 +25,8 @@ const PlayRoutine = props => {
     const completeStep = () => {
       setStepComplete(!stepComplete);
     }
-
     const time = new Date();
     time.setSeconds(time.getSeconds() + (step.timer || 60)); 
-
     return (
       <>
       <Grid container className={classes.stepContainer} alignContent="center" alignItems="center">

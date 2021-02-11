@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {Button, Typography, Paper} from '@material-ui/core/'
-import {postNewRoutineToDb, getAllRoutinesForUser, deleteOneRoutineFromDb, editOneRoutineInDb} from "./../../api";
+import {postNewRoutineToDb, deleteOneRoutineFromDb, editOneRoutineInDb} from "./../../api";
 import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import PlayRoutine from "./../../Components/PlayRoutine";
@@ -12,10 +12,6 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Loading from "./../../Components/Loading";
 import axios from 'axios';
 import useBreakpoint from "./../../hooks/useBreakpoint";
-
-
-//When this page first loads, fetch users routines from db (fake for now)
-//When the list is updated (ie, POST, PUT OR DELETE is called), setUserRoutines.
 
 const RoutineList = props => {
   const size = useBreakpoint();
@@ -56,7 +52,6 @@ const RoutineList = props => {
 
   // Async fetch function for useEffect
   const getRoutines = useCallback(async () => {
-    console.log('inside getroutines')
     setFetching(true);
     const response = await fetchServerlessRoutines(user.sub);
     console.log(response)
