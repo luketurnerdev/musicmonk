@@ -35,15 +35,15 @@ const styles = {
   routineTitle: {
     margin: '0 auto',
     textAlign: 'center',
-    height: '60%',
+    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     padding: '20px'
+
   },
   playIcon: {
-    height: '100px',
-    width: '150px'
+    fontSize: '5em'
   }
 };
 

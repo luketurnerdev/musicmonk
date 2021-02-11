@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Button, Grid, Paper} from '@material-ui/core';
+import {Button, Grid, Paper, Typography} from '@material-ui/core';
 import styles from "./styles";
 import {withStyles} from "@material-ui/styles";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -35,7 +35,7 @@ const RoutineScroll = props => {
     >
       <Grid item xs={4} className={classes.middleGridItems}>
         <Paper className={classes.routineTitle}>
-          {routines ? <h3>{routines[currentRoutine].title}</h3> : <Loading />}
+          {routines ? <Typography variant="subtitle">{routines[currentRoutine].title}</Typography> : <Loading />}
         </Paper>
       </Grid>
       <Grid item xs={4} className={classes.middleGridItems}>

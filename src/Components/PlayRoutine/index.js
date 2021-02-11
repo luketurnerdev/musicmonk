@@ -73,10 +73,10 @@ const PlayRoutine = props => {
    }
     
    const ForwardButton = () => {
-     return <Button variant="contained" onClick={() => goForward()}><ArrowForwardIcon /></Button>
+     return <Button className={classes.directionButton} variant="contained" onClick={() => goForward()}><ArrowForwardIcon /></Button>
     }
     const BackButton = () => {
-    return <Button variant="contained" onClick={() => goBackward()}><ArrowBackIcon /></Button>
+    return <Button className={classes.directionButton} variant="contained" onClick={() => goBackward()}><ArrowBackIcon /></Button>
    }
   
   return (
@@ -87,7 +87,7 @@ const PlayRoutine = props => {
       <Typography variant="subtitle" style={{margin:'5px'}}>
         {routine.title}
       </Typography>
-      
+
         <Step
           key={routine.steps[currentPage]}
           step={routine.steps[currentPage]}

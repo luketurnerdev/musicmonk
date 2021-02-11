@@ -7,7 +7,6 @@ const styles = {
   },
   completeContainer: {
     display: 'flex',
-
   },
   playModeContainer: {
     backgroundColor: 'white',
@@ -48,6 +47,11 @@ const styles = {
     width: '100%',
     marginTop: '10px'
   },  
+  directionButton: {
+    width: '0',
+    minWidth: '0',
+    height: '30px'
+  }
 };
 
 export default styles;
