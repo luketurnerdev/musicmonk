@@ -3,18 +3,19 @@ const mongoose = require('mongoose');
 
 let conn = null;
 
-const uri=process.env.GATSBY_MONGODB_CONNECTION_STRING
+const uri=process.env.GATSBY_MONGODB_CONNECTION_STRING;
 
-exports.handler = function(userId, context, callback) {
+exports.handler = function(event, context, callback) {
+  const userId = event.queryStringParameters.userId;
   context.callbackWaitsForEmptyEventLoop = false;
-  run().
+  run(userId).
     then(res => {
       callback(null, res);
     }).
     catch(error => callback(error));
 }
 
-const run = () => {
+const run = (userId) => {
   return co(function*() {
     // if no connection, try to connect
     if (conn==null) {
@@ -34,7 +35,7 @@ const run = () => {
 
     // TODO = change this to specify the userID as below
     // const doc = yield Model.find({userId: userId});
-    const doc = yield Model.find();
+    const doc = yield Model.find({userId: userId});
     
     console.log('model:')
     console.log(Model)

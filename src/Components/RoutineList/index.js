@@ -43,19 +43,21 @@ const RoutineList = props => {
     ? process.env.GATSBY_NETLIFY_SERVER
     : process.env.GATSBY_PRODUCTION_URL
 
-  const fetchServerlessRoutines = async () => {
+  const fetchServerlessRoutines = async (userId) => {
     console.log('fetchserverless')
     console.log(url)
     let response;
     // need to add user id here in axios call
-    axios.get('http://localhost:8888/.netlify/functions/getAllUserRoutines')
+    response = await axios.get('http://localhost:8888/.netlify/functions/getAllUserRoutines',
+        {
+          params: {
+            userId: userId
+          }
+        }
+       )
+    .then (resp => console.log(resp))
+    .catch(err => console.log(err))
     // axios.get(`${url}/.netlify/functions/getAllUserRoutines`)
-    .then(res => {
-      // response = res.data;
-      console.log(res.data);
-      // setUserRoutines(res.data);
-    })
-
     return response;
   }
 
@@ -214,8 +216,8 @@ const RoutineList = props => {
         : <List/>}
       </div>
     }
-
-      {/* <Button onClick={() => fetchServerlessRoutines()}>[Test] Get routines</Button> */}
+    
+      <Button onClick={() => fetchServerlessRoutines(user.sub)}>[Test] Get routines</Button>
     </div>
 
       {/* Various Modals */}
