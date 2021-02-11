@@ -8,14 +8,15 @@ const uri=process.env.GATSBY_MONGODB_CONNECTION_STRING;
 exports.handler = function(event, context, callback) {
   const userId = event.queryStringParameters.userId;
   context.callbackWaitsForEmptyEventLoop = false;
-  getUserRoutines(userId).
-    then(res => {
+  createRoutine(userId, data)
+    .then(res => {
       callback(null, res);
-    }).
-    catch(error => callback(error));
+    })
+    .catch(error => callback(error));
 }
 
-const getUserRoutines = (userId) => {
+const createRoutine = (userId, data) => {
+  const {title, steps} = data;
   return co(function*() {
     // if no connection, try to connect
     if (conn==null) {

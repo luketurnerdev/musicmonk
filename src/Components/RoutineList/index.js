@@ -31,31 +31,26 @@ const RoutineList = props => {
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  // 1 ) set deleting state to false on first load.
-  // 2 ) routine begins to be deleted. deleting = true. modal is closed.
-  // 3 ) Rest of the list is rendered, except the offending routine should show a spinner
-  // 4 ) API call finishes, deleting = false. spinner now shows null.
-
-
   // Serverless routine fetch
 
   const url = process.env.NODE_ENV === 'development' 
-    ? process.env.GATSBY_NETLIFY_SERVER
+    ? 'http://localhost:8888'
     : process.env.GATSBY_PRODUCTION_URL
 
-  const fetchServerlessRoutines = async () => {
-    console.log('fetchserverless')
-    console.log(url)
+  const fetchServerlessRoutines = async (userId) => {
     let response;
-    // need to add user id here in axios call
-    axios.get('http://localhost:8888/.netlify/functions/getAllUserRoutines')
-    // axios.get(`${url}/.netlify/functions/getAllUserRoutines`)
-    .then(res => {
-      // response = res.data;
-      console.log(res.data);
-      // setUserRoutines(res.data);
-    })
 
+    await axios.get(`${url}/.netlify/functions/getAllUserRoutines`,
+        {
+          params: {
+            userId: userId
+          }
+        }
+       )
+    .then (resp => {
+      response = resp.data;
+    })
+    .catch(err => console.log(err))
     return response;
   }
 
@@ -63,7 +58,7 @@ const RoutineList = props => {
   const getRoutines = useCallback(async () => {
     console.log('inside getroutines')
     setFetching(true);
-    const response = await getAllRoutinesForUser(user.sub);
+    const response = await fetchServerlessRoutines(user.sub);
     console.log(response)
     setFetching(false);
     return response;
@@ -214,8 +209,7 @@ const RoutineList = props => {
         : <List/>}
       </div>
     }
-
-      {/* <Button onClick={() => fetchServerlessRoutines()}>[Test] Get routines</Button> */}
+  
     </div>
 
       {/* Various Modals */}
